@@ -10,22 +10,22 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-    var firstnames : [String] = []
     var lastnames : [String] = []
+    
     
     @IBOutlet weak var personsTable: UITableView!
     
     
+    
     @IBAction func addAction(_ sender: Any) {
+        let alert = UIAlertController(title: "Nouveau nom",
+                                      message: "Ajouter un nom", preferredStyle: .alert)
         
-        let alert1 = UIAlertController(title: "Nouveau nom",
-            message: "Ajouter un nom", preferredStyle: .alert)
         
-
         let saveAction = UIAlertAction(title: "Ajouter", style: .default)
         {
             [unowned self] action in
-            guard let textField = alert1.textFields?.first,
+            guard let textField = alert.textFields?.first,
                 let nameToSave = textField.text else {
                     return
             }
@@ -35,15 +35,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         let cancelAction = UIAlertAction(title: "Annuler", style: .default)
         
-        alert1.addTextField()
-        alert1.addAction(saveAction)
-        alert1.addAction(cancelAction)
+        alert.addTextField()
+        alert.addAction(saveAction)
+        alert.addAction(cancelAction)
         
-        present(alert1, animated: true)
-            
+        present(alert, animated: true)
     }
-
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,7 +60,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         
         let cell = self.personsTable.dequeueReusableCell(withIdentifier: "personCell", for: indexPath) as! PersonTableViewCell
-        cell.firstNameLable.text = self.firstnames[indexPath.row]
         cell.lastNameLabel.text = self.lastnames[indexPath.row]
         return cell
     }
