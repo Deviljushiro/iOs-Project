@@ -24,8 +24,8 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-
-    @IBAction func signInAction(_ sender: AnyObject) {
+    
+    @IBAction func signinAction(_ sender: Any) {
         self.performSegue(withIdentifier: "connexionSegue", sender: self)
     }
 }

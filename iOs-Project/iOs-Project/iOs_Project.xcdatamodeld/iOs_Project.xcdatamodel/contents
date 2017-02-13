@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16D32" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="CategoriePersonne" syncable="YES">
+    <entity name="CategoriePersonne" representedClassName="CategoriePersonne" syncable="YES" codeGenerationType="class">
         <attribute name="libelle" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="concerne" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Personne" inverseName="estUn" inverseEntity="Personne" syncable="YES"/>
     </entity>
@@ -11,10 +11,12 @@
         <relationship name="contenir" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MotClef" inverseName="concerner" inverseEntity="MotClef" syncable="YES"/>
         <relationship name="postePar" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Personne" inverseName="poster" inverseEntity="Personne" syncable="YES"/>
     </entity>
-    <entity name="Eleve" parentEntity="Personne" syncable="YES">
+    <entity name="Eleve" representedClassName="Eleve" parentEntity="Personne" syncable="YES" codeGenerationType="class">
         <relationship name="appartient" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Promo" inverseName="contient" inverseEntity="Promo" syncable="YES"/>
     </entity>
     <entity name="Fichier" representedClassName="Fichier" syncable="YES" codeGenerationType="class">
+        <attribute name="attribute" optional="YES" syncable="YES"/>
+        <attribute name="attribute1" optional="YES" syncable="YES"/>
         <attribute name="contenu" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="nom" optional="YES" attributeType="String" syncable="YES"/>
@@ -42,7 +44,7 @@
         <attribute name="mot" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="concerner" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Document" inverseName="contenir" inverseEntity="Document" syncable="YES"/>
     </entity>
-    <entity name="Personne" syncable="YES">
+    <entity name="Personne" representedClassName="Personne" syncable="YES" codeGenerationType="class">
         <attribute name="mdp" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="nom" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="photo" optional="YES" attributeType="Binary" syncable="YES"/>
@@ -63,15 +65,15 @@
         <relationship name="contenir" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Fichier" inverseName="etreUn" inverseEntity="Fichier" syncable="YES"/>
     </entity>
     <elements>
-        <element name="CategoriePersonne" positionX="-972" positionY="179" width="128" height="73"/>
-        <element name="Personne" positionX="-702" positionY="54" width="128" height="178"/>
-        <element name="Eleve" positionX="-702" positionY="270" width="128" height="58"/>
-        <element name="Promo" positionX="-488" positionY="270" width="128" height="73"/>
+        <element name="CategoriePersonne" positionX="-972" positionY="179" width="128" height="75"/>
+        <element name="Document" positionX="-749" positionY="-90" width="128" height="118"/>
+        <element name="Eleve" positionX="-702" positionY="270" width="128" height="60"/>
+        <element name="Fichier" positionX="-299" positionY="144" width="128" height="163"/>
         <element name="Groupe" positionX="-486" positionY="-99" width="128" height="118"/>
         <element name="Message" positionX="-488" positionY="99" width="128" height="133"/>
-        <element name="Fichier" positionX="-299" positionY="144" width="128" height="133"/>
-        <element name="TypeFichier" positionX="-92" positionY="144" width="128" height="88"/>
-        <element name="Document" positionX="-749" positionY="-90" width="128" height="118"/>
         <element name="MotClef" positionX="-776" positionY="-225" width="128" height="88"/>
+        <element name="Personne" positionX="-702" positionY="54" width="128" height="178"/>
+        <element name="Promo" positionX="-488" positionY="270" width="128" height="73"/>
+        <element name="TypeFichier" positionX="-92" positionY="144" width="128" height="88"/>
     </elements>
 </model>

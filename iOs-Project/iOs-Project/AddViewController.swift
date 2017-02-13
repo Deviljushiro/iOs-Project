@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class AddViewController: UIViewController {
 
@@ -20,22 +21,40 @@ class AddViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     func saveNewPerson (withName nom: String, andFirstname prenom: String, andUsername pseudo: String){
+        //get context
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            self.alertError(errorMsg: "Impossible de valider cette personne", userInfo: "Raison inconnue")
             return
         }
         let context = appDelegate.persistentContainer.viewContext
-        let person = Perso
+        //create a person
+        let person = Personne(context: context)
+        person.nom = nom
+        do{
+            try context.save()
+            self.listePersonnes.append(person)
+        }
+        catch let error as NSError{
+            self.alertError(errorMsg: "\(error)", userInfo: "\(error.userInfo)")
+        }
     }
+    
+    func alertError(errorMsg error: String, userInfo user: String = "") {
+        let alert = UIAlertController(title: error, message: user, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Ok", style: .default)
+        alert.addAction(cancelAction)
+        present(alert, animated: true)
+    }
+
     /*
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    // In a storyboard-based application, you will often want to do a little preparation before navigation*/
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+      
     }
-    */
 
 }
