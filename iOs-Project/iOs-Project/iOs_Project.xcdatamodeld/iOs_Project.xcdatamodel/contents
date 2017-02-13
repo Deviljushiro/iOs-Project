@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11232" systemVersion="15F34" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="CategoryPerson" syncable="YES">
+        <attribute name="label" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="concern" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Person" inverseName="isA" inverseEntity="Person" syncable="YES"/>
+    </entity>
+    <entity name="Person" syncable="YES">
+        <attribute name="firstname" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastname" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="photo" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="isA" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CategoryPerson" inverseName="concern" inverseEntity="CategoryPerson" syncable="YES"/>
+    </entity>
+    <entity name="Student" parentEntity="Person" syncable="YES"/>
+    <elements>
+        <element name="Person" positionX="-216" positionY="33" width="128" height="133"/>
+        <element name="CategoryPerson" positionX="-18" positionY="48" width="128" height="73"/>
+        <element name="Student" positionX="-216" positionY="315" width="128" height="43"/>
+    </elements>
+</model>
