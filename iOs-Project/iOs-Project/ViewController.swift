@@ -7,12 +7,11 @@
 //
 
 import UIKit
+import CoreData
 
 class ViewController: UIViewController {
 
     @IBOutlet weak var username: UITextField!
-    
-    
     @IBOutlet weak var password: UITextField!
     
     override func viewDidLoad() {

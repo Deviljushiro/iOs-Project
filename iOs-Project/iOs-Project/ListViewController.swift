@@ -1,5 +1,5 @@
 //
-//  HomeViewController.swift
+//  ListViewController.swift
 //  iOs-Project
 //
 //  Created by Jean MIQUEL on 13/02/2017.
@@ -7,9 +7,13 @@
 //
 
 import UIKit
+import CoreData
 
-class HomeViewController: UIViewController {
+class ListViewController: UIViewController {
 
+    
+    @IBOutlet weak var personsTable: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,15 +25,14 @@ class HomeViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func logoutAction(_ sender: AnyObject) {
+    @IBAction func addAction(_ sender: Any) {
+        self.performSegue(withIdentifier: "addSegue", sender: self)
+    }
+
+    @IBAction func dismissNextAction(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
-    }
 
- 
-    @IBAction func nextAction(_ sender: Any) {
-            self.performSegue(withIdentifier: "nextSegue", sender: self)
     }
-
     /*
     // MARK: - Navigation
 

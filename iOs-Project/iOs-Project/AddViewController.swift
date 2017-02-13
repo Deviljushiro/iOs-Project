@@ -1,5 +1,5 @@
 //
-//  HomeViewController.swift
+//  AddViewController.swift
 //  iOs-Project
 //
 //  Created by Jean MIQUEL on 13/02/2017.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
+class AddViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,15 +21,13 @@ class HomeViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func logoutAction(_ sender: AnyObject) {
-        self.dismiss(animated: true, completion: nil)
+    func saveNewPerson (withName nom: String, andFirstname prenom: String, andUsername pseudo: String){
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        let context = appDelegate.persistentContainer.viewContext
+        let person = Perso
     }
-
- 
-    @IBAction func nextAction(_ sender: Any) {
-            self.performSegue(withIdentifier: "nextSegue", sender: self)
-    }
-
     /*
     // MARK: - Navigation
 
