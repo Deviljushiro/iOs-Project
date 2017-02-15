@@ -1,0 +1,114 @@
+CONTEXT : 
+
+// MARK: - Helper methods
+    
+    ///get context of core data
+    ///
+    /// - Parameters: 
+    ///     - errorMsg: main error msg
+    ///     - userInfoMsg: additional info user want to display
+    /// - Returns: context of the core data
+    func getContext(errorMsg: String, userInfoMsg: String = "could not retrieve data context") -> NSManagedObjectContext? {
+        
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            self.alertError(WithTitle: errorMsg, andMsg: userInfoMsg)
+            return nil
+        }
+        return appDelegate.persistentContainer.viewContext
+    }
+
+
+ALERT :
+
+// MARK: - Alerts
+    
+    func alertError(WithTitle error: String, andMsg user: String = "") {
+        let alert = UIAlertController(title: error, message: user, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Ok", style: .default)
+        alert.addAction(cancelAction)
+        present(alert, animated: true)
+    }
+
+
+BUTTON :
+
+// GO TO (MODALLY)
+    @IBAction func signInAction(_ sender: Any) {
+        self.performSegue(withIdentifier: "connexionSegue", sender: self)
+
+    }
+
+// DISMISS (MODALLY)
+    @IBAction func dismissNextAction(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+
+SAVE OBJECT: 
+
+/// create a new person and save it
+    ///
+    /// - Parameters:
+    ///     - nom: lastname of the person
+    ///     - prenom: firstname of the person
+    func saveNewPerson (withLastName nom: String, andFirstname prenom: String){
+        //get the context
+        guard let context = self.getContext(errorMsg: "Save failed")
+            else {
+                return
+        }
+        //create a person
+        let person = Personne(context: context)
+        //modify profile
+        person.nom = nom
+        person.prenom = prenom
+        do{
+            try context.save()
+            self.listePersonnes.append(person)
+        }
+        catch {
+        }
+    }
+
+GET DATAS FROM PAGE AND SAVE THEM:
+
+//Action to get  datas from the previous page and save them
+    @IBAction func unwindToPersonsListAfterSaving(segue: UIStoryboardSegue){
+   
+        let addController = segue.source as! AddViewController
+        let firstname = addController.prenomLabel.text ?? ""
+        let lastname = addController.nomLabel.text ?? ""
+
+        self.saveNewPerson(withLastName: lastname, andFirstname: firstname)
+        self.personnes.reloadData()
+        }
+
+//FETCH CORE DATA (in ViewDidLoad)
+        
+        //get the context
+        guard let context = self.getContext(errorMsg: "Person not found") else { return }
+        //create query related to the Personne entity
+        let request : NSFetchRequest<Personne> = Personne.fetchRequest()
+        do {
+            try self.listePersonnes = context.fetch(request)
+        }
+        catch let error as NSError{
+            self.alertError(WithTitle: "\(error)", andMsg: "\(error.userInfo)")
+            return
+        }
+
+
+TABLEVIEW FUNC :
+
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> 			UITableViewCell{
+        
+        	let cell = self.personnes.dequeueReusableCell(withIdentifier: "personCell", for: 		indexPath) as! ListTableViewCell
+        	cell.nom.text = self.listePersonnes[indexPath.row].nom
+        	return cell
+    }
+
+
+    	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
+        	return self.lastnames.count
+    }
+
+
