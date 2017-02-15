@@ -159,7 +159,6 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
 
     
-    
     /// When datas need to be obtained from the previous page
     ///
     /// - Parameter segue: The segue related to the previous page

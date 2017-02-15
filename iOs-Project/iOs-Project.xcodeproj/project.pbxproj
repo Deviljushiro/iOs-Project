@@ -10,6 +10,7 @@
 		DC074F531E51DBEB00F2A90E /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC074F521E51DBEB00F2A90E /* ListViewController.swift */; };
 		DC074F571E51DF9600F2A90E /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC074F561E51DF9600F2A90E /* AddViewController.swift */; };
 		DC426FCD1E52001A00809823 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC426FCC1E52001A00809823 /* ListTableViewCell.swift */; };
+		DC50EF5C1E547D5A00784C10 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC50EF5B1E547D5A00784C10 /* ProfileViewController.swift */; };
 		DCE300021E51AADC0006D7E5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCE300001E51AADC0006D7E5 /* Main.storyboard */; };
 		DCE300051E51AADC0006D7E5 /* iOs_Project.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DCE300031E51AADC0006D7E5 /* iOs_Project.xcdatamodeld */; };
 		DCE300071E51AADC0006D7E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DCE300061E51AADC0006D7E5 /* Assets.xcassets */; };
@@ -42,6 +43,7 @@
 		DC074F521E51DBEB00F2A90E /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		DC074F561E51DF9600F2A90E /* AddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		DC426FCC1E52001A00809823 /* ListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
+		DC50EF5B1E547D5A00784C10 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileViewController.swift; path = ../ProfileViewController.swift; sourceTree = "<group>"; };
 		DCE300011E51AADC0006D7E5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DCE300041E51AADC0006D7E5 /* iOs_Project.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = iOs_Project.xcdatamodel; sourceTree = "<group>"; };
 		DCE300061E51AADC0006D7E5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -125,8 +127,10 @@
 		DCE3FFFB1E51AADC0006D7E5 /* iOs-Project */ = {
 			isa = PBXGroup;
 			children = (
+				DC50EF5B1E547D5A00784C10 /* ProfileViewController.swift */,
 				DC074F561E51DF9600F2A90E /* AddViewController.swift */,
 				DC074F521E51DBEB00F2A90E /* ListViewController.swift */,
+				DC426FCC1E52001A00809823 /* ListTableViewCell.swift */,
 				DCE3FFFC1E51AADC0006D7E5 /* AppDelegate.swift */,
 				DCE3FFFE1E51AADC0006D7E5 /* ViewController.swift */,
 				DCE300001E51AADC0006D7E5 /* Main.storyboard */,
@@ -135,7 +139,6 @@
 				DCE300081E51AADC0006D7E5 /* LaunchScreen.storyboard */,
 				DCE3000B1E51AADC0006D7E5 /* Info.plist */,
 				DCE300031E51AADC0006D7E5 /* iOs_Project.xcdatamodeld */,
-				DC426FCC1E52001A00809823 /* ListTableViewCell.swift */,
 			);
 			path = "iOs-Project";
 			sourceTree = "<group>";
@@ -299,6 +302,7 @@
 				DC074F571E51DF9600F2A90E /* AddViewController.swift in Sources */,
 				DCE3FFFD1E51AADC0006D7E5 /* AppDelegate.swift in Sources */,
 				DC074F531E51DBEB00F2A90E /* ListViewController.swift in Sources */,
+				DC50EF5C1E547D5A00784C10 /* ProfileViewController.swift in Sources */,
 				DCE3002E1E51B4FC0006D7E5 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
