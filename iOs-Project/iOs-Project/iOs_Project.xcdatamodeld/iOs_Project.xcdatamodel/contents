@@ -15,8 +15,6 @@
         <relationship name="appartient" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Promo" inverseName="contient" inverseEntity="Promo" syncable="YES"/>
     </entity>
     <entity name="Fichier" representedClassName="Fichier" syncable="YES" codeGenerationType="class">
-        <attribute name="attribute" optional="YES" syncable="YES"/>
-        <attribute name="attribute1" optional="YES" syncable="YES"/>
         <attribute name="contenu" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="nom" optional="YES" attributeType="String" syncable="YES"/>
@@ -68,7 +66,7 @@
         <element name="CategoriePersonne" positionX="-972" positionY="179" width="128" height="75"/>
         <element name="Document" positionX="-749" positionY="-90" width="128" height="118"/>
         <element name="Eleve" positionX="-702" positionY="270" width="128" height="60"/>
-        <element name="Fichier" positionX="-299" positionY="144" width="128" height="163"/>
+        <element name="Fichier" positionX="-299" positionY="144" width="128" height="135"/>
         <element name="Groupe" positionX="-486" positionY="-99" width="128" height="118"/>
         <element name="Message" positionX="-488" positionY="99" width="128" height="133"/>
         <element name="MotClef" positionX="-776" positionY="-225" width="128" height="88"/>

@@ -9,8 +9,13 @@
 import UIKit
 import CoreData
 
-class AddViewController: UIViewController {
+class AddViewController: UIViewController, UITextFieldDelegate {
 
+    // MARK: - Outlet
+    
+    @IBOutlet weak var nomLabel: UITextField!
+    @IBOutlet weak var prenomLabel: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -22,6 +27,19 @@ class AddViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool{
+        textField.resignFirstResponder()
+        return true
+    }
+
+    //MARK - Save and Cancel a new person
+    
+    @IBAction func cancelAction(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    /*
     func saveNewPerson (withName nom: String, andFirstname prenom: String, andUsername pseudo: String){
         //get context
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
@@ -39,7 +57,8 @@ class AddViewController: UIViewController {
         catch let error as NSError{
             self.alertError(errorMsg: "\(error)", userInfo: "\(error.userInfo)")
         }
-    }
+    }*/
+    
     
     func alertError(errorMsg error: String, userInfo user: String = "") {
         let alert = UIAlertController(title: error, message: user, preferredStyle: .alert)
