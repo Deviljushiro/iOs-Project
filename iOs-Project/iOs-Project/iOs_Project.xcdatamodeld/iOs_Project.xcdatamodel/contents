@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16D32" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16A323" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="CategoriePersonne" representedClassName="CategoriePersonne" syncable="YES" codeGenerationType="class">
         <attribute name="libelle" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="concerne" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Personne" inverseName="estUn" inverseEntity="Personne" syncable="YES"/>
@@ -48,6 +48,8 @@
         <attribute name="photo" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="prenom" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="pseudo" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tel" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ville" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="appartenir" optional="YES" toMany="YES" minCount="1" deletionRule="Nullify" destinationEntity="Groupe" inverseName="concerner" inverseEntity="Groupe" syncable="YES"/>
         <relationship name="ecrire" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Message" inverseName="ecritPar" inverseEntity="Message" syncable="YES"/>
         <relationship name="estUn" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CategoriePersonne" inverseName="concerne" inverseEntity="CategoriePersonne" syncable="YES"/>
@@ -70,7 +72,7 @@
         <element name="Groupe" positionX="-486" positionY="-99" width="128" height="118"/>
         <element name="Message" positionX="-488" positionY="99" width="128" height="133"/>
         <element name="MotClef" positionX="-776" positionY="-225" width="128" height="88"/>
-        <element name="Personne" positionX="-702" positionY="54" width="128" height="178"/>
+        <element name="Personne" positionX="-702" positionY="54" width="128" height="210"/>
         <element name="Promo" positionX="-488" positionY="270" width="128" height="73"/>
         <element name="TypeFichier" positionX="-92" positionY="144" width="128" height="88"/>
     </elements>

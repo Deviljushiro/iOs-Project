@@ -53,7 +53,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     /// - Parameters:
     ///     - nom: lastname of the person
     ///     - prenom: firstname of the person
-    func saveNewPerson(withLastName nom: String, andFirstname prenom: String){
+    func saveNewPerson(withLastName nom: String, andFirstname prenom: String, andTel tel: String, andCity ville: String){
         //get the context
         guard let context = self.getContext(errorMsg: "Save failed")
             else {
@@ -64,6 +64,9 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         //modify profile
         person.nom = nom
         person.prenom = prenom
+        person.pseudo = prenom+"."+nom
+        person.tel = tel
+        person.ville = ville
         do{
             try context.save()
             self.listePersonnes.append(person)
@@ -167,23 +170,34 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let addController = segue.source as! AddViewController
         let firstname = addController.prenomLabel.text ?? ""
         let lastname = addController.nomLabel.text ?? ""
-        self.saveNewPerson(withLastName: lastname, andFirstname: firstname)
+        let tel = addController.telLabel.text ?? ""
+        let city = addController.villeLabel.text ?? ""
+        self.saveNewPerson(withLastName: lastname, andFirstname: firstname, andTel: tel, andCity: city)
         self.Personnes.reloadData()
         }
 
 
     // MARK: - Navigation
-     
-    // In a storyboard-based application, you will often want to do a little preparation before navigation*/
-    //override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    
+    let profileSegueId = "profileSegue"
+    
+    
+    /// prepare to send datas to the profile view ctrler
+    ///
+    /// - Parameters:
+    ///   - segue: the related segue to the other view
+    ///   - sender: who send datas
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        /*if segue.identifier == self.addSegueId{
-            if let indexPath = self.personnes.indexPathForSelectedRow{
-                let addViewController = segue.destination as! AddViewController
-                addViewController.          }
+        if segue.identifier == self.profileSegueId{
+            if let indexPath = self.Personnes.indexPathForSelectedRow{
+                let profileViewController = segue.destination as! ProfileViewController
+                profileViewController.person = self.listePersonnes[indexPath.row]
+                self.Personnes.deselectRow(at: indexPath, animated: true)
+            }
         }
-    }*/
+    }
     
     // MARK: - Helper methods
     

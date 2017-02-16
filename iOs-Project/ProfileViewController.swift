@@ -22,9 +22,14 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var ProfileName: UILabel!
     @IBOutlet weak var ProfileUsernameLabel: UILabel!
     @IBOutlet weak var ProfileUsername: UILabel!
+    @IBOutlet weak var ProfileTelLabel: UILabel!
+    @IBOutlet weak var ProfileTel: UILabel!
+    @IBOutlet weak var ProfileCityLabel: UILabel!
+    @IBOutlet weak var ProfileCity: UILabel!
 
     // MARK: - Table view protocol
     
+    /// what the view has to load
     override func viewDidLoad() {
         super.viewDidLoad()
         // check if a person has been set
@@ -32,9 +37,12 @@ class ProfileViewController: UIViewController {
             self.ProfileFirstname.text = aperson.prenom
             self.ProfileName.text = aperson.nom
             self.ProfileUsername.text = aperson.pseudo
+            self.ProfileTel.text = aperson.tel
+            self.ProfileCity.text = aperson.ville
         }
     }
 
+    /// if receive a memory warning
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

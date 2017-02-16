@@ -15,51 +15,51 @@ class AddViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var nomLabel: UITextField!
     @IBOutlet weak var prenomLabel: UITextField!
+    @IBOutlet weak var telLabel: UITextField!
+    @IBOutlet weak var villeLabel: UITextField!
     
+    // MARK: - View loading
+
+    /// what the view has to load
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
 
+    /// warning memory
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
+    // MARK: - Text field methods
     
+    /// if the keyboard has to disappear after Return
+    ///
+    /// - Parameter textField: related textfield
+    /// - Returns: TRUE it has to go out, FALSE else
     func textFieldShouldReturn(_ textField: UITextField) -> Bool{
         textField.resignFirstResponder()
         return true
     }
 
-    //MARK - Save and Cancel a new person
+    // MARK: - Button
     
+    /// Cancel the add by clicking "Annuler" button
+    ///
+    /// - Parameter sender: who send the action
     @IBAction func cancelAction(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
     
-    /*
-    func saveNewPerson (withName nom: String, andFirstname prenom: String, andUsername pseudo: String){
-        //get context
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            self.alertError(errorMsg: "Impossible de valider cette personne", userInfo: "Raison inconnue")
-            return
-        }
-        let context = appDelegate.persistentContainer.viewContext
-        //create a person
-        let person = Personne(context: context)
-        person.nom = nom
-        do{
-            try context.save()
-            self.listePersonnes.append(person)
-        }
-        catch let error as NSError{
-            self.alertError(errorMsg: "\(error)", userInfo: "\(error.userInfo)")
-        }
-    }*/
+    // MARK: - Alerts
     
-    
+    /// if an error happens
+    ///
+    /// - Parameters:
+    ///   - error: type of error
+    ///   - user: from who comes the error
     func alertError(errorMsg error: String, userInfo user: String = "") {
         let alert = UIAlertController(title: error, message: user, preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Ok", style: .default)
@@ -71,9 +71,7 @@ class AddViewController: UIViewController, UITextFieldDelegate {
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation*/
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-      
-    }
+    //override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    //  }
 
 }
