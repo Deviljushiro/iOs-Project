@@ -27,7 +27,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var ProfileCityLabel: UILabel!
     @IBOutlet weak var ProfileCity: UILabel!
 
-    // MARK: - Table view protocol
+    // MARK: - View loading
     
     /// what the view has to load
     override func viewDidLoad() {
@@ -48,6 +48,17 @@ class ProfileViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    // MARK: - Button
+    
+
+    /// go to the edition page
+    ///
+    /// - Parameter sender: who send the action
+    @IBAction func editProfileAction(_ sender: Any) {
+        self.performSegue(withIdentifier: "editProfileSegue", sender: self)
+    }
+
 
     /*
     // MARK: - Navigation

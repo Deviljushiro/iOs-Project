@@ -84,6 +84,14 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KhB-aw-bxn">
+                                <rect key="frame" x="319.5" y="818.5" width="130" height="30"/>
+                                <state key="normal" title="Modifier mon profil"/>
+                                <connections>
+                                    <action selector="editProfileAction:" destination="jst-cl-SbP" eventType="touchUpInside" id="WJf-jD-BuC"/>
+                                    <segue destination="OX3-gv-hNY" kind="presentation" identifier="editProfileSegue" id="vq2-8F-r56"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -95,8 +103,10 @@
                             <constraint firstItem="GTu-gy-M6X" firstAttribute="leading" secondItem="Bkq-yJ-C3j" secondAttribute="trailing" constant="40" id="KTs-hC-13c"/>
                             <constraint firstItem="GTu-gy-M6X" firstAttribute="top" secondItem="Bip-1E-XMf" secondAttribute="bottom" constant="80" id="Lkb-zS-KOD"/>
                             <constraint firstItem="MTw-AS-NUU" firstAttribute="leading" secondItem="pca-ej-nzT" secondAttribute="leadingMargin" constant="60" id="NZH-aZ-ET8"/>
+                            <constraint firstItem="KhB-aw-bxn" firstAttribute="top" secondItem="38q-MJ-ZMU" secondAttribute="bottom" constant="60" id="TaY-cK-BxL"/>
                             <constraint firstItem="38q-MJ-ZMU" firstAttribute="leading" secondItem="MTw-AS-NUU" secondAttribute="trailing" constant="8" id="Vgl-SJ-ice"/>
                             <constraint firstItem="j9N-sX-Xrj" firstAttribute="top" secondItem="Bkq-yJ-C3j" secondAttribute="bottom" constant="60" id="b7C-ZL-4fX"/>
+                            <constraint firstItem="KhB-aw-bxn" firstAttribute="centerX" secondItem="pca-ej-nzT" secondAttribute="centerX" id="fVz-lJ-iVF"/>
                             <constraint firstItem="Bkq-yJ-C3j" firstAttribute="leading" secondItem="pca-ej-nzT" secondAttribute="leadingMargin" constant="60" id="gaR-Ki-Z5B"/>
                             <constraint firstItem="GuI-As-mnp" firstAttribute="top" secondItem="j9N-sX-Xrj" secondAttribute="bottom" constant="60" id="ha5-Sm-Yj3"/>
                             <constraint firstItem="Bkq-yJ-C3j" firstAttribute="top" secondItem="Bip-1E-XMf" secondAttribute="bottom" constant="40" id="iNE-VF-bwQ"/>
@@ -126,6 +136,45 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="muF-15-T1L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2247.826086956522" y="-382.33695652173918"/>
+        </scene>
+        <!--Edit Profile View Controller-->
+        <scene sceneID="iyC-gm-fjo">
+            <objects>
+                <viewController id="OX3-gv-hNY" customClass="EditProfileViewController" customModule="iOs_Project" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Ji1-j5-NBU"/>
+                        <viewControllerLayoutGuide type="bottom" id="gag-Hr-xj9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="5Aa-es-ZRl">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QsJ-Qx-JzT">
+                                <rect key="frame" x="0.0" y="980" width="768" height="44"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="BpI-Kx-Q1B"/>
+                                    <barButtonItem title="Valider" id="rIC-7j-Bqp"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Jda-um-aez"/>
+                                    <barButtonItem title="Annuler" id="KTG-lk-ode">
+                                        <connections>
+                                            <action selector="cancelAction:" destination="OX3-gv-hNY" id="G2y-4H-uSt"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="fLo-UG-iI6"/>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="gag-Hr-xj9" firstAttribute="top" secondItem="QsJ-Qx-JzT" secondAttribute="bottom" id="8gE-EQ-OIT"/>
+                            <constraint firstItem="QsJ-Qx-JzT" firstAttribute="leading" secondItem="5Aa-es-ZRl" secondAttribute="leading" id="IUI-Mo-JAQ"/>
+                            <constraint firstAttribute="trailing" secondItem="QsJ-Qx-JzT" secondAttribute="trailing" id="hfl-Gs-TG5"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nmT-d1-B5u" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2962" y="-381"/>
         </scene>
         <!--List View Controller-->
         <scene sceneID="Vvh-kb-Mza">
@@ -261,12 +310,18 @@
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="fDa-t7-H0i" id="rFs-Y1-3Vg"/>
+                                        </connections>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Ville" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mcw-h1-W2f">
                                         <rect key="frame" x="0.0" y="120" width="688" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="fDa-t7-H0i" id="l15-US-zsE"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                             </stackView>
