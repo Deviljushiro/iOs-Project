@@ -15,6 +15,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     // MARK: - Variables
     
     var listePersonnes: [Personne] = []
+    var indexPathForProfile: IndexPath? = nil
     
 
     // MARK: - Outlet
@@ -23,23 +24,24 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     // MARK: - View Loading
     
-    /// What the view has to load before be printed
+    /// What the view has to load before
     override func viewDidLoad() {
         super.viewDidLoad()
         //get the context
-        guard let context = self.getContext(errorMsg: "Person not found") else { return }
+        let context = CoreDataManager.getContext()
         //create query related to the Personne entity
         let request : NSFetchRequest<Personne> = Personne.fetchRequest()
         do {
             try self.listePersonnes = context.fetch(request)
         }
         catch let error as NSError{
-            self.alertError(WithTitle: "\(error)", andMsg: "\(error.userInfo)")
+            DialogBoxHelper.alert(view: self, error: error)
             return
         }
+        
     }
 
-    /// Tell if viex receive a warning
+    /// Tell if view receive a warning
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -55,25 +57,21 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     ///     - prenom: firstname of the person
     func saveNewPerson(withLastName nom: String, andFirstname prenom: String, andTel tel: String, andCity ville: String){
         //get the context
-        guard let context = self.getContext(errorMsg: "Save failed")
-            else {
-                return
-        }
+        //get the context
+        let context = CoreDataManager.getContext()
         //create a person
         let person = Personne(context: context)
-        //modify profile
+        //save datas into the person
         person.nom = nom
         person.prenom = prenom
         person.pseudo = prenom+"."+nom
         person.tel = tel
         person.ville = ville
-        do{
-            try context.save()
-            self.listePersonnes.append(person)
+        if let error = CoreDataManager.save() {
+            DialogBoxHelper.alert(view: self, error: error)
         }
-        catch let error as NSError{
-                self.alert(error: error)
-                return
+        else {
+            self.listePersonnes.append(person)
         }
     }
     
@@ -82,18 +80,18 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     /// - Parameter index: index of the related person
     /// - Returns: TRUE if deleted, FALSE else
     func delete(personWithIndex index: Int) ->Bool {
-        guard let context = self.getContext(errorMsg: "Couldn't delete")
-            else { return false }
+        //get the context
+        let context = CoreDataManager.getContext()
         let person = self.listePersonnes[index]
         context.delete(person)
-        do {
-            try context.save()
-            self.listePersonnes.remove(at: index)
-            return true
-        }
-        catch let error as NSError {
-            self.alert(error: error)
+        // try to save it
+        if let error = CoreDataManager.save() {
+            DialogBoxHelper.alert(view: self, error: error)
             return false
+        }
+        else {
+                self.listePersonnes.remove(at: index)
+                return true
         }
     }
     
@@ -122,6 +120,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         return self.listePersonnes.count
     }
+
     
     /// Tell if a tableview can be edited
     ///
@@ -132,6 +131,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
+    
 
     /// Edit a tableview
     ///
@@ -156,17 +156,16 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     /// Go to the Add page
     ///
-    /// - Parameter sender: the object itself
+    /// - Parameter sender: who send action
     @IBAction func addAction(_ sender: Any) {
-        self.performSegue(withIdentifier: "addSegue", sender: self)
+        self.performSegue(withIdentifier: self.addSegueId, sender: self)
     }
-
+    
     
     /// When datas need to be obtained from the previous page
     ///
     /// - Parameter segue: The segue related to the previous page
     @IBAction func unwindToPersonsListAfterSaving(segue: UIStoryboardSegue){
-        print("I'm back")
         let addController = segue.source as! AddViewController
         let firstname = addController.prenomLabel.text ?? ""
         let lastname = addController.nomLabel.text ?? ""
@@ -180,7 +179,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     // MARK: - Navigation
     
     let profileSegueId = "profileSegue"
-    
+    let addSegueId = "addSegue"
     
     /// prepare to send datas to the profile view ctrler
     ///
@@ -191,51 +190,12 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         if segue.identifier == self.profileSegueId{
-            if let indexPath = self.Personnes.indexPathForSelectedRow{
+            if let indexPath = self.Personnes.indexPathForSelectedRow {
                 let profileViewController = segue.destination as! ProfileViewController
                 profileViewController.person = self.listePersonnes[indexPath.row]
                 self.Personnes.deselectRow(at: indexPath, animated: true)
             }
         }
-    }
-    
-    // MARK: - Helper methods
-    
-    ///get context of core data
-    ///
-    /// - Parameters: 
-    ///     - errorMsg: main error msg
-    ///     - userInfoMsg: additional info user want to display
-    /// - Returns: context of the core data
-    func getContext(errorMsg: String, userInfoMsg: String = "could not retrieve data context") -> NSManagedObjectContext? {
-        
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            //assertionFailure("No Application Delegate!")
-            self.alertError(WithTitle: errorMsg, andMsg: userInfoMsg)
-            return nil
-        }
-        return appDelegate.persistentContainer.viewContext
-    }
-    
-    // MARK: - Alerts
-    
-    /// When need to send an alert with the alert methode
-    ///
-    /// - Parameters:
-    ///   - error: error title
-    ///   - user: message from the user
-    func alertError(WithTitle error: String, andMsg user: String = "") {
-        let alert = UIAlertController(title: error, message: user, preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "Ok", style: .default)
-        alert.addAction(cancelAction)
-        present(alert, animated: true)
-    }
-    
-    /// When an error is caught
-    ///
-    /// - Parameter error: NSError caught
-    func alert(error: NSError) {
-        self.alertError(WithTitle: "\(error)", andMsg: "\(error.userInfo)")
     }
 
 }

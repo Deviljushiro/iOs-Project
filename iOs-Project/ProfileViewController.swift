@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ProfileViewController: UIViewController {
 
@@ -48,6 +49,16 @@ class ProfileViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK: - Person data management
+    
+    /// Save an existing person
+    func save(){
+        //get context
+        if let error = CoreDataManager.save(){
+            DialogBoxHelper.alert(view: self, error: error)
+        }
+    }
+    
     
     // MARK: - Button
     
@@ -56,18 +67,39 @@ class ProfileViewController: UIViewController {
     ///
     /// - Parameter sender: who send the action
     @IBAction func editProfileAction(_ sender: Any) {
-        self.performSegue(withIdentifier: "editProfileSegue", sender: self)
+        self.performSegue(withIdentifier: self.editProfileSegueId, sender: self)
+    }
+    
+    @IBAction func unwindToPersonAfterEditing(segue: UIStoryboardSegue) {
+        self.save()
+        self.viewDidLoad()
     }
 
-
-    /*
+    
     // MARK: - Navigation
+     
+     let editProfileSegueId = "editProfileSegue"
+     let profileSegueId = "profileSegue"
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
+    
+    /// prepare to send datas
+    ///
+    /// - Parameters:
+    ///   - segue: the related segue where datas will be sent
+    ///   - sender: who senf datas
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == self.editProfileSegueId{
+            let editProfileViewController = segue.destination as! EditProfileViewController
+            editProfileViewController.person = self.person
+        }
+        if segue.identifier == self.profileSegueId{
+            let listViewController = segue.destination as! ListViewController
+            listViewController.viewDidLoad()
+        }
     }
-    */
 
 }

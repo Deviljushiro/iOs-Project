@@ -53,19 +53,6 @@ class AddViewController: UIViewController, UITextFieldDelegate {
         self.dismiss(animated: true, completion: nil)
     }
     
-    // MARK: - Alerts
-    
-    /// if an error happens
-    ///
-    /// - Parameters:
-    ///   - error: type of error
-    ///   - user: from who comes the error
-    func alertError(errorMsg error: String, userInfo user: String = "") {
-        let alert = UIAlertController(title: error, message: user, preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "Ok", style: .default)
-        alert.addAction(cancelAction)
-        present(alert, animated: true)
-    }
 
     /*
     // MARK: - Navigation
