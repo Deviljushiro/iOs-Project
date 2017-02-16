@@ -12,8 +12,16 @@ class EditProfileViewController: UIViewController {
     
     // MARK: - Outlets
     
+    @IBOutlet weak var EditProfileTitle: UILabel!
+    @IBOutlet weak var EditProfileImage: UIImageView!
+    @IBOutlet weak var EditProfileFirstnameLabel: UILabel!
+    @IBOutlet weak var EditProfileNameLabel: UILabel!
+    @IBOutlet weak var EditProfileUsernameLabel: UILabel!
+    @IBOutlet weak var EditProfileUsername: UILabel!
+    @IBOutlet weak var EditProfileTelLabel: UILabel!
+    @IBOutlet weak var EditProfileCityLabel: UILabel!
    
-    
+
     // MARK: - View loading
     
     /// What the view has to load
