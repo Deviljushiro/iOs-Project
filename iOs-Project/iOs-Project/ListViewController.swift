@@ -67,6 +67,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         person.pseudo = prenom+"."+nom
         person.tel = tel
         person.ville = ville
+        person.mdp = "123"
         if let error = CoreDataManager.save() {
             DialogBoxHelper.alert(view: self, error: error)
         }
@@ -151,7 +152,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
 
     
-    // MARK: - Button
+    // MARK: - Action
     
     
     /// Go to the Add page

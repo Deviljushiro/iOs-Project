@@ -55,7 +55,7 @@ class EditProfileViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    // MARK: - Button
+    // MARK: - Action
     
     /// Save new fields by clicking "Valider"
     ///

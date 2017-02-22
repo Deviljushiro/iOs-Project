@@ -10,7 +10,10 @@
 		DC074F531E51DBEB00F2A90E /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC074F521E51DBEB00F2A90E /* ListViewController.swift */; };
 		DC074F571E51DF9600F2A90E /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC074F561E51DF9600F2A90E /* AddViewController.swift */; };
 		DC426FCD1E52001A00809823 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC426FCC1E52001A00809823 /* ListTableViewCell.swift */; };
-		DC50EF5C1E547D5A00784C10 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC50EF5B1E547D5A00784C10 /* ProfileViewController.swift */; };
+		DC4FAB511E5DD19C00BC0745 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4FAB501E5DD19C00BC0745 /* LoginViewController.swift */; };
+		DC4FAB531E5DDC5D00BC0745 /* WallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4FAB521E5DDC5D00BC0745 /* WallViewController.swift */; };
+		DC4FAB581E5DE96700BC0745 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4FAB571E5DE96700BC0745 /* ProfileViewController.swift */; };
+		DC4FAB5C1E5DEABA00BC0745 /* Personne.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4FAB5B1E5DEABA00BC0745 /* Personne.swift */; };
 		DCE300021E51AADC0006D7E5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCE300001E51AADC0006D7E5 /* Main.storyboard */; };
 		DCE300051E51AADC0006D7E5 /* iOs_Project.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DCE300031E51AADC0006D7E5 /* iOs_Project.xcdatamodeld */; };
 		DCE300071E51AADC0006D7E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DCE300061E51AADC0006D7E5 /* Assets.xcassets */; };
@@ -46,7 +49,10 @@
 		DC074F521E51DBEB00F2A90E /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		DC074F561E51DF9600F2A90E /* AddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		DC426FCC1E52001A00809823 /* ListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
-		DC50EF5B1E547D5A00784C10 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileViewController.swift; path = ../ProfileViewController.swift; sourceTree = "<group>"; };
+		DC4FAB501E5DD19C00BC0745 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		DC4FAB521E5DDC5D00BC0745 /* WallViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WallViewController.swift; sourceTree = "<group>"; };
+		DC4FAB571E5DE96700BC0745 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		DC4FAB5B1E5DEABA00BC0745 /* Personne.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Personne.swift; sourceTree = "<group>"; };
 		DCE300011E51AADC0006D7E5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DCE300041E51AADC0006D7E5 /* iOs_Project.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = iOs_Project.xcdatamodel; sourceTree = "<group>"; };
 		DCE300061E51AADC0006D7E5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -92,6 +98,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DC4FAB5D1E5DED4800BC0745 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				DC4FAB5B1E5DEABA00BC0745 /* Personne.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		DCE300131E51AADC0006D7E5 /* iOs-ProjectTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -133,14 +147,17 @@
 		DCE3FFFB1E51AADC0006D7E5 /* iOs-Project */ = {
 			isa = PBXGroup;
 			children = (
+				DC4FAB5D1E5DED4800BC0745 /* Models */,
 				DFED6F8E1E55F3D400F5C275 /* Class Helpers */,
-				DC50EF5B1E547D5A00784C10 /* ProfileViewController.swift */,
+				DC4FAB571E5DE96700BC0745 /* ProfileViewController.swift */,
 				DC074F561E51DF9600F2A90E /* AddViewController.swift */,
 				DC074F521E51DBEB00F2A90E /* ListViewController.swift */,
 				DC426FCC1E52001A00809823 /* ListTableViewCell.swift */,
 				DCE3FFFC1E51AADC0006D7E5 /* AppDelegate.swift */,
 				DCE3FFFE1E51AADC0006D7E5 /* ViewController.swift */,
 				DCE300001E51AADC0006D7E5 /* Main.storyboard */,
+				DC4FAB521E5DDC5D00BC0745 /* WallViewController.swift */,
+				DC4FAB501E5DD19C00BC0745 /* LoginViewController.swift */,
 				DF36A7341E55C50200B051F5 /* EditProfileViewController.swift */,
 				DCE3002D1E51B4FC0006D7E5 /* HomeViewController.swift */,
 				DCE300061E51AADC0006D7E5 /* Assets.xcassets */,
@@ -313,15 +330,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC4FAB511E5DD19C00BC0745 /* LoginViewController.swift in Sources */,
 				DC426FCD1E52001A00809823 /* ListTableViewCell.swift in Sources */,
 				DFED6F8D1E55F2DA00F5C275 /* DialogBoxHelper.swift in Sources */,
+				DC4FAB531E5DDC5D00BC0745 /* WallViewController.swift in Sources */,
 				DCE3FFFF1E51AADC0006D7E5 /* ViewController.swift in Sources */,
+				DC4FAB5C1E5DEABA00BC0745 /* Personne.swift in Sources */,
 				DCE300051E51AADC0006D7E5 /* iOs_Project.xcdatamodeld in Sources */,
 				DC074F571E51DF9600F2A90E /* AddViewController.swift in Sources */,
 				DCE3FFFD1E51AADC0006D7E5 /* AppDelegate.swift in Sources */,
 				DC074F531E51DBEB00F2A90E /* ListViewController.swift in Sources */,
-				DC50EF5C1E547D5A00784C10 /* ProfileViewController.swift in Sources */,
 				DCE3002E1E51B4FC0006D7E5 /* HomeViewController.swift in Sources */,
+				DC4FAB581E5DE96700BC0745 /* ProfileViewController.swift in Sources */,
 				DFED6F8B1E55F11400F5C275 /* CoreDataManager.swift in Sources */,
 				DF36A7351E55C50200B051F5 /* EditProfileViewController.swift in Sources */,
 			);

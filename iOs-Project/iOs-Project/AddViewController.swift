@@ -44,7 +44,7 @@ class AddViewController: UIViewController, UITextFieldDelegate {
         return true
     }
 
-    // MARK: - Button
+    // MARK: - Action
     
     /// Cancel the add by clicking "Annuler" button
     ///
