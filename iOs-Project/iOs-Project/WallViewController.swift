@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class WallViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -26,8 +27,18 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        //get the context
+        let context = CoreDataManager.getContext()
+        //create query related to the Personne entity
+        let request : NSFetchRequest<Message> = Message.fetchRequest()
+        do {
+            try self.listMsg = context.fetch(request)
+        }
+        catch let error as NSError{
+            DialogBoxHelper.alert(view: self, error: error)
+            return
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -57,8 +68,45 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         return self.listMsg.count
     }
-
     
+    // MARK: - Message data management
+    
+    /// create a new message and save it
+    ///
+    /// - Parameters:
+    ///     - message : the message which is sent
+    func saveNewMessage(message mes : String ){
+        //get the context
+        //get the context
+        let context = CoreDataManager.getContext()
+        //create a person
+        let message = Message(context: context)
+        //save datas into the person
+        message.contenu = mes
+        message.dateEnvoi = currentDate() as NSDate
+        if let error = CoreDataManager.save() {
+            DialogBoxHelper.alert(view: self, error: error)
+        }
+        
+    }
+    
+    
+    // MARK: - Functions
+    
+    func currentDate() -> Date{
+        let date = NSDate()
+        let calendar = NSCalendar.current
+        let dateNeeded = calendar.dateComponents([.year, .month,.day], from: date as Date)
+        let year = String(describing: dateNeeded.year)
+        let month = String(describing:dateNeeded.month)
+        let day = String(describing:dateNeeded.day)
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd.MM.yyyy"
+        
+        let result = formatter.date(from :day+"/"+month+"/"+year)
+        return result!
+        
+    }
     // MARK: - Actions
     
     

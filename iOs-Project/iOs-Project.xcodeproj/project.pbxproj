@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D3C3CCC1E682EC6001893E4 /* PersonnesSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D3C3CCB1E682EC6001893E4 /* PersonnesSet.swift */; };
+		3D3C3CCD1E682EC6001893E4 /* PersonnesSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D3C3CCB1E682EC6001893E4 /* PersonnesSet.swift */; };
 		DC074F531E51DBEB00F2A90E /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC074F521E51DBEB00F2A90E /* ListViewController.swift */; };
 		DC074F571E51DF9600F2A90E /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC074F561E51DF9600F2A90E /* AddViewController.swift */; };
 		DC426FCD1E52001A00809823 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC426FCC1E52001A00809823 /* ListTableViewCell.swift */; };
@@ -46,6 +48,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3D3C3CCB1E682EC6001893E4 /* PersonnesSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonnesSet.swift; sourceTree = "<group>"; };
 		DC074F521E51DBEB00F2A90E /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		DC074F561E51DF9600F2A90E /* AddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		DC426FCC1E52001A00809823 /* ListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
@@ -102,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				DC4FAB5B1E5DEABA00BC0745 /* Personne.swift */,
+				3D3C3CCB1E682EC6001893E4 /* PersonnesSet.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -314,6 +318,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D3C3CCD1E682EC6001893E4 /* PersonnesSet.swift in Sources */,
 				DCE300151E51AADC0006D7E5 /* iOs_ProjectTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -335,6 +340,7 @@
 				DFED6F8D1E55F2DA00F5C275 /* DialogBoxHelper.swift in Sources */,
 				DC4FAB531E5DDC5D00BC0745 /* WallViewController.swift in Sources */,
 				DCE3FFFF1E51AADC0006D7E5 /* ViewController.swift in Sources */,
+				3D3C3CCC1E682EC6001893E4 /* PersonnesSet.swift in Sources */,
 				DC4FAB5C1E5DEABA00BC0745 /* Personne.swift in Sources */,
 				DCE300051E51AADC0006D7E5 /* iOs_Project.xcdatamodeld in Sources */,
 				DC074F571E51DF9600F2A90E /* AddViewController.swift in Sources */,

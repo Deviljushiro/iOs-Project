@@ -36,6 +36,31 @@ class LoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK: - Person data management
+    
+    /// create a new person and save it
+    ///
+    /// - Parameters:
+    ///     - nom: lastname of the person
+    ///     - prenom: firstname of the person
+    func saveNewPerson(withLastName nom: String, andFirstname prenom: String, andTel tel: String, andCity ville: String){
+        //get the context
+        //get the context
+        let context = CoreDataManager.getContext()
+        //create a person
+        let person = Personne(context: context)
+        //save datas into the person
+        person.nom = nom
+        person.prenom = prenom
+        person.pseudo = prenom+"."+nom
+        person.tel = tel
+        person.ville = ville
+        person.mdp = "123"
+        if let error = CoreDataManager.save() {
+            DialogBoxHelper.alert(view: self, error: error)
+        }
+    }
+    
     // MARK: - Action
     
     /// Check the id and password and connect the user
@@ -63,6 +88,27 @@ class LoginViewController: UIViewController {
             }
             
         }
+    }
+    
+    /// When datas need to be obtained from the previous page
+    ///
+    /// - Parameter segue: The segue related to the previous page
+    @IBAction func unwindToPersonsListAfterSaving(segue: UIStoryboardSegue){
+        let addController = segue.source as! AddViewController
+        let firstname = addController.prenomLabel.text ?? ""
+        let lastname = addController.nomLabel.text ?? ""
+        let tel = addController.telLabel.text ?? ""
+        let city = addController.villeLabel.text ?? ""
+        self.saveNewPerson(withLastName: lastname, andFirstname: firstname, andTel: tel, andCity: city)
+    }
+
+    
+    
+    /// Go to the registration Segue
+    ///
+    /// - Parameter sender: who send the action
+    @IBAction func registrationAction(_ sender: Any) {
+        self.performSegue(withIdentifier: "registerSegue", sender: self)
     }
 
     
