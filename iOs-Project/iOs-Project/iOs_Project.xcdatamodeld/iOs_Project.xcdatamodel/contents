@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16A323" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16D32" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="CategoriePersonne" representedClassName="CategoriePersonne" syncable="YES" codeGenerationType="class">
         <attribute name="libelle" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="concerne" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Personne" inverseName="estUn" inverseEntity="Personne" syncable="YES"/>
@@ -32,7 +32,7 @@
     <entity name="Message" representedClassName="Message" syncable="YES" codeGenerationType="class">
         <attribute name="contenu" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="dateEnvoi" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="concerner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Groupe" inverseName="contenir" inverseEntity="Groupe" syncable="YES"/>
         <relationship name="contenir" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Fichier" inverseName="etreDans" inverseEntity="Fichier" syncable="YES"/>
         <relationship name="ecritPar" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Personne" inverseName="ecrire" inverseEntity="Personne" syncable="YES"/>

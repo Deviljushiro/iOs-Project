@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D25929B1E6D4DBB00AA940D /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D25929A1E6D4DBB00AA940D /* Session.swift */; };
+		3D25929D1E6D596600AA940D /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D25929C1E6D596600AA940D /* Message.swift */; };
+		3D25929F1E6D5D8900AA940D /* MessagesSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D25929E1E6D5D8900AA940D /* MessagesSet.swift */; };
+		3D2592A11E6D6E1C00AA940D /* ListTableViewCellMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2592A01E6D6E1C00AA940D /* ListTableViewCellMessage.swift */; };
 		3D3C3CCC1E682EC6001893E4 /* PersonnesSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D3C3CCB1E682EC6001893E4 /* PersonnesSet.swift */; };
 		3D3C3CCD1E682EC6001893E4 /* PersonnesSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D3C3CCB1E682EC6001893E4 /* PersonnesSet.swift */; };
 		DC074F531E51DBEB00F2A90E /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC074F521E51DBEB00F2A90E /* ListViewController.swift */; };
@@ -48,6 +52,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3D25929A1E6D4DBB00AA940D /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		3D25929C1E6D596600AA940D /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		3D25929E1E6D5D8900AA940D /* MessagesSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesSet.swift; sourceTree = "<group>"; };
+		3D2592A01E6D6E1C00AA940D /* ListTableViewCellMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTableViewCellMessage.swift; sourceTree = "<group>"; };
 		3D3C3CCB1E682EC6001893E4 /* PersonnesSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonnesSet.swift; sourceTree = "<group>"; };
 		DC074F521E51DBEB00F2A90E /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		DC074F561E51DF9600F2A90E /* AddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
@@ -105,6 +113,8 @@
 			isa = PBXGroup;
 			children = (
 				DC4FAB5B1E5DEABA00BC0745 /* Personne.swift */,
+				3D25929E1E6D5D8900AA940D /* MessagesSet.swift */,
+				3D25929C1E6D596600AA940D /* Message.swift */,
 				3D3C3CCB1E682EC6001893E4 /* PersonnesSet.swift */,
 			);
 			name = Models;
@@ -154,8 +164,10 @@
 				DC4FAB5D1E5DED4800BC0745 /* Models */,
 				DFED6F8E1E55F3D400F5C275 /* Class Helpers */,
 				DC4FAB571E5DE96700BC0745 /* ProfileViewController.swift */,
+				3D25929A1E6D4DBB00AA940D /* Session.swift */,
 				DC074F561E51DF9600F2A90E /* AddViewController.swift */,
 				DC074F521E51DBEB00F2A90E /* ListViewController.swift */,
+				3D2592A01E6D6E1C00AA940D /* ListTableViewCellMessage.swift */,
 				DC426FCC1E52001A00809823 /* ListTableViewCell.swift */,
 				DCE3FFFC1E51AADC0006D7E5 /* AppDelegate.swift */,
 				DCE3FFFE1E51AADC0006D7E5 /* ViewController.swift */,
@@ -338,15 +350,19 @@
 				DC4FAB511E5DD19C00BC0745 /* LoginViewController.swift in Sources */,
 				DC426FCD1E52001A00809823 /* ListTableViewCell.swift in Sources */,
 				DFED6F8D1E55F2DA00F5C275 /* DialogBoxHelper.swift in Sources */,
+				3D25929D1E6D596600AA940D /* Message.swift in Sources */,
 				DC4FAB531E5DDC5D00BC0745 /* WallViewController.swift in Sources */,
 				DCE3FFFF1E51AADC0006D7E5 /* ViewController.swift in Sources */,
 				3D3C3CCC1E682EC6001893E4 /* PersonnesSet.swift in Sources */,
 				DC4FAB5C1E5DEABA00BC0745 /* Personne.swift in Sources */,
+				3D2592A11E6D6E1C00AA940D /* ListTableViewCellMessage.swift in Sources */,
 				DCE300051E51AADC0006D7E5 /* iOs_Project.xcdatamodeld in Sources */,
 				DC074F571E51DF9600F2A90E /* AddViewController.swift in Sources */,
 				DCE3FFFD1E51AADC0006D7E5 /* AppDelegate.swift in Sources */,
 				DC074F531E51DBEB00F2A90E /* ListViewController.swift in Sources */,
 				DCE3002E1E51B4FC0006D7E5 /* HomeViewController.swift in Sources */,
+				3D25929B1E6D4DBB00AA940D /* Session.swift in Sources */,
+				3D25929F1E6D5D8900AA940D /* MessagesSet.swift in Sources */,
 				DC4FAB581E5DE96700BC0745 /* ProfileViewController.swift in Sources */,
 				DFED6F8B1E55F11400F5C275 /* CoreDataManager.swift in Sources */,
 				DF36A7351E55C50200B051F5 /* EditProfileViewController.swift in Sources */,

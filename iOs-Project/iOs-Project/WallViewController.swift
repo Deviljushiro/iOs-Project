@@ -21,24 +21,13 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
     // MARK: - Variables
     
     var person : Personne? = nil
-    var listMsg: [Message] = []
+    var listMsg : MessagesSet = MessagesSet()
     
     // MARK: - Table loading
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //get the context
-        let context = CoreDataManager.getContext()
-        //create query related to the Personne entity
-        let request : NSFetchRequest<Message> = Message.fetchRequest()
-        do {
-            try self.listMsg = context.fetch(request)
-        }
-        catch let error as NSError{
-            DialogBoxHelper.alert(view: self, error: error)
-            return
-        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -55,7 +44,7 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
     ///   - indexPath: the index of each cell
     /// - Returns: the cell with the defined values
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
-        let cell = self.Messages.dequeueReusableCell(withIdentifier: "msgCell", for: indexPath) as! ListTableViewCell
+        let cell = self.Messages.dequeueReusableCell(withIdentifier: "msgCell", for: indexPath) as! ListTableViewCellMessage
         return cell
     }
     
@@ -66,7 +55,7 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
     ///   - section: number of lines for each section
     /// - Returns: number of sections
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        return self.listMsg.count
+        return self.listMsg.numbersOfMessages
     }
     
     // MARK: - Message data management
@@ -76,37 +65,18 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
     /// - Parameters:
     ///     - message : the message which is sent
     func saveNewMessage(message mes : String ){
-        //get the context
-        //get the context
-        let context = CoreDataManager.getContext()
-        //create a person
-        let message = Message(context: context)
-        //save datas into the person
-        message.contenu = mes
-        message.dateEnvoi = currentDate() as NSDate
-        if let error = CoreDataManager.save() {
-            DialogBoxHelper.alert(view: self, error: error)
-        }
         
+        guard self.listMsg.addMessage(message: mes, personne: person!) != nil else{
+            DialogBoxHelper.alert(view: self, WithTitle: "Erreur dans l'ajout du message")
+            return
+        }        
     }
     
     
-    // MARK: - Functions
+
     
-    func currentDate() -> Date{
-        let date = NSDate()
-        let calendar = NSCalendar.current
-        let dateNeeded = calendar.dateComponents([.year, .month,.day], from: date as Date)
-        let year = String(describing: dateNeeded.year)
-        let month = String(describing:dateNeeded.month)
-        let day = String(describing:dateNeeded.day)
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd.MM.yyyy"
-        
-        let result = formatter.date(from :day+"/"+month+"/"+year)
-        return result!
-        
-    }
+    
+    
     // MARK: - Actions
     
     

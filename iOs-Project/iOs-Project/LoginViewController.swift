@@ -84,8 +84,11 @@ class LoginViewController: UIViewController {
             }
             else {
                 self.person = res[0]
-                self.performSegue(withIdentifier: "loginSegue", sender: self)
-            }
+                Session.newSession(pseudo: id, password: pwd)
+                if Session.session != nil{
+                    self.performSegue(withIdentifier: "loginSegue", sender: self)
+                }
+                            }
             
         }
     }
