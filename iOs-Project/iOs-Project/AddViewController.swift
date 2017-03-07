@@ -18,6 +18,7 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
     // MARK: - Variables
     
     var person: Personne? = nil
+    var listPersons: PersonnesSet = PersonnesSet()
     
     // MARK: - Outlet
     
@@ -82,6 +83,8 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
 
     // MARK: - Action
     
+
+    
     
     @IBAction func saveAction(_ sender: Any) {
         print("hello")
@@ -93,22 +96,16 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
             else {
                 DialogBoxHelper.alert(view: self, WithTitle: "Echec inscription", andMsg: "Confirmation incorrecte")
                 return }
-        person?.nom = self.prenomLabel.text
-        person?.prenom = self.nomLabel.text
-        person?.tel = self.telLabel.text
-        person?.ville = self.villeLabel.text
-        person?.photo = UIImageJPEGRepresentation(self.image.image!,1) as NSData?
-        person?.mdp = self.motDePasse.text
-        self.performSegue(withIdentifier: "unwindToPersonsListAfterSaving", sender: self)
-
+        self.performSegue(withIdentifier: "unwindToLoginAfterSaving", sender: self)
     }
     
-    /// Cancel the add by clicking "Annuler" button
-    ///
-    /// - Parameter sender: who send the action
+   
+
+    
     @IBAction func cancelAction(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
+
     
     
     /// Ask for a picture by clicking on the "Ajouter une image" button

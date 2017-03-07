@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 import UIKit
 
-class PersonnesSet{
+class PersonnesSet {
     
     let context = CoreDataManager.getContext()
     let request : NSFetchRequest<Personne> = Personne.fetchRequest()
@@ -34,9 +34,8 @@ class PersonnesSet{
     /// - Parameters:
     ///   - person: the person we want to add
     /// - Returns: the person we added (or nil if the save failed)
-    func addPerson(person p:Personne)->Personne?{
+    func addPerson(person p:Personne) {
         self.listPersons.append(p)
-        return p
     }
     
     /// Delete a person from the set with a specific index
@@ -50,22 +49,6 @@ class PersonnesSet{
     
     // MARK: - Getters
     
-    /// Get persons with a specific username
-    ///
-    /// - Parameter withUsername: username of the persons
-    /// - Returns: return a tab of persons with the username
-    func getPersonsByUsername(withUsername: String) -> [Personne] {
-        var persons: [Personne] = []
-        let context = CoreDataManager.getContext()
-        let request : NSFetchRequest<Personne> = Personne.fetchRequest()
-        request.predicate = NSPredicate(format: "pseudo == %@", withUsername)
-        do {
-            try persons = context.fetch(request)
-        } catch let error as NSError {
-            fatalError("failed to get persons by username=\(withUsername): \(error)")
-        }
-        return persons
-    }
     
     /// Get persons with a specific lastname
     ///
@@ -80,6 +63,23 @@ class PersonnesSet{
             try persons = context.fetch(request)
         } catch let error as NSError {
             fatalError("failed to get persons by lastname=\(withLastname): \(error)")
+        }
+        return persons
+    }
+    
+    /// Get persons with a specific lastname
+    ///
+    /// - Parameter withLastname: lastname of the persons
+    /// - Returns: return a tab of persons with the lastname
+    func getPersonsByUsername(withUsername: String) -> [Personne] {
+        var persons: [Personne] = []
+        let context = CoreDataManager.getContext()
+        let request : NSFetchRequest<Personne> = Personne.fetchRequest()
+        request.predicate = NSPredicate(format: "pseudo == %@", withUsername)
+        do {
+            try persons = context.fetch(request)
+        } catch let error as NSError {
+            fatalError("failed to get persons by lastname=\(withUsername): \(error)")
         }
         return persons
     }

@@ -22,15 +22,18 @@ extension Personne {
         }
     }
     
-    var pseudo : String{
-        get{
-            let prenom : String = self.prenom ?? ""
-            let nom : String = self.nom ?? ""
-            return prenom+"."+nom
-        }
-    }
     
     @discardableResult
+    /// Create a new person in the DB
+    ///
+    /// - Parameters:
+    ///   - firstName: of the person
+    ///   - name: of the person
+    ///   - tel: of the person
+    ///   - city: of the person
+    ///   - pwd: of the person
+    ///   - image: of the person
+    /// - Returns: the person created
     static func createNewPersonne(firstName: String, name: String, tel: String, city: String, pwd: String, image: NSData) -> Personne{
         let context = CoreDataManager.getContext()
         //create a person
@@ -42,6 +45,7 @@ extension Personne {
         person.ville = city
         person.mdp = pwd
         person.photo = image
+        person.pseudo = firstName+"."+name
         return person
     }
     

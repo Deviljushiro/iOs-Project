@@ -14,7 +14,7 @@ class LoginViewController: UIViewController {
     // MARK: - Variables
     
     var person : Personne? = nil
-    var personSet : PersonnesSet!
+    var listPersons : PersonnesSet!
 
     // MARK: - Outlets
     
@@ -29,7 +29,7 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.personSet = PersonnesSet()
+        self.listPersons = PersonnesSet()
 
     }
 
@@ -40,17 +40,29 @@ class LoginViewController: UIViewController {
     
     // MARK: - Person data management
     
+    /// Save an existing person
+    func save(){
+        //get context
+        if let error = CoreDataManager.save(){
+            DialogBoxHelper.alert(view: self, error: error)
+        }
+    }
+    
     /// create a new person and save it
     ///
     /// - Parameters:
     ///     - nom: lastname of the person
     ///     - prenom: firstname of the person
-    func saveNewPerson(withLastName name: String, andFirstname firstname: String, andTel tel: String, andCity city: String, andPwd pwd: String, andImage image: NSData){
-        Personne.createNewPersonne(firstName: firstname, name: name, tel: tel, city: city, pwd: pwd, image: image)
+    func saveNewPerson(withLastName nom: String, andFirstname prenom: String, andTel tel: String, andCity ville: String, andPwd mdp: String, andImage image: NSData){
+        let person = Personne.createNewPersonne(firstName: prenom, name: nom, tel: tel, city: ville, pwd: mdp, image: image)
         if let error = CoreDataManager.save() {
             DialogBoxHelper.alert(view: self, error: error)
         }
+        else {
+            self.listPersons.addPerson(person: person)
+        }
     }
+
     
     // MARK: - Action
     
@@ -63,7 +75,7 @@ class LoginViewController: UIViewController {
             DialogBoxHelper.alert(view: self, WithTitle: "Connection impossible", andMsg: "Identifiant ou mot de passe manquant")
             return
         }
-        let res = personSet.getPersonsByUsername(withUsername: user)
+        let res = listPersons.getPersonsByUsername(withUsername: user)
         if res.count < 1 {
             DialogBoxHelper.alert(view: self, WithTitle: "Connection impossible", andMsg: "Identifiant inconnu")
             return
@@ -87,9 +99,13 @@ class LoginViewController: UIViewController {
     /// When datas need to be obtained from the previous page
     ///
     /// - Parameter segue: The segue related to the previous page
-    @IBAction func unwindToLoginSaved(segue: UIStoryboardSegue){
-        CoreDataManager.save()
-        DialogBoxHelper.alert(view: self, WithTitle: "Inscription validée")
+    @IBAction func unwindToLoginAfterSaving(segue: UIStoryboardSegue){
+        let addController = segue.source as! AddViewController
+        self.saveNewPerson(withLastName: addController.nomLabel.text!, andFirstname : addController.prenomLabel.text!, andTel :addController.telLabel.text!, andCity : addController.villeLabel.text!, andPwd : addController.motDePasse.text!, andImage : (UIImageJPEGRepresentation(addController.image.image!, 1) as NSData?)!)
+        if let error = CoreDataManager.save(){
+            DialogBoxHelper.alert(view: self, error: error)
+        }
+        else { DialogBoxHelper.alert(view: self, WithTitle: "Inscription validée") }
     }
 
     
