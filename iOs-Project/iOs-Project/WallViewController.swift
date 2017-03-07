@@ -27,7 +27,6 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -77,6 +76,10 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
     // MARK: - Actions
     
     
+    
+    @IBAction func myProfileAction(_ sender: Any) {
+    }
+    
     /// Log out the user
     ///
     /// - Parameter sender: who send the action
@@ -92,14 +95,20 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
 
-    /*
+    
     // MARK: - Navigation
+     
+    let profileSegueId = "myProfileSegue"
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == self.profileSegueId {
+            let profileViewController = segue.destination as! ProfileViewController
+            profileViewController.person = self.person
+        }
     }
-    */
+    
 
 }

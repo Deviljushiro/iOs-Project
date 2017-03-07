@@ -40,6 +40,7 @@ class ProfileViewController: UIViewController {
             self.ProfileUsername.text = aperson.pseudo
             self.ProfileTel.text = aperson.tel
             self.ProfileCity.text = aperson.ville
+            self.ProfileImage.image = UIImage(data: aperson.photo as! Data)
         }
     }
 

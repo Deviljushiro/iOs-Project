@@ -80,28 +80,49 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
         textField.resignFirstResponder()
         return true
     }
+    
+    // MARK: - Person data management
+    
+    /// create a new person, add it to the personsSet and save the context
+    ///
+    /// - Parameters:
+    ///     - nom: lastname of the person
+    ///     - prenom: firstname of the person
+    func saveNewPerson(withLastName nom: String, andFirstname prenom: String, andTel tel: String, andCity ville: String, andPwd mdp: String, andImage image: NSData){
+        let person = Personne.createNewPersonne(firstName: prenom, name: nom, tel: tel, city: ville, pwd: mdp, image: image)
+        if let error = CoreDataManager.save() {
+            DialogBoxHelper.alert(view: self, error: error)
+        }
+        else {
+            self.listPersons.addPerson(person: person)
+        }
+    }
 
     // MARK: - Action
-    
 
-    
-    
+    /// Save the person by clicking on "Valider"
+    ///
+    /// - Parameter sender: who send action
     @IBAction func saveAction(_ sender: Any) {
-        print("hello")
-        guard (self.prenomLabel.text != "") && (self.nomLabel.text != "") && (self.motDePasse.text != "") && (self.confirmMotDePasse.text != "")
-            else {
-                DialogBoxHelper.alert(view: self, WithTitle: "Echec inscription", andMsg: "Informations manquantes")
-                return }
-        guard (self.motDePasse.text == self.confirmMotDePasse.text)
-            else {
-                DialogBoxHelper.alert(view: self, WithTitle: "Echec inscription", andMsg: "Confirmation incorrecte")
-                return }
-        self.performSegue(withIdentifier: "unwindToLoginAfterSaving", sender: self)
+        //create the attributes to save the new person
+        let firstname = self.prenomLabel.text ?? ""
+        let lastname = self.nomLabel.text ?? ""
+        let tel = self.telLabel.text ?? ""
+        let city = self.villeLabel.text ?? ""
+        let pwd = self.motDePasse.text ?? ""
+        let pwd2 = self.confirmMotDePasse.text ?? ""
+        let image = UIImageJPEGRepresentation(self.image.image!,1) as NSData? ?? nil
+        //save it
+        self.saveNewPerson(withLastName: lastname, andFirstname: firstname, andTel: tel, andCity: city, andPwd: pwd, andImage: image!)
+        DialogBoxHelper.alert(view: self, WithTitle: "Inscription validée")
+        performSegue(withIdentifier: "backToLoginSegue", sender: self)
     }
-    
-   
 
     
+    
+    /// Cancel the registration by clicking on "Annuler"
+    ///
+    /// - Parameter sender: who send action
     @IBAction func cancelAction(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
