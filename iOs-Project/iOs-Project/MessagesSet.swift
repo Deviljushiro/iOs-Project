@@ -12,10 +12,22 @@ import UIKit
 
 class MessagesSet {
     
+    // MARK: - Variables
+    
     var listMsg: [Message]
+    var numbersOfMessages : Int{
+        get{
+            return self.listMsg.count
+        }
+    }
+    
+    // MARK: - CoreData Constant
+    
     let context = CoreDataManager.getContext()
     let request : NSFetchRequest<Message> = Message.fetchRequest()
 
+    // MARK: - Initialization
+    
     init(){
         do {
             try self.listMsg = self.context.fetch(request)
@@ -24,12 +36,14 @@ class MessagesSet {
         }
     }
     
-    var numbersOfMessages : Int{
-        get{
-            return self.listMsg.count
-        }
-    }
+    // MARK: - Data Manager
     
+    /// Add a message to the set
+    ///
+    /// - Parameters:
+    ///   - mes: the message we want to add
+    ///   - p: the person who sent the message
+    /// - Returns: the message we added (or nil if the save failed)
     func addMessage(message mes:String,personne p:Personne)->Message?{
         //create a person
         let message = Message(context: self.context)
@@ -48,7 +62,11 @@ class MessagesSet {
 
     }
     
+    // MARK: - Tool Methods
     
+    /// Get the current date
+    ///
+    /// - Returns: the current date
     func currentDate() -> Date{
         let date = NSDate()
         let calendar = NSCalendar.current
@@ -64,6 +82,9 @@ class MessagesSet {
         
     }
     
+    /// Increment automatically the number of messages
+    ///
+    /// - Returns: The number of messages incremented
     func autoIncrement() -> Int64{
         return Message.getNumbersOfMessages()+1
     }

@@ -12,6 +12,8 @@ import UIKit
 
 extension Personne {
     
+    // MARK: - Variables
+    
     var fullname : String{
         get{
             let prenom = self.prenom ?? ""
@@ -20,37 +22,29 @@ extension Personne {
         }
     }
     
-    /// Get a person with a specific id
-    ///
-    /// - Parameter withId: username of the person
-    /// - Returns: return a tab of persons
-    class func getPersonsById(withId: String) -> [Personne] {
-        var persons: [Personne] = []
-        let context = CoreDataManager.getContext()
-        let request : NSFetchRequest<Personne> = Personne.fetchRequest()
-        request.predicate = NSPredicate(format: "pseudo == %@", withId)
-        do {
-            try persons = context.fetch(request)
-        } catch let error as NSError {
-            fatalError("failed to get persons by pseudo=\(withId): \(error)")
+    var pseudo : String{
+        get{
+            let prenom : String = self.prenom ?? ""
+            let nom : String = self.nom ?? ""
+            return prenom+"."+nom
         }
-        return persons
     }
     
-    /// Get all the persons is the DB
-    ///
-    /// - Returns: array of persons
-    class func getAllPersons() -> [Personne] {
-        var persons: [Personne] = []
+    @discardableResult
+    static func createNewPersonne(firstName: String, name: String, tel: String, city: String, pwd: String, image: NSData) -> Personne{
         let context = CoreDataManager.getContext()
-        let request : NSFetchRequest<Personne> = Personne.fetchRequest()
-        do {
-            try persons = context.fetch(request)
-        } catch let error as NSError {
-            print(error)
-        }
-        return persons
+        //create a person
+        let person = Personne(context: context)
+        //save datas into the person
+        person.nom = name
+        person.prenom = firstName
+        person.tel = tel
+        person.ville = city
+        person.mdp = pwd
+        person.photo = image
+        return person
     }
+    
     
     
 }

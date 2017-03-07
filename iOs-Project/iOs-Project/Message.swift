@@ -12,6 +12,11 @@ import UIKit
 
 extension Message {
     
+    // MARK: - Methods
+    
+    /// Get the number of message in a set
+    ///
+    /// - Returns: how many messages are in the set
     static func getNumbersOfMessages()-> Int{
         var msgs: [Message] = []
         let context = CoreDataManager.getContext()

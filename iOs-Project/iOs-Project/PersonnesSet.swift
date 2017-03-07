@@ -12,27 +12,74 @@ import UIKit
 
 class PersonnesSet{
     
-    /// Récupère dans l'ensemble des personnes la personne qui a ce pseudo
-    ///
-    /// - Parameter pseudo: pseudo de la personne à récupérer
-    /// - Returns: la personne ou rien si aucune personne avec ce pseudo existe dans l'ensemble
-    /*func getPerson(byPseudo pseudo: String) -> Personne?{
-     return
-    }*/
+    let context = CoreDataManager.getContext()
+    let request : NSFetchRequest<Personne> = Personne.fetchRequest()
     
-    /// Get a person with a specific id
+    var listPersons : [Personne]
+    
+    // MARK : - Initialization
+    
+    init(){
+        do {
+            try self.listPersons = self.context.fetch(request)
+        } catch let error as NSError {
+            fatalError("failed to get number of messages\(error)")
+        }
+    }
+    
+    // MARK: - Data Manager
+    
+    /// Add a person to the set
     ///
-    /// - Parameter withId: username of the person
-    /// - Returns: return a tab of persons
-    class func getPersonsById(withId: String) -> [Personne] {
+    /// - Parameters:
+    ///   - person: the person we want to add
+    /// - Returns: the person we added (or nil if the save failed)
+    func addPerson(person p:Personne)->Personne?{
+        self.listPersons.append(p)
+        return p
+    }
+    
+    /// Delete a person from the set with a specific index
+    ///
+    /// - Parameters:
+    ///   - index: the person's index where we want to delete
+    func deletePerson(atIndex index: Int) {
+        self.listPersons.remove(at: index)
+    }
+    
+    
+    // MARK: - Getters
+    
+    /// Get persons with a specific username
+    ///
+    /// - Parameter withUsername: username of the persons
+    /// - Returns: return a tab of persons with the username
+    func getPersonsByUsername(withUsername: String) -> [Personne] {
         var persons: [Personne] = []
         let context = CoreDataManager.getContext()
         let request : NSFetchRequest<Personne> = Personne.fetchRequest()
-        request.predicate = NSPredicate(format: "pseudo == %@", withId)
+        request.predicate = NSPredicate(format: "pseudo == %@", withUsername)
         do {
             try persons = context.fetch(request)
         } catch let error as NSError {
-            fatalError("failed to get persons by pseudo=\(withId): \(error)")
+            fatalError("failed to get persons by username=\(withUsername): \(error)")
+        }
+        return persons
+    }
+    
+    /// Get persons with a specific lastname
+    ///
+    /// - Parameter withLastname: lastname of the persons
+    /// - Returns: return a tab of persons with the lastname
+    func getPersonsByLastname(withLastname: String) -> [Personne] {
+        var persons: [Personne] = []
+        let context = CoreDataManager.getContext()
+        let request : NSFetchRequest<Personne> = Personne.fetchRequest()
+        request.predicate = NSPredicate(format: "nom == %@", withLastname)
+        do {
+            try persons = context.fetch(request)
+        } catch let error as NSError {
+            fatalError("failed to get persons by lastname=\(withLastname): \(error)")
         }
         return persons
     }
@@ -40,7 +87,7 @@ class PersonnesSet{
     /// Get all the persons is the DB
     ///
     /// - Returns: array of persons
-    class func getAllPersons() -> [Personne] {
+    func getAllPersons() -> [Personne] {
         var persons: [Personne] = []
         let context = CoreDataManager.getContext()
         let request : NSFetchRequest<Personne> = Personne.fetchRequest()
@@ -51,4 +98,14 @@ class PersonnesSet{
         }
         return persons
     }
+    
+    /// Get a person on a specific index
+    ///
+    /// - Returns: a person
+    func getPersonAtIndex(withIndex index: Int) -> Personne {
+        return self.listPersons[index]
+    }
+
+
+
 }

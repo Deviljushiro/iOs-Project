@@ -14,7 +14,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
     // MARK: - Variables
     
-    var listePersonnes: [Personne] = []
+    var listPersons = PersonnesSet()
     var indexPathForProfile: IndexPath? = nil
     
 
@@ -27,18 +27,6 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     /// What the view has to load before
     override func viewDidLoad() {
         super.viewDidLoad()
-        //get the context
-        let context = CoreDataManager.getContext()
-        //create query related to the Personne entity
-        let request : NSFetchRequest<Personne> = Personne.fetchRequest()
-        do {
-            try self.listePersonnes = context.fetch(request)
-        }
-        catch let error as NSError{
-            DialogBoxHelper.alert(view: self, error: error)
-            return
-        }
-        
     }
 
     /// Tell if view receive a warning
@@ -55,24 +43,13 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     /// - Parameters:
     ///     - nom: lastname of the person
     ///     - prenom: firstname of the person
-    func saveNewPerson(withLastName nom: String, andFirstname prenom: String, andTel tel: String, andCity ville: String){
-        //get the context
-        //get the context
-        let context = CoreDataManager.getContext()
-        //create a person
-        let person = Personne(context: context)
-        //save datas into the person
-        person.nom = nom
-        person.prenom = prenom
-        person.pseudo = prenom+"."+nom
-        person.tel = tel
-        person.ville = ville
-        person.mdp = "123"
+    func saveNewPerson(withLastName nom: String, andFirstname prenom: String, andTel tel: String, andCity ville: String, andPwd mdp: String, andImage image: NSData){
+        let person = Personne.createNewPersonne(firstName: prenom, name: nom, tel: tel, city: ville, pwd: mdp, image: image)
         if let error = CoreDataManager.save() {
             DialogBoxHelper.alert(view: self, error: error)
         }
         else {
-            self.listePersonnes.append(person)
+            self.listPersons.addPerson(person: person)
         }
     }
     
@@ -83,7 +60,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func delete(personWithIndex index: Int) ->Bool {
         //get the context
         let context = CoreDataManager.getContext()
-        let person = self.listePersonnes[index]
+        let person = self.listPersons.getPersonAtIndex(withIndex: index)
         context.delete(person)
         // try to save it
         if let error = CoreDataManager.save() {
@@ -91,7 +68,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
             return false
         }
         else {
-                self.listePersonnes.remove(at: index)
+                self.listPersons.deletePerson(atIndex: index)
                 return true
         }
     }
@@ -107,8 +84,8 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     /// - Returns: the cell with the defined values
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cell = self.Personnes.dequeueReusableCell(withIdentifier: "personCell", for: indexPath) as! ListTableViewCell
-        cell.nom.text = self.listePersonnes[indexPath.row].nom
-        cell.prenom.text = self.listePersonnes[indexPath.row].prenom
+        cell.nom.text = self.listPersons.getPersonAtIndex(withIndex: indexPath.row).nom
+        cell.prenom.text = self.listPersons.getPersonAtIndex(withIndex: indexPath.row).prenom
         return cell
     }
 
@@ -119,7 +96,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     ///   - section: number of lines for each section
     /// - Returns: number of sections
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        return self.listePersonnes.count
+        return self.listPersons.getAllPersons().count
     }
 
     
@@ -167,12 +144,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     ///
     /// - Parameter segue: The segue related to the previous page
     @IBAction func unwindToPersonsListAfterSaving(segue: UIStoryboardSegue){
-        let addController = segue.source as! AddViewController
-        let firstname = addController.prenomLabel.text ?? ""
-        let lastname = addController.nomLabel.text ?? ""
-        let tel = addController.telLabel.text ?? ""
-        let city = addController.villeLabel.text ?? ""
-        self.saveNewPerson(withLastName: lastname, andFirstname: firstname, andTel: tel, andCity: city)
+        CoreDataManager.save()
         self.Personnes.reloadData()
         }
 
@@ -193,7 +165,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         if segue.identifier == self.profileSegueId{
             if let indexPath = self.Personnes.indexPathForSelectedRow {
                 let profileViewController = segue.destination as! ProfileViewController
-                profileViewController.person = self.listePersonnes[indexPath.row]
+                profileViewController.person = self.listPersons.getPersonAtIndex(withIndex: indexPath.row)
                 self.Personnes.deselectRow(at: indexPath, animated: true)
             }
         }

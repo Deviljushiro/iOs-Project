@@ -72,10 +72,7 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }        
     }
     
-    
 
-    
-    
     
     // MARK: - Actions
     

@@ -9,20 +9,32 @@
 import UIKit
 import CoreData
 
-class AddViewController: UIViewController, UITextFieldDelegate {
+class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
 
+    // MARK: - Constant
+    
+    let picker = UIImagePickerController()
+    
+    // MARK: - Variables
+    
+    var person: Personne? = nil
+    
     // MARK: - Outlet
     
     @IBOutlet weak var nomLabel: UITextField!
     @IBOutlet weak var prenomLabel: UITextField!
     @IBOutlet weak var telLabel: UITextField!
     @IBOutlet weak var villeLabel: UITextField!
+    @IBOutlet weak var image: UIImageView!
+    @IBOutlet weak var motDePasse: UITextField!
+    @IBOutlet weak var confirmMotDePasse: UITextField!
     
     // MARK: - View loading
 
     /// what the view has to load
     override func viewDidLoad() {
         super.viewDidLoad()
+        picker.delegate = self
 
         // Do any additional setup after loading the view.
     }
@@ -31,6 +43,30 @@ class AddViewController: UIViewController, UITextFieldDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    //MARK: - Delegates
+    
+    /// Pick the image
+    ///
+    /// - Parameters:
+    ///   - picker: picker which has to pick image
+    ///   - info: about finish picking media
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [String : AnyObject])
+    {
+        if let chosenImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            image.contentMode = .scaleAspectFit
+            image.image = chosenImage
+            dismiss(animated:true, completion: nil)
+        }
+    }
+    
+    /// When clicking cancel, remove the picker
+    ///
+    /// - Parameter picker: The picker which has to be removed
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
     }
 
     // MARK: - Text field methods
@@ -46,6 +82,27 @@ class AddViewController: UIViewController, UITextFieldDelegate {
 
     // MARK: - Action
     
+    
+    @IBAction func saveAction(_ sender: Any) {
+        print("hello")
+        guard (self.prenomLabel.text != "") && (self.nomLabel.text != "") && (self.motDePasse.text != "") && (self.confirmMotDePasse.text != "")
+            else {
+                DialogBoxHelper.alert(view: self, WithTitle: "Echec inscription", andMsg: "Informations manquantes")
+                return }
+        guard (self.motDePasse.text == self.confirmMotDePasse.text)
+            else {
+                DialogBoxHelper.alert(view: self, WithTitle: "Echec inscription", andMsg: "Confirmation incorrecte")
+                return }
+        person?.nom = self.prenomLabel.text
+        person?.prenom = self.nomLabel.text
+        person?.tel = self.telLabel.text
+        person?.ville = self.villeLabel.text
+        person?.photo = UIImageJPEGRepresentation(self.image.image!,1) as NSData?
+        person?.mdp = self.motDePasse.text
+        self.performSegue(withIdentifier: "unwindToPersonsListAfterSaving", sender: self)
+
+    }
+    
     /// Cancel the add by clicking "Annuler" button
     ///
     /// - Parameter sender: who send the action
@@ -53,6 +110,16 @@ class AddViewController: UIViewController, UITextFieldDelegate {
         self.dismiss(animated: true, completion: nil)
     }
     
+    
+    /// Ask for a picture by clicking on the "Ajouter une image" button
+    ///
+    /// - Parameter sender: who send the action
+    @IBAction func loadImageButtonTapped(_ sender: Any) {
+        picker.allowsEditing = false
+        picker.sourceType = .photoLibrary
+        picker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
+        present(picker, animated: true, completion: nil)
+    }
 
     /*
     // MARK: - Navigation
