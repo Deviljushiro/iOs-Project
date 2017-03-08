@@ -13,6 +13,7 @@
 		3D2592A11E6D6E1C00AA940D /* ListTableViewCellMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2592A01E6D6E1C00AA940D /* ListTableViewCellMessage.swift */; };
 		3D3C3CCC1E682EC6001893E4 /* PersonnesSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D3C3CCB1E682EC6001893E4 /* PersonnesSet.swift */; };
 		3D3C3CCD1E682EC6001893E4 /* PersonnesSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D3C3CCB1E682EC6001893E4 /* PersonnesSet.swift */; };
+		3D806A7D1E7006BA0073C4FA /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D806A7C1E7006BA0073C4FA /* MessageTableViewCell.swift */; };
 		DC074F531E51DBEB00F2A90E /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC074F521E51DBEB00F2A90E /* ListViewController.swift */; };
 		DC074F571E51DF9600F2A90E /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC074F561E51DF9600F2A90E /* AddViewController.swift */; };
 		DC426FCD1E52001A00809823 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC426FCC1E52001A00809823 /* ListTableViewCell.swift */; };
@@ -57,6 +58,7 @@
 		3D25929E1E6D5D8900AA940D /* MessagesSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesSet.swift; sourceTree = "<group>"; };
 		3D2592A01E6D6E1C00AA940D /* ListTableViewCellMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTableViewCellMessage.swift; sourceTree = "<group>"; };
 		3D3C3CCB1E682EC6001893E4 /* PersonnesSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonnesSet.swift; sourceTree = "<group>"; };
+		3D806A7C1E7006BA0073C4FA /* MessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		DC074F521E51DBEB00F2A90E /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		DC074F561E51DF9600F2A90E /* AddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		DC426FCC1E52001A00809823 /* ListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 				DCE3FFFC1E51AADC0006D7E5 /* AppDelegate.swift */,
 				DCE3FFFE1E51AADC0006D7E5 /* ViewController.swift */,
 				DCE300001E51AADC0006D7E5 /* Main.storyboard */,
+				3D806A7C1E7006BA0073C4FA /* MessageTableViewCell.swift */,
 				DC4FAB521E5DDC5D00BC0745 /* WallViewController.swift */,
 				DC4FAB501E5DD19C00BC0745 /* LoginViewController.swift */,
 				DF36A7341E55C50200B051F5 /* EditProfileViewController.swift */,
@@ -360,6 +363,7 @@
 				DC074F571E51DF9600F2A90E /* AddViewController.swift in Sources */,
 				DCE3FFFD1E51AADC0006D7E5 /* AppDelegate.swift in Sources */,
 				DC074F531E51DBEB00F2A90E /* ListViewController.swift in Sources */,
+				3D806A7D1E7006BA0073C4FA /* MessageTableViewCell.swift in Sources */,
 				DCE3002E1E51B4FC0006D7E5 /* HomeViewController.swift in Sources */,
 				3D25929B1E6D4DBB00AA940D /* Session.swift in Sources */,
 				3D25929F1E6D5D8900AA940D /* MessagesSet.swift in Sources */,

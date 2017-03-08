@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="eN0-4D-HP5">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="eN0-4D-HP5">
     <device id="ipad12_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -442,6 +442,16 @@
                                             <segue destination="jst-cl-SbP" kind="show" identifier="myProfileSegue" id="oRA-iJ-wD1"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e9N-qz-KQB">
+                                        <rect key="frame" x="8" y="195" width="77" height="30"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" title="Calendrier">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="myProfileAction:" destination="Iil-LA-aax" eventType="touchUpInside" id="Ko1-GM-iGs"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -449,8 +459,10 @@
                                     <constraint firstItem="iTD-TS-hTh" firstAttribute="leading" secondItem="Rcl-aa-0ro" secondAttribute="leading" constant="8" id="20G-8t-vvD"/>
                                     <constraint firstItem="j5I-Q5-UR6" firstAttribute="leading" secondItem="Rcl-aa-0ro" secondAttribute="leading" constant="8" id="9QM-cS-rYD"/>
                                     <constraint firstItem="g8w-RZ-IDo" firstAttribute="leading" secondItem="Rcl-aa-0ro" secondAttribute="leading" constant="8" id="ERB-Ld-BFM"/>
+                                    <constraint firstItem="e9N-qz-KQB" firstAttribute="leading" secondItem="Rcl-aa-0ro" secondAttribute="leading" constant="8" id="Y3j-K1-tJj"/>
                                     <constraint firstItem="g8w-RZ-IDo" firstAttribute="top" secondItem="Rcl-aa-0ro" secondAttribute="top" constant="81" id="Zkb-vk-jEq"/>
                                     <constraint firstItem="j5I-Q5-UR6" firstAttribute="top" secondItem="iTD-TS-hTh" secondAttribute="bottom" constant="8" id="aJY-xd-Pj7"/>
+                                    <constraint firstItem="e9N-qz-KQB" firstAttribute="top" secondItem="j5I-Q5-UR6" secondAttribute="bottom" constant="8" id="cR9-QK-QBE"/>
                                     <constraint firstItem="iTD-TS-hTh" firstAttribute="top" secondItem="g8w-RZ-IDo" secondAttribute="bottom" constant="8" id="ehg-go-i7K"/>
                                     <constraint firstAttribute="width" constant="200" id="fow-2j-hAJ"/>
                                 </constraints>
@@ -459,13 +471,39 @@
                                 <rect key="frame" x="200" y="64" width="824" height="1245"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="JJj-04-cEv">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="messageCell" id="JJj-04-cEv" customClass="MessageTableViewCell" customModule="iOs_Project" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="824" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JJj-04-cEv" id="vjA-08-8L8">
-                                            <rect key="frame" x="0.0" y="0.0" width="824" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="824" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nlx-Oy-JZr">
+                                                    <rect key="frame" x="8" y="8" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CUS-eY-DpB">
+                                                    <rect key="frame" x="95" y="8" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Nlx-Oy-JZr" firstAttribute="leading" secondItem="vjA-08-8L8" secondAttribute="leadingMargin" id="270-Hi-Owi"/>
+                                                <constraint firstItem="CUS-eY-DpB" firstAttribute="top" secondItem="vjA-08-8L8" secondAttribute="topMargin" id="9tm-Hm-yxc"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="CUS-eY-DpB" secondAttribute="bottom" constant="6" id="Al6-mL-eyZ"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="Nlx-Oy-JZr" secondAttribute="bottom" constant="6" id="SNP-9R-2g5"/>
+                                                <constraint firstItem="CUS-eY-DpB" firstAttribute="leading" secondItem="Nlx-Oy-JZr" secondAttribute="trailing" constant="45" id="bIy-7T-Rs0"/>
+                                                <constraint firstItem="Nlx-Oy-JZr" firstAttribute="top" secondItem="vjA-08-8L8" secondAttribute="topMargin" id="ikN-20-NBZ"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="content" destination="CUS-eY-DpB" id="3Y8-pW-ntX"/>
+                                            <outlet property="date" destination="Nlx-Oy-JZr" id="CfU-aK-e7k"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -480,6 +518,9 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="23"/>
                                 <state key="normal" title="Envoyer"/>
+                                <connections>
+                                    <action selector="SendMessage:" destination="Iil-LA-aax" eventType="touchUpInside" id="862-HQ-L5V"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

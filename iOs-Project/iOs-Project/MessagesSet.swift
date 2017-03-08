@@ -49,7 +49,7 @@ class MessagesSet {
         let message = Message(context: self.context)
         //save datas into the person
         message.contenu = mes
-        message.dateEnvoi = currentDate() as NSDate
+        message.dateEnvoi = currentDateString()
         message.id = autoIncrement()
         message.ecritPar=p
         if CoreDataManager.save() != nil {
@@ -71,17 +71,33 @@ class MessagesSet {
         let date = NSDate()
         let calendar = NSCalendar.current
         let dateNeeded = calendar.dateComponents([.year, .month,.day], from: date as Date)
-        let year = String(describing: dateNeeded.year)
-        let month = String(describing:dateNeeded.month)
-        let day = String(describing:dateNeeded.day)
+        let year : String = String(format: "%04d", dateNeeded.year!)
+        let month = String(format: "%02d", dateNeeded.month!)
+        let day = String(format:"%02d",dateNeeded.day!)
         let formatter = DateFormatter()
-        formatter.dateFormat = "dd.MM.yyyy"
+        formatter.dateFormat = "dd-MM-yyyy"
         
-        let result = formatter.date(from :day+"/"+month+"/"+year)
+        let result = formatter.date(from :day+"-"+month+"-"+year)
+        //let result = formatter.date(from :"01-04-2017")
         return result!
         
     }
     
+    /// Get the current date as a string
+    ///
+    /// - Returns: the current date
+    func currentDateString() -> String{
+        let date = NSDate()
+        let calendar = NSCalendar.current
+        let dateNeeded = calendar.dateComponents([.year, .month,.day], from: date as Date)
+        let year : String = String(format: "%04d", dateNeeded.year!)
+        let month = String(format: "%02d", dateNeeded.month!)
+        let day = String(format:"%02d",dateNeeded.day!)
+        let result :String = day+"/"+month+"/"+year
+        //let result = formatter.date(from :"01-04-2017")
+        return result
+        
+    }
     /// Increment automatically the number of messages
     ///
     /// - Returns: The number of messages incremented

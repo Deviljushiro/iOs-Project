@@ -43,7 +43,12 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
     ///   - indexPath: the index of each cell
     /// - Returns: the cell with the defined values
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
-        let cell = self.Messages.dequeueReusableCell(withIdentifier: "msgCell", for: indexPath) as! ListTableViewCellMessage
+        let cell = self.Messages.dequeueReusableCell(withIdentifier: "messageCell", for: indexPath) as! MessageTableViewCell
+    
+        cell.content.text=self.listMsg.listMsg[indexPath.row].contenu
+    cell.date.text=self.listMsg.listMsg[indexPath.row].dateEnvoi
+        
+        
         return cell
     }
     
@@ -57,6 +62,17 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
         return self.listMsg.numbersOfMessages
     }
     
+    @IBAction func SendMessage(_ sender: Any) {
+        
+        let mes = MessageField.text ?? ""
+        saveNewMessage(message: mes)
+        //guard let mes = MessageField.text, mes != "" else {
+           // DialogBoxHelper.alert(view: self, WithTitle: "Envoi message impossible", andMsg: "message vide")
+          //  return
+        //}
+        //saveNewMessage(message: mes)
+
+    }
     // MARK: - Message data management
     
     /// create a new message and save it

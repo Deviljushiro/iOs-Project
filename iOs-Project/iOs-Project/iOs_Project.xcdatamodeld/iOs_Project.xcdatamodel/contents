@@ -31,7 +31,7 @@
     </entity>
     <entity name="Message" representedClassName="Message" syncable="YES" codeGenerationType="class">
         <attribute name="contenu" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="dateEnvoi" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="dateEnvoi" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="concerner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Groupe" inverseName="contenir" inverseEntity="Groupe" syncable="YES"/>
         <relationship name="contenir" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Fichier" inverseName="etreDans" inverseEntity="Fichier" syncable="YES"/>
@@ -70,7 +70,7 @@
         <element name="Eleve" positionX="-702" positionY="270" width="128" height="60"/>
         <element name="Fichier" positionX="-299" positionY="144" width="128" height="135"/>
         <element name="Groupe" positionX="-486" positionY="-99" width="128" height="118"/>
-        <element name="Message" positionX="-488" positionY="99" width="128" height="133"/>
+        <element name="Message" positionX="-488" positionY="99" width="128" height="135"/>
         <element name="MotClef" positionX="-776" positionY="-225" width="128" height="88"/>
         <element name="Personne" positionX="-702" positionY="54" width="128" height="210"/>
         <element name="Promo" positionX="-488" positionY="270" width="128" height="73"/>
