@@ -8,7 +8,11 @@
 
 import UIKit
 
-class EditProfileViewController: UIViewController {
+class EditProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    // MARK: - Constant
+    
+    let picker = UIImagePickerController()
     
     // MARK: - Variables
     
@@ -20,8 +24,6 @@ class EditProfileViewController: UIViewController {
     @IBOutlet weak var EditProfileImage: UIImageView!
     @IBOutlet weak var EditProfileFirstnameLabel: UILabel!
     @IBOutlet weak var EditProfileNameLabel: UILabel!
-    @IBOutlet weak var EditProfileUsernameLabel: UILabel!
-    @IBOutlet weak var EditProfileUsername: UILabel!
     @IBOutlet weak var EditProfileTelLabel: UILabel!
     @IBOutlet weak var EditProfileCityLabel: UILabel!
     
@@ -38,15 +40,16 @@ class EditProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        picker.delegate = self
         if let aperson = self.person{
-            self.EditProfileUsername.text = aperson.pseudo
             self.FirstnameTextField.text = aperson.prenom
             self.NameTextField.text = aperson.nom
             self.TelTextField.text = aperson.tel
             self.CityTextField.text = aperson.ville
-            
+            self.EditProfileImage.image = UIImage(data: aperson.photo as! Data)
         }
-        
+        let tapImage = UITapGestureRecognizer(target: self, action: #selector(self.changeImage))
+        self.EditProfileImage.addGestureRecognizer(tapImage)
     }
 
     /// if receive memory warning
@@ -55,7 +58,43 @@ class EditProfileViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+
+    //MARK: - Image delegates
+    
+    /// Pick the image
+    ///
+    /// - Parameters:
+    ///   - picker: picker which has to pick image
+    ///   - info: about finish picking media
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [String : AnyObject])
+    {
+        if let chosenImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            self.EditProfileImage.contentMode = .scaleAspectFit
+            self.EditProfileImage.image = chosenImage
+            dismiss(animated:true, completion: nil)
+        }
+    }
+    
+    /// When clicking cancel, remove the picker
+    ///
+    /// - Parameter picker: The picker which has to be removed
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+
+    
     // MARK: - Action
+    
+    /// open the photo library by clicking on the picture
+    ///
+    /// - Parameter sender: who send the action
+    func changeImage(sender: UITapGestureRecognizer){
+        picker.allowsEditing = false
+        picker.sourceType = .photoLibrary
+        picker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
+        present(picker, animated: true, completion: nil)
+    }
     
     /// Save new fields by clicking "Valider"
     ///
@@ -70,6 +109,7 @@ class EditProfileViewController: UIViewController {
         person.nom = self.NameTextField.text
         person.tel = self.TelTextField.text
         person.ville = self.CityTextField.text
+        person.photo = UIImageJPEGRepresentation(self.EditProfileImage.image!,1)! as NSData
         self.performSegue(withIdentifier: segueUnwindId, sender: self)
     }
       

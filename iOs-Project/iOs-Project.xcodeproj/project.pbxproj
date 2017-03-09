@@ -21,9 +21,10 @@
 		DC4FAB531E5DDC5D00BC0745 /* WallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4FAB521E5DDC5D00BC0745 /* WallViewController.swift */; };
 		DC4FAB581E5DE96700BC0745 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4FAB571E5DE96700BC0745 /* ProfileViewController.swift */; };
 		DC4FAB5C1E5DEABA00BC0745 /* Personne.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4FAB5B1E5DEABA00BC0745 /* Personne.swift */; };
+		DC56D81D1E7154BF00BA7C72 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC56D81C1E7154BF00BA7C72 /* Assets.xcassets */; };
+		DC56D81F1E71795A00BA7C72 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC56D81E1E71795A00BA7C72 /* DateManager.swift */; };
 		DCE300021E51AADC0006D7E5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCE300001E51AADC0006D7E5 /* Main.storyboard */; };
 		DCE300051E51AADC0006D7E5 /* iOs_Project.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DCE300031E51AADC0006D7E5 /* iOs_Project.xcdatamodeld */; };
-		DCE300071E51AADC0006D7E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DCE300061E51AADC0006D7E5 /* Assets.xcassets */; };
 		DCE3000A1E51AADC0006D7E5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCE300081E51AADC0006D7E5 /* LaunchScreen.storyboard */; };
 		DCE300151E51AADC0006D7E5 /* iOs_ProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE300141E51AADC0006D7E5 /* iOs_ProjectTests.swift */; };
 		DCE300201E51AADC0006D7E5 /* iOs_ProjectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE3001F1E51AADC0006D7E5 /* iOs_ProjectUITests.swift */; };
@@ -66,9 +67,10 @@
 		DC4FAB521E5DDC5D00BC0745 /* WallViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WallViewController.swift; sourceTree = "<group>"; };
 		DC4FAB571E5DE96700BC0745 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		DC4FAB5B1E5DEABA00BC0745 /* Personne.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Personne.swift; sourceTree = "<group>"; };
+		DC56D81C1E7154BF00BA7C72 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DC56D81E1E71795A00BA7C72 /* DateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
 		DCE300011E51AADC0006D7E5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DCE300041E51AADC0006D7E5 /* iOs_Project.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = iOs_Project.xcdatamodel; sourceTree = "<group>"; };
-		DCE300061E51AADC0006D7E5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DCE300091E51AADC0006D7E5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DCE3000B1E51AADC0006D7E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DCE300101E51AADC0006D7E5 /* iOs-ProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iOs-ProjectTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -179,8 +181,8 @@
 				DC4FAB501E5DD19C00BC0745 /* LoginViewController.swift */,
 				DF36A7341E55C50200B051F5 /* EditProfileViewController.swift */,
 				DCE3002D1E51B4FC0006D7E5 /* HomeViewController.swift */,
-				DCE300061E51AADC0006D7E5 /* Assets.xcassets */,
 				DCE300081E51AADC0006D7E5 /* LaunchScreen.storyboard */,
+				DC56D81C1E7154BF00BA7C72 /* Assets.xcassets */,
 				DCE3000B1E51AADC0006D7E5 /* Info.plist */,
 				DCE300031E51AADC0006D7E5 /* iOs_Project.xcdatamodeld */,
 			);
@@ -191,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				DFED6F8A1E55F11400F5C275 /* CoreDataManager.swift */,
+				DC56D81E1E71795A00BA7C72 /* DateManager.swift */,
 				DFED6F8C1E55F2DA00F5C275 /* DialogBoxHelper.swift */,
 			);
 			name = "Class Helpers";
@@ -321,7 +324,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DCE3000A1E51AADC0006D7E5 /* LaunchScreen.storyboard in Resources */,
-				DCE300071E51AADC0006D7E5 /* Assets.xcassets in Resources */,
+				DC56D81D1E7154BF00BA7C72 /* Assets.xcassets in Resources */,
 				DCE300021E51AADC0006D7E5 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -357,6 +360,7 @@
 				DC4FAB531E5DDC5D00BC0745 /* WallViewController.swift in Sources */,
 				DCE3FFFF1E51AADC0006D7E5 /* ViewController.swift in Sources */,
 				3D3C3CCC1E682EC6001893E4 /* PersonnesSet.swift in Sources */,
+				DC56D81F1E71795A00BA7C72 /* DateManager.swift in Sources */,
 				DC4FAB5C1E5DEABA00BC0745 /* Personne.swift in Sources */,
 				3D2592A11E6D6E1C00AA940D /* ListTableViewCellMessage.swift in Sources */,
 				DCE300051E51AADC0006D7E5 /* iOs_Project.xcdatamodeld in Sources */,

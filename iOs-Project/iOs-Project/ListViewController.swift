@@ -16,6 +16,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     var indexPathForProfile: IndexPath? = nil
     
+    /// The list of persons fetched for the view
     fileprivate lazy var personsFetched : NSFetchedResultsController<Personne> = {
         //prepare request
         let request : NSFetchRequest<Personne> = Personne.fetchRequest()

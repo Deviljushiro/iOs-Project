@@ -26,7 +26,7 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
     @IBOutlet weak var prenomLabel: UITextField!
     @IBOutlet weak var telLabel: UITextField!
     @IBOutlet weak var villeLabel: UITextField!
-    @IBOutlet weak var image: UIImageView!
+    @IBOutlet weak var image: UIImageView?
     @IBOutlet weak var motDePasse: UITextField!
     @IBOutlet weak var confirmMotDePasse: UITextField!
     
@@ -46,7 +46,7 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
         // Dispose of any resources that can be recreated.
     }
     
-    //MARK: - Delegates
+    //MARK: - Image delegates
     
     /// Pick the image
     ///
@@ -57,8 +57,8 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
                                didFinishPickingMediaWithInfo info: [String : AnyObject])
     {
         if let chosenImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            image.contentMode = .scaleAspectFit
-            image.image = chosenImage
+            image?.contentMode = .scaleAspectFit
+            image?.image = chosenImage
             dismiss(animated:true, completion: nil)
         }
     }
@@ -97,6 +97,8 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
             self.listPersons.addPerson(person: person)
         }
     }
+    
+    
 
     // MARK: - Action
 
@@ -111,9 +113,15 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
         let city = self.villeLabel.text ?? ""
         let pwd = self.motDePasse.text ?? ""
         let pwd2 = self.confirmMotDePasse.text ?? ""
-        let image = UIImageJPEGRepresentation(self.image.image!,1) as NSData? ?? nil
+        var imageData: NSData
+        if let image = self.image?.image {  //the image isn't empty
+            imageData = UIImageJPEGRepresentation(image, 1)! as NSData
+        }
+        else {  //or it's empty
+            imageData = UIImageJPEGRepresentation(#imageLiteral(resourceName: "default"), 1)! as NSData
+        }
         //save it
-        self.saveNewPerson(withLastName: lastname, andFirstname: firstname, andTel: tel, andCity: city, andPwd: pwd, andImage: image!)
+        self.saveNewPerson(withLastName: lastname, andFirstname: firstname, andTel: tel, andCity: city, andPwd: pwd, andImage: imageData)
         DialogBoxHelper.alert(view: self, WithTitle: "Inscription validée")
         performSegue(withIdentifier: "backToLoginSegue", sender: self)
     }

@@ -28,6 +28,28 @@ extension Message {
         }
         return msgs.count
     }
+    
+    @discardableResult
+    /// Create a new message in the DB
+    ///
+    /// - Parameters:
+    ///   - id: of the msg
+    ///   - body: of the msg
+    ///   - sendDate: of the msg
+    ///   - image: of the msg
+    /// - Returns: the msg created
+    static func createNewMessage(body: String,image: NSData?) -> Message{
+        let context = CoreDataManager.getContext()
+        //create a person
+        let msg = Message(context: context)
+        //save datas into the person
+        msg.dateEnvoi = DateManager.currentDateString()
+        msg.id = DateManager.autoIncrement()
+        msg.contenu = body
+        msg.image = image
+        return msg
+    }
+
 
 }
 

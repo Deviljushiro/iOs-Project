@@ -84,7 +84,6 @@ class ProfileViewController: UIViewController {
     // MARK: - Navigation
      
      let editProfileSegueId = "editProfileSegue"
-     let profileSegueId = "profileSegue"
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     
@@ -100,10 +99,6 @@ class ProfileViewController: UIViewController {
         if segue.identifier == self.editProfileSegueId{
             let editProfileViewController = segue.destination as! EditProfileViewController
             editProfileViewController.person = self.person
-        }
-        if segue.identifier == self.profileSegueId{
-            let listViewController = segue.destination as! ListViewController
-            listViewController.viewDidLoad()
         }
     }
 

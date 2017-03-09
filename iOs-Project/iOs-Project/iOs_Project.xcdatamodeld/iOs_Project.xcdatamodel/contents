@@ -14,14 +14,6 @@
     <entity name="Eleve" representedClassName="Eleve" parentEntity="Personne" syncable="YES" codeGenerationType="class">
         <relationship name="appartient" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Promo" inverseName="contient" inverseEntity="Promo" syncable="YES"/>
     </entity>
-    <entity name="Fichier" representedClassName="Fichier" syncable="YES" codeGenerationType="class">
-        <attribute name="contenu" optional="YES" attributeType="Binary" syncable="YES"/>
-        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="nom" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="taille" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="etreDans" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Message" inverseName="contenir" inverseEntity="Message" syncable="YES"/>
-        <relationship name="etreUn" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TypeFichier" inverseName="contenir" inverseEntity="TypeFichier" syncable="YES"/>
-    </entity>
     <entity name="Groupe" representedClassName="Groupe" syncable="YES" codeGenerationType="class">
         <attribute name="dateCreation" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -33,8 +25,8 @@
         <attribute name="contenu" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="dateEnvoi" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="Binary" syncable="YES"/>
         <relationship name="concerner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Groupe" inverseName="contenir" inverseEntity="Groupe" syncable="YES"/>
-        <relationship name="contenir" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Fichier" inverseName="etreDans" inverseEntity="Fichier" syncable="YES"/>
         <relationship name="ecritPar" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Personne" inverseName="ecrire" inverseEntity="Personne" syncable="YES"/>
     </entity>
     <entity name="MotClef" representedClassName="MotClef" syncable="YES" codeGenerationType="class">
@@ -59,21 +51,14 @@
         <attribute name="annee" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="contient" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Eleve" inverseName="appartient" inverseEntity="Eleve" syncable="YES"/>
     </entity>
-    <entity name="TypeFichier" representedClassName="TypeFichier" syncable="YES" codeGenerationType="class">
-        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="libelle" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="contenir" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Fichier" inverseName="etreUn" inverseEntity="Fichier" syncable="YES"/>
-    </entity>
     <elements>
         <element name="CategoriePersonne" positionX="-972" positionY="179" width="128" height="75"/>
         <element name="Document" positionX="-749" positionY="-90" width="128" height="118"/>
         <element name="Eleve" positionX="-702" positionY="270" width="128" height="60"/>
-        <element name="Fichier" positionX="-299" positionY="144" width="128" height="135"/>
         <element name="Groupe" positionX="-486" positionY="-99" width="128" height="118"/>
-        <element name="Message" positionX="-488" positionY="99" width="128" height="135"/>
+        <element name="Message" positionX="-488" positionY="99" width="128" height="133"/>
         <element name="MotClef" positionX="-776" positionY="-225" width="128" height="88"/>
         <element name="Personne" positionX="-702" positionY="54" width="128" height="210"/>
         <element name="Promo" positionX="-488" positionY="270" width="128" height="73"/>
-        <element name="TypeFichier" positionX="-92" positionY="144" width="128" height="88"/>
     </elements>
 </model>

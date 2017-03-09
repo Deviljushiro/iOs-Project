@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class WallViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class WallViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, NSFetchedResultsControllerDelegate {
     
     // MARK: - Outlets
     
@@ -18,15 +18,31 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var SideView: UIView!
     @IBOutlet weak var Messages: UITableView!
     
+    // MARK: - Constants
+    
+    let picker = UIImagePickerController()
+    
     // MARK: - Variables
     
     var person : Personne? = nil
     var listMsg : MessagesSet = MessagesSet()
+    var sentImage : UIImage? = nil
+    
+    /// The list of messages fetched for the view
+    fileprivate lazy var msgFetched : NSFetchedResultsController<Message> = {
+        //prepare request
+        let request : NSFetchRequest<Message> = Message.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(key:#keyPath(Message.dateEnvoi),ascending:true)]
+        let fetchResultController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: CoreDataManager.getContext(), sectionNameKeyPath: nil, cacheName: nil)
+        fetchResultController.delegate = self
+        return fetchResultController
+    }()
     
     // MARK: - Table loading
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        picker.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -44,11 +60,8 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
     /// - Returns: the cell with the defined values
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cell = self.Messages.dequeueReusableCell(withIdentifier: "messageCell", for: indexPath) as! MessageTableViewCell
-    
         cell.content.text=self.listMsg.listMsg[indexPath.row].contenu
-    cell.date.text=self.listMsg.listMsg[indexPath.row].dateEnvoi
-        
-        
+        cell.date.text=self.listMsg.listMsg[indexPath.row].dateEnvoi
         return cell
     }
     
@@ -62,29 +75,51 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
         return self.listMsg.numbersOfMessages
     }
     
-    @IBAction func SendMessage(_ sender: Any) {
-        
-        let mes = MessageField.text ?? ""
-        saveNewMessage(message: mes)
-        //guard let mes = MessageField.text, mes != "" else {
-           // DialogBoxHelper.alert(view: self, WithTitle: "Envoi message impossible", andMsg: "message vide")
-          //  return
-        //}
-        //saveNewMessage(message: mes)
-
-    }
-    // MARK: - Message data management
     
-    /// create a new message and save it
+    
+    //MARK: - Image delegates
+    
+    /// Pick the image
     ///
     /// - Parameters:
-    ///     - message : the message which is sent
-    func saveNewMessage(message mes : String ){
-        
-        guard self.listMsg.addMessage(message: mes, personne: person!) != nil else{
-            DialogBoxHelper.alert(view: self, WithTitle: "Erreur dans l'ajout du message")
-            return
-        }        
+    ///   - picker: picker which has to pick image
+    ///   - info: about finish picking media
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [String : AnyObject])
+    {
+        if let chosenImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            self.sentImage = chosenImage
+            dismiss(animated:true, completion: nil)
+        }
+    }
+    
+    /// When clicking cancel, remove the picker
+    ///
+    /// - Parameter picker: The picker which has to be removed
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+
+    
+    
+    // MARK: - Message data management
+    
+    
+    /// Create a new msg and save it in the set
+    ///
+    /// - Parameters:
+    ///   - id: of the msg
+    ///   - body: of the msg
+    ///   - sendDate: of the msg
+    ///   - image: of the msg
+    func saveNewMessage(withBody body: String,withImage image: NSData?){
+        let msg = Message.createNewMessage(body: body,image: image)
+        if let error = CoreDataManager.save() {
+            DialogBoxHelper.alert(view: self, error: error)
+        }
+        else {
+            self.listMsg.addMessage(message: msg, personne: self.person!)
+        }
     }
     
 
@@ -92,22 +127,41 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
     // MARK: - Actions
     
     
-    
-    @IBAction func myProfileAction(_ sender: Any) {
+    /// send the message by clicking "Envoyer" button
+    ///
+    /// - Parameter sender: wh osend the action
+    @IBAction func sendMessage(_ sender: Any) {
+        let body = MessageField.text ?? ""
+        var imageData: NSData? = nil
+        if let image = sentImage {  //the image isn't empty
+            imageData = UIImageJPEGRepresentation(image, 1)! as NSData
+        }
+        self.saveNewMessage(withBody: body, withImage: imageData)
+        Messages.reloadData()
+        //guard let mes = MessageField.text, mes != "" else {
+        // DialogBoxHelper.alert(view: self, WithTitle: "Envoi message impossible", andMsg: "message vide")
+        //  return
+        //}
+        //saveNewMessage(message: mes)
     }
+    
     
     /// Log out the user
     ///
     /// - Parameter sender: who send the action
     @IBAction func logoutAction(_ sender: Any) {
-            self.dismiss(animated: true, completion: nil)
-        }
+        self.dismiss(animated: true, completion: nil)
+    }
     
     
-    /// Go to the admin page
+    /// Add an image to a message by clicking the grey icon
     ///
-    /// - Parameter sender: sender of the action
-    @IBAction func adminAction(_ sender: Any) {
+    /// - Parameter sender: who send the action
+    @IBAction func addImage(_ sender: Any) {
+        picker.allowsEditing = false
+        picker.sourceType = .photoLibrary
+        picker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
+        present(picker, animated: true, completion: nil)
     }
     
 
