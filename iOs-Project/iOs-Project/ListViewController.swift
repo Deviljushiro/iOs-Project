@@ -122,6 +122,18 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         return true
     }
     
+    /// Give different options for a selected row
+    ///
+    /// - Parameters:
+    ///   - tableView: table view related
+    ///   - indexPath: index path of the cell
+    /// - Returns: type of action
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let delete = UITableViewRowAction(style: .default, title: "Delete", handler: self.deleteHandlerAction)
+        delete.backgroundColor = UIColor.red
+        return [delete]
+    }
+    
 
     // MARK: - NSFetchResultController delegate protocol
     

@@ -32,6 +32,7 @@
 		DCE3FFFD1E51AADC0006D7E5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE3FFFC1E51AADC0006D7E5 /* AppDelegate.swift */; };
 		DCE3FFFF1E51AADC0006D7E5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE3FFFE1E51AADC0006D7E5 /* ViewController.swift */; };
 		DF36A7351E55C50200B051F5 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF36A7341E55C50200B051F5 /* EditProfileViewController.swift */; };
+		DF52D5AD1E71EEC2001ABB0C /* BasicTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF52D5AC1E71EEC2001ABB0C /* BasicTools.swift */; };
 		DFED6F8B1E55F11400F5C275 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFED6F8A1E55F11400F5C275 /* CoreDataManager.swift */; };
 		DFED6F8D1E55F2DA00F5C275 /* DialogBoxHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFED6F8C1E55F2DA00F5C275 /* DialogBoxHelper.swift */; };
 /* End PBXBuildFile section */
@@ -84,6 +85,7 @@
 		DCE3FFFC1E51AADC0006D7E5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DCE3FFFE1E51AADC0006D7E5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		DF36A7341E55C50200B051F5 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		DF52D5AC1E71EEC2001ABB0C /* BasicTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicTools.swift; sourceTree = "<group>"; };
 		DFED6F8A1E55F11400F5C275 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		DFED6F8C1E55F2DA00F5C275 /* DialogBoxHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogBoxHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -195,6 +197,7 @@
 				DFED6F8A1E55F11400F5C275 /* CoreDataManager.swift */,
 				DC56D81E1E71795A00BA7C72 /* DateManager.swift */,
 				DFED6F8C1E55F2DA00F5C275 /* DialogBoxHelper.swift */,
+				DF52D5AC1E71EEC2001ABB0C /* BasicTools.swift */,
 			);
 			name = "Class Helpers";
 			sourceTree = "<group>";
@@ -355,6 +358,7 @@
 			files = (
 				DC4FAB511E5DD19C00BC0745 /* LoginViewController.swift in Sources */,
 				DC426FCD1E52001A00809823 /* ListTableViewCell.swift in Sources */,
+				DF52D5AD1E71EEC2001ABB0C /* BasicTools.swift in Sources */,
 				DFED6F8D1E55F2DA00F5C275 /* DialogBoxHelper.swift in Sources */,
 				3D25929D1E6D596600AA940D /* Message.swift in Sources */,
 				DC4FAB531E5DDC5D00BC0745 /* WallViewController.swift in Sources */,

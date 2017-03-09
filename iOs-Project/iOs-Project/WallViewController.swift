@@ -17,16 +17,13 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var MessageField: UITextField!
     @IBOutlet weak var SideView: UIView!
     @IBOutlet weak var Messages: UITableView!
-    
-    // MARK: - Constants
-    
-    let picker = UIImagePickerController()
-    
+
     // MARK: - Variables
     
     var person : Personne? = nil
     var listMsg : MessagesSet = MessagesSet()
     var sentImage : UIImage? = nil
+    
     
     /// The list of messages fetched for the view
     fileprivate lazy var msgFetched : NSFetchedResultsController<Message> = {
@@ -38,23 +35,32 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
         return fetchResultController
     }()
     
+    // MARK: - Constants
+    
+    let picker = UIImagePickerController()
+    
     // MARK: - Table loading
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //delegate the picker
         picker.delegate = self
+        //fetch all the messages
         do {
             try self.msgFetched.performFetch()
         }
         catch let error as NSError{
             DialogBoxHelper.alert(view: self, error: error)
         }
+        //start with the last messages
+        self.Messages.scrollToRow(at: self.getLastIndexPath(), at: .bottom, animated: false)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     
     // MARK: - Table view datasource protocol
     
@@ -66,9 +72,18 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
     /// - Returns: the cell with the defined values
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cell = self.Messages.dequeueReusableCell(withIdentifier: "messageCell", for: indexPath) as! MessageTableViewCell
+        //get the msg datas from the fetched msg
         let msg = self.msgFetched.object(at: indexPath)
-        cell.date.text = "TODAY"
-        cell.content.text = msg.contenu
+        cell.sendDate.text = msg.dateEnvoi
+        cell.body?.text = msg.contenu
+        cell.sender.text = msg.ecritPar?.pseudo
+        cell.senderPic.image = UIImage(data: self.person?.photo as! Data)
+        if let image = msg.image {  //the image isn't empty
+            cell.msgImage?.image = UIImage(data: image as! Data)
+        }
+        else {  //or it's empty
+            cell.msgImage?.image = #imageLiteral(resourceName: "blank")
+        }
         return cell
     }
     
@@ -79,7 +94,10 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
     ///   - section: number of lines for each section
     /// - Returns: number of sections
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        return self.listMsg.numbersOfMessages
+        guard let section = self.msgFetched.sections?[section] else {
+            fatalError("unexpected section number")
+        }
+        return section.numberOfObjects
     }
     
     // MARK: - NSFetchResultController delegate protocol
@@ -113,6 +131,10 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
             if let indexPath = indexPath{
                 self.Messages.deleteRows(at: [indexPath], with: .automatic)
             }
+        case .insert:
+            if let newIndexPath = newIndexPath{
+                self.Messages.insertRows(at: [newIndexPath], with: .fade)
+            }
         default:
             break
         }
@@ -121,7 +143,7 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     //MARK: - Image delegates
     
-    /// Pick the image
+    /// Pick the image and send it
     ///
     /// - Parameters:
     ///   - picker: picker which has to pick image
@@ -131,6 +153,11 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
     {
         if let chosenImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             self.sentImage = chosenImage
+            let image = sentImage
+            let imageData = UIImageJPEGRepresentation(image!, 1)! as NSData
+            self.saveNewMessage(withBody: "", withImage: imageData)
+            //refresh the page
+            self.viewDidLoad()
             dismiss(animated:true, completion: nil)
         }
     }
@@ -155,7 +182,7 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
     ///   - sendDate: of the msg
     ///   - image: of the msg
     func saveNewMessage(withBody body: String,withImage image: NSData?){
-        let msg = Message.createNewMessage(body: body,image: image)
+        let msg = Message.createNewMessage(body: body,image: image, person: self.person!)
         if let error = CoreDataManager.save() {
             DialogBoxHelper.alert(view: self, error: error)
         }
@@ -164,6 +191,20 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
     
+    // MARK: - Index tools
+    
+    /// get the last index path of the table view
+    ///
+    /// - Returns: index path
+    func getLastIndexPath() -> IndexPath{
+        // First figure out how many sections there are
+        let lastSectionIndex = self.Messages.numberOfSections - 1
+        // Then grab the number of rows in the last section
+        let lastRowIndex = self.Messages.numberOfRows(inSection: lastSectionIndex) - 1
+        // Now just construct the index path
+        let pathToLastRow = IndexPath(row: lastRowIndex, section: lastSectionIndex)
+        return pathToLastRow
+    }
 
     
     // MARK: - Actions
@@ -173,18 +214,13 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
     ///
     /// - Parameter sender: wh osend the action
     @IBAction func sendMessage(_ sender: Any) {
-        let body = MessageField.text ?? ""
-        var imageData: NSData? = nil
-        if let image = sentImage {  //the image isn't empty
-            imageData = UIImageJPEGRepresentation(image, 1)! as NSData
+        guard let body = MessageField?.text else {
+            DialogBoxHelper.alert(view: self, WithTitle: "Echec envoi", andMsg: "Message vide")
+            return
         }
-        self.saveNewMessage(withBody: body, withImage: imageData)
-        Messages.reloadData()
-        //guard let mes = MessageField.text, mes != "" else {
-        // DialogBoxHelper.alert(view: self, WithTitle: "Envoi message impossible", andMsg: "message vide")
-        //  return
-        //}
-        //saveNewMessage(message: mes)
+        self.saveNewMessage(withBody: body, withImage: nil)
+        //refresh the page
+        self.viewDidLoad()
     }
     
     
@@ -196,24 +232,32 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     
+    /// Go to the admin page
+    ///
+    /// - Parameter sender: who send the action
     @IBAction func adminAction(_ sender: Any) {
         self.performSegue(withIdentifier: "adminSegue", sender: self)
     }
     
     
+    /// Go to the profile page
+    ///
+    /// - Parameter sender: who send the action
     @IBAction func myProfileAction(_ sender: Any) {
         self.performSegue(withIdentifier: profileSegueId, sender: self)
     }
 
     
-    /// Add an image to a message by clicking the grey icon
+    /// Send an image
     ///
     /// - Parameter sender: who send the action
     @IBAction func addImage(_ sender: Any) {
         picker.allowsEditing = false
         picker.sourceType = .photoLibrary
         picker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
-        present(picker, animated: true, completion: nil)   }
+        present(picker, animated: true, completion: nil)
+
+    }
     
 
     

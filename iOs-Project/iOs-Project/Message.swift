@@ -38,16 +38,26 @@ extension Message {
     ///   - sendDate: of the msg
     ///   - image: of the msg
     /// - Returns: the msg created
-    static func createNewMessage(body: String,image: NSData?) -> Message{
+    static func createNewMessage(body: String,image: NSData?,person: Personne) -> Message{
         let context = CoreDataManager.getContext()
         //create a person
         let msg = Message(context: context)
         //save datas into the person
-        msg.dateEnvoi = "TODAY"
-        msg.id = DateManager.autoIncrement()
+        msg.dateEnvoi = DateManager.currentDateString()
+        msg.id = autoIncrementMessages()
         msg.contenu = body
         msg.image = image
+        msg.ecritPar = person
         return msg
+    }
+    
+    // MARK: - Increment tools
+    
+    /// Increment automatically the number of messages
+    ///
+    /// - Returns: The number of messages incremented
+    class func autoIncrementMessages() -> Int64{
+        return Message.getNumbersOfMessages()+1
     }
 
 
