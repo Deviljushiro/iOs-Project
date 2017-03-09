@@ -43,6 +43,12 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         picker.delegate = self
+        do {
+            try self.msgFetched.performFetch()
+        }
+        catch let error as NSError{
+            DialogBoxHelper.alert(view: self, error: error)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -60,8 +66,9 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
     /// - Returns: the cell with the defined values
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cell = self.Messages.dequeueReusableCell(withIdentifier: "messageCell", for: indexPath) as! MessageTableViewCell
-        cell.content.text=self.listMsg.listMsg[indexPath.row].contenu
-        cell.date.text=self.listMsg.listMsg[indexPath.row].dateEnvoi
+        let msg = self.msgFetched.object(at: indexPath)
+        cell.date.text = "TODAY"
+        cell.content.text = msg.contenu
         return cell
     }
     
@@ -75,6 +82,41 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
         return self.listMsg.numbersOfMessages
     }
     
+    // MARK: - NSFetchResultController delegate protocol
+    
+    /// Start the update of a fetch result
+    ///
+    /// - Parameter controller: fetchresultcontroller
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        self.Messages.beginUpdates()
+    }
+    
+    /// End the update of a fetch result
+    ///
+    /// - Parameter controller: fetchresultcontroller
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        self.Messages.endUpdates()
+        CoreDataManager.save()
+    }
+    
+    /// Control the update of the fetch result
+    ///
+    /// - Parameters:
+    ///   - controller: fetchresultcontroller
+    ///   - anObject: object type
+    ///   - indexPath: indexpath of the object
+    ///   - type: type of modification
+    ///   - newIndexPath: if indexpath change
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type{
+        case .delete:
+            if let indexPath = indexPath{
+                self.Messages.deleteRows(at: [indexPath], with: .automatic)
+            }
+        default:
+            break
+        }
+    }
     
     
     //MARK: - Image delegates
@@ -154,6 +196,16 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     
+    @IBAction func adminAction(_ sender: Any) {
+        self.performSegue(withIdentifier: "adminSegue", sender: self)
+    }
+    
+    
+    @IBAction func myProfileAction(_ sender: Any) {
+        self.performSegue(withIdentifier: profileSegueId, sender: self)
+    }
+
+    
     /// Add an image to a message by clicking the grey icon
     ///
     /// - Parameter sender: who send the action
@@ -161,13 +213,12 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
         picker.allowsEditing = false
         picker.sourceType = .photoLibrary
         picker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
-        present(picker, animated: true, completion: nil)
-    }
+        present(picker, animated: true, completion: nil)   }
     
 
     
     // MARK: - Navigation
-     
+    
     let profileSegueId = "myProfileSegue"
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation

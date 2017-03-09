@@ -12,6 +12,7 @@ class MessageTableViewCell: UITableViewCell {
 
     @IBOutlet weak var content: UILabel!
     @IBOutlet weak var date: UILabel!
+    @IBOutlet weak var sender: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

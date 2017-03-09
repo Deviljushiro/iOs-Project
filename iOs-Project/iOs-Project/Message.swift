@@ -43,7 +43,7 @@ extension Message {
         //create a person
         let msg = Message(context: context)
         //save datas into the person
-        msg.dateEnvoi = DateManager.currentDateString()
+        msg.dateEnvoi = "TODAY"
         msg.id = DateManager.autoIncrement()
         msg.contenu = body
         msg.image = image

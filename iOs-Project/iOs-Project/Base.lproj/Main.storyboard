@@ -405,8 +405,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="adminAction:" destination="Iil-LA-aax" eventType="touchUpInside" id="MJN-5X-P05"/>
-                                            <segue destination="w9q-U9-9hd" kind="show" identifier="adminSegue" id="Tk2-CO-RbN"/>
+                                            <segue destination="w9q-U9-9hd" kind="show" identifier="adminSegue" id="jun-bg-4NO"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j5I-Q5-UR6">
@@ -416,8 +415,7 @@
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="myProfileAction:" destination="Iil-LA-aax" eventType="touchUpInside" id="cvd-57-Hk5"/>
-                                            <segue destination="jst-cl-SbP" kind="show" identifier="myProfileSegue" id="oRA-iJ-wD1"/>
+                                            <segue destination="jst-cl-SbP" kind="show" identifier="myProfileSegue" id="34F-WH-kKC"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e9N-qz-KQB">
@@ -426,9 +424,6 @@
                                         <state key="normal" title="Calendrier">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
-                                        <connections>
-                                            <action selector="myProfileAction:" destination="Iil-LA-aax" eventType="touchUpInside" id="Ko1-GM-iGs"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -456,14 +451,21 @@
                                             <rect key="frame" x="0.0" y="0.0" width="824" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nlx-Oy-JZr">
-                                                    <rect key="frame" x="8" y="8" width="42" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nlx-Oy-JZr">
+                                                    <rect key="frame" x="8" y="8" width="35" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CUS-eY-DpB">
-                                                    <rect key="frame" x="95" y="8" width="42" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="sender :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mzb-yl-xAk">
+                                                    <rect key="frame" x="58" y="7" width="62" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="body" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CUS-eY-DpB">
+                                                    <rect key="frame" x="151" y="8" width="39" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -481,6 +483,7 @@
                                         <connections>
                                             <outlet property="content" destination="CUS-eY-DpB" id="3Y8-pW-ntX"/>
                                             <outlet property="date" destination="Nlx-Oy-JZr" id="CfU-aK-e7k"/>
+                                            <outlet property="sender" destination="mzb-yl-xAk" id="fOp-1R-JFY"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -776,6 +779,6 @@
         <image name="file" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="oRA-iJ-wD1"/>
+        <segue reference="34F-WH-kKC"/>
     </inferredMetricsTieBreakers>
 </document>
