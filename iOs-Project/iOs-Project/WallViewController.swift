@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class WallViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, NSFetchedResultsControllerDelegate {
+class WallViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, NSFetchedResultsControllerDelegate, UITextFieldDelegate {
     
     // MARK: - Outlets
     
@@ -60,8 +60,7 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
+
     // MARK: - Table view datasource protocol
     
     /// Define the cell of the tableview
@@ -78,11 +77,17 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
         cell.body?.text = msg.contenu
         cell.sender.text = msg.ecritPar?.pseudo
         cell.senderPic.image = UIImage(data: self.person?.photo as! Data)
-        if let image = msg.image {  //the image isn't empty
-            cell.msgImage?.image = UIImage(data: image as! Data)
+        if let bimage = msg.image {  //the image isn't empty
+            if let image = UIImage(data: bimage as Data){
+                cell.msgImage.sizeThatFits(image.size)
+                cell.msgImage.image = image
+            }
+            else{
+                cell.msgImage.image = nil
+            }
         }
         else {  //or it's empty
-            cell.msgImage?.image = #imageLiteral(resourceName: "blank")
+            cell.msgImage.image = nil
         }
         return cell
     }
@@ -100,6 +105,18 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
         return section.numberOfObjects
     }
     
+    // MARK: - Text field protocol
+    
+    /// if the keyboard has to disappear after Return
+    ///
+    /// - Parameter textField: related textfield
+    /// - Returns: TRUE it has to go out, FALSE else
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool{
+        textField.resignFirstResponder()
+        return true
+    }
+
+
     // MARK: - NSFetchResultController delegate protocol
     
     /// Start the update of a fetch result
@@ -198,7 +215,7 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
     /// - Returns: index path
     func getLastIndexPath() -> IndexPath{
         // First figure out how many sections there are
-        let lastSectionIndex = self.Messages.numberOfSections - 1
+        var lastSectionIndex = self.Messages.numberOfSections - 1
         // Then grab the number of rows in the last section
         let lastRowIndex = self.Messages.numberOfRows(inSection: lastSectionIndex) - 1
         // Now just construct the index path
