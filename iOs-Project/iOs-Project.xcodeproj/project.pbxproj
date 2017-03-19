@@ -35,6 +35,8 @@
 		DF52D5AD1E71EEC2001ABB0C /* BasicTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF52D5AC1E71EEC2001ABB0C /* BasicTools.swift */; };
 		DFED6F8B1E55F11400F5C275 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFED6F8A1E55F11400F5C275 /* CoreDataManager.swift */; };
 		DFED6F8D1E55F2DA00F5C275 /* DialogBoxHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFED6F8C1E55F2DA00F5C275 /* DialogBoxHelper.swift */; };
+		DFEE4AB81E7EBA0600E12701 /* ForgotPwdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFEE4AB71E7EBA0600E12701 /* ForgotPwdViewController.swift */; };
+		DFEE4ABA1E7F02F300E12701 /* Groupe.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFEE4AB91E7F02F200E12701 /* Groupe.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +90,8 @@
 		DF52D5AC1E71EEC2001ABB0C /* BasicTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicTools.swift; sourceTree = "<group>"; };
 		DFED6F8A1E55F11400F5C275 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		DFED6F8C1E55F2DA00F5C275 /* DialogBoxHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogBoxHelper.swift; sourceTree = "<group>"; };
+		DFEE4AB71E7EBA0600E12701 /* ForgotPwdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPwdViewController.swift; sourceTree = "<group>"; };
+		DFEE4AB91E7F02F200E12701 /* Groupe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Groupe.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				DC4FAB5B1E5DEABA00BC0745 /* Personne.swift */,
+				DFEE4AB91E7F02F200E12701 /* Groupe.swift */,
 				3D25929E1E6D5D8900AA940D /* MessagesSet.swift */,
 				3D25929C1E6D596600AA940D /* Message.swift */,
 				3D3C3CCB1E682EC6001893E4 /* PersonnesSet.swift */,
@@ -170,7 +175,6 @@
 				DC4FAB5D1E5DED4800BC0745 /* Models */,
 				DFED6F8E1E55F3D400F5C275 /* Class Helpers */,
 				DC4FAB571E5DE96700BC0745 /* ProfileViewController.swift */,
-				3D25929A1E6D4DBB00AA940D /* Session.swift */,
 				DC074F561E51DF9600F2A90E /* AddViewController.swift */,
 				DC074F521E51DBEB00F2A90E /* ListViewController.swift */,
 				3D2592A01E6D6E1C00AA940D /* ListTableViewCellMessage.swift */,
@@ -178,6 +182,7 @@
 				DCE3FFFC1E51AADC0006D7E5 /* AppDelegate.swift */,
 				DCE3FFFE1E51AADC0006D7E5 /* ViewController.swift */,
 				DCE300001E51AADC0006D7E5 /* Main.storyboard */,
+				DFEE4AB71E7EBA0600E12701 /* ForgotPwdViewController.swift */,
 				3D806A7C1E7006BA0073C4FA /* MessageTableViewCell.swift */,
 				DC4FAB521E5DDC5D00BC0745 /* WallViewController.swift */,
 				DC4FAB501E5DD19C00BC0745 /* LoginViewController.swift */,
@@ -198,6 +203,7 @@
 				DC56D81E1E71795A00BA7C72 /* DateManager.swift */,
 				DFED6F8C1E55F2DA00F5C275 /* DialogBoxHelper.swift */,
 				DF52D5AC1E71EEC2001ABB0C /* BasicTools.swift */,
+				3D25929A1E6D4DBB00AA940D /* Session.swift */,
 			);
 			name = "Class Helpers";
 			sourceTree = "<group>";
@@ -370,8 +376,10 @@
 				DCE300051E51AADC0006D7E5 /* iOs_Project.xcdatamodeld in Sources */,
 				DC074F571E51DF9600F2A90E /* AddViewController.swift in Sources */,
 				DCE3FFFD1E51AADC0006D7E5 /* AppDelegate.swift in Sources */,
+				DFEE4AB81E7EBA0600E12701 /* ForgotPwdViewController.swift in Sources */,
 				DC074F531E51DBEB00F2A90E /* ListViewController.swift in Sources */,
 				3D806A7D1E7006BA0073C4FA /* MessageTableViewCell.swift in Sources */,
+				DFEE4ABA1E7F02F300E12701 /* Groupe.swift in Sources */,
 				DCE3002E1E51B4FC0006D7E5 /* HomeViewController.swift in Sources */,
 				3D25929B1E6D4DBB00AA940D /* Session.swift in Sources */,
 				3D25929F1E6D5D8900AA940D /* MessagesSet.swift in Sources */,
@@ -520,6 +528,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "IG4.iOs-Project";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -534,6 +543,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "IG4.iOs-Project";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};

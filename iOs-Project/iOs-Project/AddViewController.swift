@@ -17,8 +17,8 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
     
     // MARK: - Variables
     
-    var person: Personne? = nil
     var listPersons: PersonnesSet = PersonnesSet()
+    var activeTextField = UITextField()
     
     // MARK: - Outlet
     
@@ -29,6 +29,8 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
     @IBOutlet weak var image: UIImageView?
     @IBOutlet weak var motDePasse: UITextField!
     @IBOutlet weak var confirmMotDePasse: UITextField!
+    @IBOutlet weak var secretQ: UITextField!
+    @IBOutlet weak var secretA: UITextField!
     
     // MARK: - View loading
 
@@ -36,8 +38,9 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
     override func viewDidLoad() {
         super.viewDidLoad()
         picker.delegate = self
-
         // Do any additional setup after loading the view.
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
 
     /// warning memory
@@ -81,23 +84,42 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
         return true
     }
     
-    // MARK: - Person data management
-    
-    /// create a new person, add it to the personsSet and save the context
+    /// Before editing the text field
     ///
-    /// - Parameters:
-    ///     - nom: lastname of the person
-    ///     - prenom: firstname of the person
-    func saveNewPerson(withLastName nom: String, andFirstname prenom: String, andTel tel: String, andCity ville: String, andPwd mdp: String, andImage image: NSData){
-        let person = Personne.createNewPersonne(firstName: prenom, name: nom, tel: tel, city: ville, pwd: mdp, image: image)
-        if let error = CoreDataManager.save() {
-            DialogBoxHelper.alert(view: self, error: error)
-        }
-        else {
-            self.listPersons.addPerson(person: person)
+    /// - Parameter textfield: the text field
+    func textFieldDidBeginEditing(textfield: UITextField){
+        activeTextField = textfield
+    }
+    
+    /// After edition of the text field
+    ///
+    /// - Parameter textField: related text field
+    func textFieldDidEndEditing(textfield: UITextField){
+        activeTextField = UITextField()
+    }
+    
+    // MARK : - Keyboard
+    
+    /// Size the keyboard and scroll the page according to it
+    ///
+    /// - Parameter notification: notif which called the method
+    func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.activeTextField.frame.origin.y >= keyboardSize.height {
+                self.view.frame.origin.y = keyboardSize.height - self.activeTextField.frame.origin.y
+            } else {
+                self.view.frame.origin.y = 0
+            }
         }
     }
     
+    /// Keyboard disappear
+    ///
+    /// - Parameter notification: notif which called the method
+    func keyboardWillHide(notification: NSNotification) {
+        self.view.frame.origin.y = 0
+    }
+
     
 
     // MARK: - Action
@@ -112,7 +134,7 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
         let tel = self.telLabel.text ?? ""
         let city = self.villeLabel.text ?? ""
         let pwd = self.motDePasse.text ?? ""
-        let pwd2 = self.confirmMotDePasse.text ?? ""
+        //let pwd2 = self.confirmMotDePasse.text ?? ""
         var imageData: NSData
         if let image = self.image?.image {  //the image isn't empty
             imageData = UIImageJPEGRepresentation(image, 1)! as NSData
@@ -121,7 +143,7 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
             imageData = UIImageJPEGRepresentation(#imageLiteral(resourceName: "default"), 1)! as NSData
         }
         //save it
-        self.saveNewPerson(withLastName: lastname, andFirstname: firstname, andTel: tel, andCity: city, andPwd: pwd, andImage: imageData)
+        Personne.createNewPersonne(firstName: firstname, name: lastname, tel: tel, city: city, pwd: pwd, image: imageData)
         DialogBoxHelper.alert(view: self, WithTitle: "Inscription validée")
         performSegue(withIdentifier: "backToLoginSegue", sender: self)
     }

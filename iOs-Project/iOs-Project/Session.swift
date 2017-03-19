@@ -13,18 +13,16 @@ class Session{
     
     // MARK: - Variables
     
-    static var isLogin = false
-    static var session : Session? = nil
-    var username : String
-    var pwd : String
+    private static var user: Personne? = nil
     
     
     // MARK: - Initialization
     
-    private init(username u:String,password passwd: String){
-        username=u
-        pwd=passwd
-        
+    /// Initialize the session
+    ///
+    /// - Parameter person: the person wo want to create his Session
+    private init(person: Personne){
+        Session.user = person
     }
     
     // MARK: - Session methods
@@ -36,16 +34,25 @@ class Session{
     ///   - p: the username of the user
     ///   - pwd: the password of the user
     /// - Returns: the session created
-    static func newSession(username u:String,password pwd: String)->Session{
-        if let asession = Session.session{
-            return asession
-        }
-        else{
-            Session.session = Session(username: u,password: pwd)
-            return Session.session!
+    static func getSession()-> Personne{
+        return Session.user!
+    }
+
+    /// Destroy the user's Session
+    static func destroySession() {
+        Session.user = nil
+    }
+    
+    /// Create a new Session if there's no current one
+    ///
+    /// - Parameter person: the person wo want to create his Session
+    static func createSession(person: Personne) {
+        guard self.user != nil else {
+            Session(person: person)
+            return
         }
     }
 }
-    
+
 
 

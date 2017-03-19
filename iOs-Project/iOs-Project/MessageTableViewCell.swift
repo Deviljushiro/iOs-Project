@@ -13,9 +13,9 @@ class MessageTableViewCell: UITableViewCell {
 
     @IBOutlet weak var sender: UILabel!
     @IBOutlet weak var sendDate: UILabel!
-    @IBOutlet weak var body: UILabel? = nil
     @IBOutlet weak var senderPic: UIImageView!
     @IBOutlet weak var msgImage: UIImageView!
+    @IBOutlet weak var body: UITextView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

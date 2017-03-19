@@ -13,7 +13,6 @@ class LoginViewController: UIViewController {
     
     // MARK: - Variables
     
-    var person : Personne? = nil
     var listPersons : PersonnesSet!
 
     // MARK: - Outlets
@@ -30,7 +29,7 @@ class LoginViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         self.listPersons = PersonnesSet()
-
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -62,7 +61,7 @@ class LoginViewController: UIViewController {
             DialogBoxHelper.alert(view: self, WithTitle: "Connection impossible", andMsg: "Identifiant ou mot de passe manquant")
             return
         }
-        let res = listPersons.getPersonsByUsername(withUsername: user)
+        let res = PersonnesSet.getPersonsByUsername(withUsername: user)
         if res.count < 1 {
             DialogBoxHelper.alert(view: self, WithTitle: "Connection impossible", andMsg: "Identifiant inconnu")
             return
@@ -73,25 +72,29 @@ class LoginViewController: UIViewController {
                 return
             }
             else {
-                self.person = res[0]
-                Session.newSession(username: user, password: pwd)
-                if Session.session != nil{
+                Session.createSession(person: res[0])
+              //  if Session.getSession() != nil{
                     self.performSegue(withIdentifier: "loginSegue", sender: self)
-                }
-                            }
+             //   }
+            }
             
         }
     }
     
 
-
-    
-    
     /// Go to the registration Segue
     ///
     /// - Parameter sender: who send the action
     @IBAction func registrationAction(_ sender: Any) {
         self.performSegue(withIdentifier: "registerSegue", sender: self)
+    }
+    
+    
+    /// Go to the forgot password page
+    ///
+    /// - Parameter sender: who send the action
+    @IBAction func forgotPwdAction(_ sender: Any) {
+        self.performSegue(withIdentifier: "forgotpwdSegue", sender: self)
     }
 
     
@@ -99,14 +102,14 @@ class LoginViewController: UIViewController {
 
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    //override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        if segue.identifier == "loginSegue" {
-            let navController = segue.destination as! UINavigationController
-            let destController = navController.topViewController as! WallViewController
-            destController.person = self.person
-        }
-    }
+        //if segue.identifier == "loginSegue" {
+        //    let navController = segue.destination as! UINavigationController
+        //    let destController = navController.topViewController as! WallViewController
+        //    destController.person = self.person
+        //}
+   // }
     
 }

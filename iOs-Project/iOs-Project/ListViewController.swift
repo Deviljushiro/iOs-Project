@@ -15,18 +15,8 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     // MARK: - Variables
     
     var indexPathForProfile: IndexPath? = nil
+    var persons: PersonnesSet = PersonnesSet()
     
-    /// The list of persons fetched for the view
-    fileprivate lazy var personsFetched : NSFetchedResultsController<Personne> = {
-        //prepare request
-        let request : NSFetchRequest<Personne> = Personne.fetchRequest()
-        request.sortDescriptors = [NSSortDescriptor(key:#keyPath(Personne.nom),ascending:true)]
-        let fetchResultController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: CoreDataManager.getContext(), sectionNameKeyPath: nil, cacheName: nil)
-        fetchResultController.delegate = self
-        return fetchResultController
-    }()
-    
-
     // MARK: - Outlet
     
     @IBOutlet weak var Personnes: UITableView!
@@ -36,12 +26,6 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     /// What the view has to load before
     override func viewDidLoad() {
         super.viewDidLoad()
-        do {
-            try self.personsFetched.performFetch()
-        }
-        catch let error as NSError{
-            DialogBoxHelper.alert(view: self, error: error)
-        }
     }
 
     /// Tell if view receive a warning
@@ -77,7 +61,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     ///   - action: type of action
     ///   - indexPath: indexPath of the object
     func deleteHandlerAction(action: UITableViewRowAction, indexPath: IndexPath) {
-        let person = self.personsFetched.object(at: indexPath)
+        let person = self.persons.getPersons().object(at: indexPath)
         CoreDataManager.context.delete(person)
     }
     
@@ -92,7 +76,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     /// - Returns: the cell with the defined values
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cell = self.Personnes.dequeueReusableCell(withIdentifier: "personCell", for: indexPath) as! ListTableViewCell
-        let person = self.personsFetched.object(at: indexPath)
+        let person = self.persons.getPersons().object(at: indexPath)
         cell.nom.text = person.nom
         cell.prenom.text = person.prenom
         return cell
@@ -105,7 +89,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     ///   - section: number of lines for each section
     /// - Returns: number of sections
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        guard let section = self.personsFetched.sections?[section] else {
+        guard let section = self.persons.getPersons().sections?[section] else {
             fatalError("unexpected section number")
         }
         return section.numberOfObjects
@@ -207,7 +191,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         if segue.identifier == self.profileSegueId{
             if let indexPath = self.Personnes.indexPathForSelectedRow {
                 let profileViewController = segue.destination as! ProfileViewController
-                profileViewController.person = self.personsFetched.object(at: indexPath)
+                profileViewController.person = self.persons.getPersons().object(at: indexPath)
             }
         }
     }

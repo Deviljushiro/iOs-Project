@@ -22,6 +22,7 @@ extension Personne {
         }
     }
     
+    // MARK: - CRUD
     
     @discardableResult
     /// Create a new person in the DB
@@ -34,10 +35,9 @@ extension Personne {
     ///   - pwd: of the person
     ///   - image: of the person
     /// - Returns: the person created
-    static func createNewPersonne(firstName: String, name: String, tel: String, city: String, pwd: String, image: NSData) -> Personne{
-        let context = CoreDataManager.getContext()
+    static func createNewPersonne(firstName: String, name: String, tel: String, city: String, pwd: String, image: NSData){
         //create a person
-        let person = Personne(context: context)
+        let person = Personne(context: CoreDataManager.getContext())
         //save datas into the person
         person.nom = name
         person.prenom = firstName
@@ -46,7 +46,7 @@ extension Personne {
         person.mdp = pwd
         person.photo = image
         person.pseudo = firstName+"."+name
-        return person
+        CoreDataManager.save()
     }
     
     

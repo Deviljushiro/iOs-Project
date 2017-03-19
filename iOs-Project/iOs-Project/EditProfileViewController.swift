@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EditProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class EditProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
     // MARK: - Constant
     
@@ -17,6 +17,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     // MARK: - Variables
     
     var person: Personne? = nil
+    var activeTextField = UITextField()
     
     // MARK: - Outlets
     
@@ -48,14 +49,67 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
             self.CityTextField.text = aperson.ville
             self.EditProfileImage.image = UIImage(data: aperson.photo as! Data)
         }
+        //to tap the image
         let tapImage = UITapGestureRecognizer(target: self, action: #selector(self.changeImage))
         self.EditProfileImage.addGestureRecognizer(tapImage)
+        //notif for the kayboard management
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
+    
+    
 
     /// if receive memory warning
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    // MARK: - Text field methods
+    
+    /// if the keyboard has to disappear after Return
+    ///
+    /// - Parameter textField: related textfield
+    /// - Returns: TRUE it has to go out, FALSE else
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool{
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    /// Before editing the text field
+    ///
+    /// - Parameter textfield: the text field
+    func textFieldDidBeginEditing(textfield: UITextField){
+        activeTextField = textfield
+    }
+    
+    /// After edition of the text field
+    ///
+    /// - Parameter textField: related text field
+    func textFieldDidEndEditing(textfield: UITextField){
+        activeTextField = UITextField()
+    }
+    
+    // MARK : - Keyboard
+    
+    /// Size the keyboard and scroll the page according to it
+    ///
+    /// - Parameter notification: notif which called the method
+    func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.activeTextField.frame.origin.y >= keyboardSize.height {
+                self.view.frame.origin.y = keyboardSize.height - self.activeTextField.frame.origin.y
+            } else {
+                self.view.frame.origin.y = 0
+            }
+        }
+    }
+    
+    /// Keyboard disappear
+    ///
+    /// - Parameter notification: notif which called the method
+    func keyboardWillHide(notification: NSNotification) {
+        self.view.frame.origin.y = 0
     }
     
 

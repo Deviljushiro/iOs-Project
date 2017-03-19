@@ -9,31 +9,19 @@
 import UIKit
 import CoreData
 
-class WallViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, NSFetchedResultsControllerDelegate, UITextFieldDelegate {
+class WallViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, NSFetchedResultsControllerDelegate {
     
     // MARK: - Outlets
     
     @IBOutlet weak var ListMessages: UITableView!
-    @IBOutlet weak var MessageField: UITextField!
+    @IBOutlet weak var MessageField: UITextView!
     @IBOutlet weak var SideView: UIView!
     @IBOutlet weak var Messages: UITableView!
 
     // MARK: - Variables
     
-    var person : Personne? = nil
-    var listMsg : MessagesSet = MessagesSet()
+    var msgFetched : MessagesSet = MessagesSet()
     var sentImage : UIImage? = nil
-    
-    
-    /// The list of messages fetched for the view
-    fileprivate lazy var msgFetched : NSFetchedResultsController<Message> = {
-        //prepare request
-        let request : NSFetchRequest<Message> = Message.fetchRequest()
-        request.sortDescriptors = [NSSortDescriptor(key:#keyPath(Message.dateEnvoi),ascending:true)]
-        let fetchResultController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: CoreDataManager.getContext(), sectionNameKeyPath: nil, cacheName: nil)
-        fetchResultController.delegate = self
-        return fetchResultController
-    }()
     
     // MARK: - Constants
     
@@ -43,19 +31,20 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //delegate the picker
+        //delegate the picker and messages fetched
+        self.msgFetched.getMessages().delegate = self
         picker.delegate = self
-        //fetch all the messages
-        do {
-            try self.msgFetched.performFetch()
-        }
-        catch let error as NSError{
-            DialogBoxHelper.alert(view: self, error: error)
-        }
+        self.msgFetched.refreshMsg()
         //start with the last messages
-        self.Messages.scrollToRow(at: self.getLastIndexPath(), at: .bottom, animated: false)
+        if (msgFetched.getNumberMessages()>0) {
+          self.Messages.scrollToRow(at: self.getLastIndexPath(), at: .bottom, animated: false)
+        }
+        //Notifications to manage the keyboard
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
-
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -72,11 +61,11 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cell = self.Messages.dequeueReusableCell(withIdentifier: "messageCell", for: indexPath) as! MessageTableViewCell
         //get the msg datas from the fetched msg
-        let msg = self.msgFetched.object(at: indexPath)
+        let msg = self.msgFetched.getMessages().object(at: indexPath)
         cell.sendDate.text = msg.dateEnvoi
         cell.body?.text = msg.contenu
         cell.sender.text = msg.ecritPar?.pseudo
-        cell.senderPic.image = UIImage(data: self.person?.photo as! Data)
+        cell.senderPic.image = UIImage(data: msg.ecritPar!.photo as! Data)
         if let bimage = msg.image {  //the image isn't empty
             if let image = UIImage(data: bimage as Data){
                 cell.msgImage.sizeThatFits(image.size)
@@ -99,22 +88,59 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
     ///   - section: number of lines for each section
     /// - Returns: number of sections
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        guard let section = self.msgFetched.sections?[section] else {
+        guard let section = self.msgFetched.getMessages().sections?[section] else {
             fatalError("unexpected section number")
         }
         return section.numberOfObjects
     }
     
-    // MARK: - Text field protocol
+    // MARK: - Text view protocol
     
     /// if the keyboard has to disappear after Return
     ///
-    /// - Parameter textField: related textfield
+    /// - Parameter textView: related textView
     /// - Returns: TRUE it has to go out, FALSE else
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool{
-        textField.resignFirstResponder()
+    func textViewShouldReturn(_ textView: UITextView) -> Bool{
+        textView.resignFirstResponder()
         return true
     }
+    
+    /// Before editing the textView
+    ///
+    /// - Parameter textView: the text view
+    func textViewDidBeginEditing(_ textView: UITextView){
+        MessageField = textView
+    }
+    
+    /// After edition of the text view
+    ///
+    /// - Parameter textView: related text view
+    func textViewDidEndEditing(_ textView: UITextView){
+        MessageField = nil
+    }
+    
+    // MARK : - Keyboard
+    
+    /// Size the keyboard and scroll the page according to it
+    ///
+    /// - Parameter notification: notif which called the method
+    func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if (self.MessageField?.frame.origin.y)! >= keyboardSize.height {
+                self.view.frame.origin.y = keyboardSize.height - (self.MessageField?.frame.origin.y)!
+            } else {
+                self.view.frame.origin.y = 0
+            }
+        }
+    }
+    
+    /// Keyboard disappear
+    ///
+    /// - Parameter notification: notif which called the method
+    func keyboardWillHide(notification: NSNotification) {
+        self.view.frame.origin.y = 0
+    }
+
 
 
     // MARK: - NSFetchResultController delegate protocol
@@ -131,7 +157,7 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
     /// - Parameter controller: fetchresultcontroller
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         self.Messages.endUpdates()
-        CoreDataManager.save()
+        self.Messages.reloadData()
     }
     
     /// Control the update of the fetch result
@@ -172,7 +198,7 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
             self.sentImage = chosenImage
             let image = sentImage
             let imageData = UIImageJPEGRepresentation(image!, 1)! as NSData
-            self.saveNewMessage(withBody: "", withImage: imageData)
+            Message.createNewMessage(body: "", image: imageData, person: Session.getSession())
             //refresh the page
             self.viewDidLoad()
             dismiss(animated:true, completion: nil)
@@ -191,22 +217,7 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
     // MARK: - Message data management
     
     
-    /// Create a new msg and save it in the set
-    ///
-    /// - Parameters:
-    ///   - id: of the msg
-    ///   - body: of the msg
-    ///   - sendDate: of the msg
-    ///   - image: of the msg
-    func saveNewMessage(withBody body: String,withImage image: NSData?){
-        let msg = Message.createNewMessage(body: body,image: image, person: self.person!)
-        if let error = CoreDataManager.save() {
-            DialogBoxHelper.alert(view: self, error: error)
-        }
-        else {
-            self.listMsg.addMessage(message: msg, personne: self.person!)
-        }
-    }
+
     
     // MARK: - Index tools
     
@@ -235,16 +246,17 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
             DialogBoxHelper.alert(view: self, WithTitle: "Echec envoi", andMsg: "Message vide")
             return
         }
-        self.saveNewMessage(withBody: body, withImage: nil)
+        Message.createNewMessage(body: body, image: nil, person: Session.getSession())
         //refresh the page
         self.viewDidLoad()
     }
     
     
-    /// Log out the user
+    /// Log out the user by destroying the Session
     ///
     /// - Parameter sender: who send the action
     @IBAction func logoutAction(_ sender: Any) {
+        Session.destroySession()
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -276,6 +288,8 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
     }
     
+    
+    
 
     
     // MARK: - Navigation
@@ -288,7 +302,7 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
         // Pass the selected object to the new view controller.
         if segue.identifier == self.profileSegueId {
             let profileViewController = segue.destination as! ProfileViewController
-            profileViewController.person = self.person
+            profileViewController.person = Session.getSession()
         }
     }
     
