@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16A323" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16D32" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Groupe" representedClassName="Groupe" syncable="YES" codeGenerationType="class">
         <attribute name="dateCreation" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -32,13 +32,13 @@
         <relationship name="promo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Promo" inverseName="contient" inverseEntity="Promo" syncable="YES"/>
     </entity>
     <entity name="Promo" representedClassName="Promo" syncable="YES" codeGenerationType="class">
-        <attribute name="annee" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="annee" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="contient" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Personne" inverseName="promo" inverseEntity="Personne" syncable="YES"/>
     </entity>
     <elements>
         <element name="Groupe" positionX="-450" positionY="-63" width="128" height="118"/>
         <element name="Message" positionX="-488" positionY="99" width="128" height="135"/>
         <element name="Personne" positionX="-702" positionY="54" width="128" height="253"/>
-        <element name="Promo" positionX="-488" positionY="270" width="128" height="73"/>
+        <element name="Promo" positionX="-488" positionY="270" width="128" height="75"/>
     </elements>
 </model>

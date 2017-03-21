@@ -50,6 +50,8 @@ class MessagesSet {
         }
     }
     
+    // MARK: - Help methods
+    
     /// Re-perform the fetch for the NSFetchResult
     func refreshMsg(){
         do {

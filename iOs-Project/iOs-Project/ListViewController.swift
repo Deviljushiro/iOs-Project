@@ -26,6 +26,9 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     /// What the view has to load before
     override func viewDidLoad() {
         super.viewDidLoad()
+        //delegate the persons fetched and refresh the list
+        self.persons.getPersons().delegate = self
+        self.persons.refreshPersons()
     }
 
     /// Tell if view receive a warning
@@ -33,25 +36,6 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
-    // MARK: - Person data management
-    
-    /*
-    /// create a new person and save it
-    ///
-    /// - Parameters:
-    ///     - nom: lastname of the person
-    ///     - prenom: firstname of the person
-    func saveNewPerson(withLastName nom: String, andFirstname prenom: String, andTel tel: String, andCity ville: String, andPwd mdp: String, andImage image: NSData){
-        let person = Personne.createNewPersonne(firstName: prenom, name: nom, tel: tel, city: ville, pwd: mdp, image: image)
-        if let error = CoreDataManager.save() {
-            DialogBoxHelper.alert(view: self, error: error)
-        }
-        else {
-            self.listPersons.addPerson(person: person)
-        }
-    }*/
     
     // MARK: - Action Handler
     
@@ -157,28 +141,35 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     // MARK: - Action
     
-    
-    /// Go to the Add page
+    /// Go to the registration page
     ///
-    /// - Parameter sender: who send action
-    @IBAction func addAction(_ sender: Any) {
-        self.performSegue(withIdentifier: self.addSegueId, sender: self)
+    /// - Parameter sender: who send the action
+    @IBAction func registrationAction(_ sender: Any) {
+        self.performSegue(withIdentifier: self.registerSegueId, sender: self)
     }
     
     
-    /// When datas need to be obtained from the previous page
+    /// Go to the promo add page
     ///
-    /// - Parameter segue: The segue related to the previous page
-    @IBAction func unwindToPersonsListAfterSaving(segue: UIStoryboardSegue){
-        CoreDataManager.save()
-        self.Personnes.reloadData()
-        }
-
-
+    /// - Parameter sender: who send the action
+    @IBAction func promoAction(_ sender: Any) {
+        self.performSegue(withIdentifier: self.promoSegueId, sender: self)
+    }
+    
+    
+    /// Go back to the Wall page
+    ///
+    /// - Parameter sender: who send the action
+    @IBAction func wallAction(_ sender: Any) {
+        self.performSegue(withIdentifier: "wallSegue", sender: self)
+    }
+    
+    
     // MARK: - Navigation
     
     let profileSegueId = "profileSegue"
-    let addSegueId = "addSegue"
+    let registerSegueId = "registerSegue"
+    let promoSegueId = "promoSegue"
     
     /// prepare to send datas to the profile view ctrler
     ///

@@ -120,7 +120,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     /// - Parameters:
     ///   - picker: picker which has to pick image
     ///   - info: about finish picking media
-    func imagePickerController(_ picker: UIImagePickerController,
+    @nonobjc func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [String : AnyObject])
     {
         if let chosenImage = info[UIImagePickerControllerOriginalImage] as? UIImage {

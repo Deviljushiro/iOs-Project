@@ -16,6 +16,9 @@
 		3D806A7D1E7006BA0073C4FA /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D806A7C1E7006BA0073C4FA /* MessageTableViewCell.swift */; };
 		DC074F531E51DBEB00F2A90E /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC074F521E51DBEB00F2A90E /* ListViewController.swift */; };
 		DC074F571E51DF9600F2A90E /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC074F561E51DF9600F2A90E /* AddViewController.swift */; };
+		DC24C77E1E81343D0043753F /* PromoSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC24C77D1E81343D0043753F /* PromoSet.swift */; };
+		DC24C7801E8135B30043753F /* Promo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC24C77F1E8135B30043753F /* Promo.swift */; };
+		DC24C7821E8145D80043753F /* PromoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC24C7811E8145D80043753F /* PromoViewController.swift */; };
 		DC426FCD1E52001A00809823 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC426FCC1E52001A00809823 /* ListTableViewCell.swift */; };
 		DC4FAB511E5DD19C00BC0745 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4FAB501E5DD19C00BC0745 /* LoginViewController.swift */; };
 		DC4FAB531E5DDC5D00BC0745 /* WallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4FAB521E5DDC5D00BC0745 /* WallViewController.swift */; };
@@ -65,6 +68,9 @@
 		3D806A7C1E7006BA0073C4FA /* MessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		DC074F521E51DBEB00F2A90E /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		DC074F561E51DF9600F2A90E /* AddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
+		DC24C77D1E81343D0043753F /* PromoSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromoSet.swift; sourceTree = "<group>"; };
+		DC24C77F1E8135B30043753F /* Promo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Promo.swift; sourceTree = "<group>"; };
+		DC24C7811E8145D80043753F /* PromoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromoViewController.swift; sourceTree = "<group>"; };
 		DC426FCC1E52001A00809823 /* ListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
 		DC4FAB501E5DD19C00BC0745 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		DC4FAB521E5DDC5D00BC0745 /* WallViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WallViewController.swift; sourceTree = "<group>"; };
@@ -124,6 +130,8 @@
 			children = (
 				DC4FAB5B1E5DEABA00BC0745 /* Personne.swift */,
 				DFEE4AB91E7F02F200E12701 /* Groupe.swift */,
+				DC24C77F1E8135B30043753F /* Promo.swift */,
+				DC24C77D1E81343D0043753F /* PromoSet.swift */,
 				3D25929E1E6D5D8900AA940D /* MessagesSet.swift */,
 				3D25929C1E6D596600AA940D /* Message.swift */,
 				3D3C3CCB1E682EC6001893E4 /* PersonnesSet.swift */,
@@ -175,6 +183,7 @@
 				DC4FAB5D1E5DED4800BC0745 /* Models */,
 				DFED6F8E1E55F3D400F5C275 /* Class Helpers */,
 				DC4FAB571E5DE96700BC0745 /* ProfileViewController.swift */,
+				DC24C7811E8145D80043753F /* PromoViewController.swift */,
 				DC074F561E51DF9600F2A90E /* AddViewController.swift */,
 				DC074F521E51DBEB00F2A90E /* ListViewController.swift */,
 				3D2592A01E6D6E1C00AA940D /* ListTableViewCellMessage.swift */,
@@ -368,7 +377,9 @@
 				DFED6F8D1E55F2DA00F5C275 /* DialogBoxHelper.swift in Sources */,
 				3D25929D1E6D596600AA940D /* Message.swift in Sources */,
 				DC4FAB531E5DDC5D00BC0745 /* WallViewController.swift in Sources */,
+				DC24C77E1E81343D0043753F /* PromoSet.swift in Sources */,
 				DCE3FFFF1E51AADC0006D7E5 /* ViewController.swift in Sources */,
+				DC24C7821E8145D80043753F /* PromoViewController.swift in Sources */,
 				3D3C3CCC1E682EC6001893E4 /* PersonnesSet.swift in Sources */,
 				DC56D81F1E71795A00BA7C72 /* DateManager.swift in Sources */,
 				DC4FAB5C1E5DEABA00BC0745 /* Personne.swift in Sources */,
@@ -384,6 +395,7 @@
 				3D25929B1E6D4DBB00AA940D /* Session.swift in Sources */,
 				3D25929F1E6D5D8900AA940D /* MessagesSet.swift in Sources */,
 				DC4FAB581E5DE96700BC0745 /* ProfileViewController.swift in Sources */,
+				DC24C7801E8135B30043753F /* Promo.swift in Sources */,
 				DFED6F8B1E55F11400F5C275 /* CoreDataManager.swift in Sources */,
 				DF36A7351E55C50200B051F5 /* EditProfileViewController.swift in Sources */,
 			);

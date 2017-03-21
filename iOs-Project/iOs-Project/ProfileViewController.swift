@@ -27,6 +27,8 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var ProfileTel: UILabel!
     @IBOutlet weak var ProfileCityLabel: UILabel!
     @IBOutlet weak var ProfileCity: UILabel!
+    @IBOutlet weak var ProfilePromoLabel: UILabel!
+    @IBOutlet weak var ProfilePromo: UILabel!
 
     // MARK: - View loading
     
@@ -41,6 +43,7 @@ class ProfileViewController: UIViewController {
             self.ProfileTel.text = aperson.tel
             self.ProfileCity.text = aperson.ville
             self.ProfileImage.image = UIImage(data: aperson.photo as! Data)
+            self.ProfilePromo.text = aperson.promo?.annee
         }
     }
 

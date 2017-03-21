@@ -1,4 +1,4 @@
-//
+ //
 //  ForgotPwdViewController.swift
 //  iOs-Project
 //
@@ -50,11 +50,11 @@ class ForgotPwdViewController: UIViewController {
             return
         }
         let res = PersonnesSet.getPersonsByUsername(withUsername: user)
-        if res.count < 1 {
+        if res == nil {
             DialogBoxHelper.alert(view: self, WithTitle: "Modification impossible", andMsg: "Identifiant inconnu")
             return
         }
-        self.person = res[0]
+        self.person = res!
 
         self.person?.mdp = self.newpwd.text
         
