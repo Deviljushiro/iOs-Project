@@ -16,18 +16,18 @@ extension Groupe{
     ///
     /// - Parameters:
     ///   - name : name we want for the group
-    func createNewGroup(name n: String){
+    static func createNewGroup(name n: String){
         
         let group = Groupe(context: CoreDataManager.getContext())
         //save datas into the group
-        group.name=name
-        group.id=autoIncrementGroups();
+        group.name=n
+        group.id=Groupe.autoIncrementGroups();
         //save him
         CoreDataManager.save()
 
     }
     
-    func autoIncrementGroups() -> Int64{
-        return GroupesSet.getNumbersOfMessages()+1
+    static func autoIncrementGroups() -> Int64{
+        return GroupesSet.getNumbersOfGroups()+1
     }
 }

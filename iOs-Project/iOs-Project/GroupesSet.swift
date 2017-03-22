@@ -60,13 +60,17 @@ class GroupesSet{
         }
     }
     
+    
     // MARK: - Getters
     
     /// Get groups for a specific person
     ///
     /// - Parameter person: name of the person we want his groups
     /// - Returns: return the tab of groups of the person
-    class func getGroupByUser(person p: Personne)-> [Groupe]{
+    func getGroupsByUser(person p: Personne)-> [Groupe]{
+        let groups = p.appartenir
+        return groups!.allObjects as! [Groupe]
+        /*
         var groups: [Groupe] = []
         let request : NSFetchRequest<Groupe> = Groupe.fetchRequest()
         request.predicate = NSPredicate(format: " concerner == %@", p)
@@ -76,13 +80,14 @@ class GroupesSet{
             fatalError("failed to get the groups of the person=\(p): \(error)")
         }
         return groups
+        */
         
     }
     
     /// return true if there is groups in the database
     ///
     /// - Returns: return true if there is groups in the database
-    static func getNumbersOfMessages()-> Int{
+    static func getNumbersOfGroups()-> Int{
         var groups: [Groupe] = []
         let context = CoreDataManager.getContext()
         let request : NSFetchRequest<Groupe> = Groupe.fetchRequest()

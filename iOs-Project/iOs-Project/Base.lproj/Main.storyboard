@@ -528,29 +528,38 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="groupCell" id="p7o-OZ-bR4" customClass="GroupTableViewCell" customModule="iOs_Project" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="groupCell" id="p7o-OZ-bR4" customClass="ListGroupTableViewCell" customModule="iOs_Project" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="746" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="p7o-OZ-bR4" id="CV0-0r-FvR">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="p7o-OZ-bR4" id="CV0-0r-FvR">
                                             <rect key="frame" x="0.0" y="0.0" width="746" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Group" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qrf-h6-L0n">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Group" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qrf-h6-L0n">
                                                     <rect key="frame" x="352" y="11" width="48" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="200" id="vfQ-Xv-VFd"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="Qrf-h6-L0n" firstAttribute="leading" secondItem="CV0-0r-FvR" secondAttribute="leadingMargin" constant="8" id="1j6-OF-XEI"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="Qrf-h6-L0n" secondAttribute="trailing" constant="341" id="DN0-i1-cXr"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Qrf-h6-L0n" secondAttribute="trailing" constant="338" id="FOU-A7-4Wl"/>
+                                                <constraint firstItem="Qrf-h6-L0n" firstAttribute="top" secondItem="CV0-0r-FvR" secondAttribute="topMargin" constant="3" id="Idr-IV-fgb"/>
                                                 <constraint firstItem="Qrf-h6-L0n" firstAttribute="top" secondItem="CV0-0r-FvR" secondAttribute="topMargin" constant="3" id="JR1-7s-yBB"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="Qrf-h6-L0n" secondAttribute="bottom" constant="3" id="Q3O-eN-4KC"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="Qrf-h6-L0n" secondAttribute="bottom" constant="3" id="Wwd-fl-vXx"/>
-                                                <constraint firstItem="Qrf-h6-L0n" firstAttribute="leading" secondItem="CV0-0r-FvR" secondAttribute="leadingMargin" constant="341" id="XJ3-3l-Dj0"/>
+                                                <constraint firstItem="Qrf-h6-L0n" firstAttribute="top" secondItem="CV0-0r-FvR" secondAttribute="topMargin" constant="3" id="ioe-8O-aFh"/>
+                                                <constraint firstItem="Qrf-h6-L0n" firstAttribute="leading" secondItem="CV0-0r-FvR" secondAttribute="leadingMargin" constant="344" id="lpI-Fn-MYZ"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="Qrf-h6-L0n" secondAttribute="bottom" constant="3" id="xao-Jk-xal"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="group" destination="Qrf-h6-L0n" id="in8-q6-ND6"/>
+                                            <outlet property="group" destination="Qrf-h6-L0n" id="YsL-Zm-UrM"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -568,7 +577,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hQt-S3-fcv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1936.5234374999998" y="-1786.71875"/>
+            <point key="canvasLocation" x="2132" y="-1834"/>
         </scene>
         <!--Groupe de discussion-->
         <scene sceneID="QYr-zg-6zJ">

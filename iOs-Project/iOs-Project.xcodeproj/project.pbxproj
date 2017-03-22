@@ -18,6 +18,7 @@
 		3D3C3CCC1E682EC6001893E4 /* PersonnesSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D3C3CCB1E682EC6001893E4 /* PersonnesSet.swift */; };
 		3D3C3CCD1E682EC6001893E4 /* PersonnesSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D3C3CCB1E682EC6001893E4 /* PersonnesSet.swift */; };
 		3D806A7D1E7006BA0073C4FA /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D806A7C1E7006BA0073C4FA /* MessageTableViewCell.swift */; };
+		3DEA3A2D1E82D6D500185E19 /* ListGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEA3A2C1E82D6D500185E19 /* ListGroupTableViewCell.swift */; };
 		DC074F531E51DBEB00F2A90E /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC074F521E51DBEB00F2A90E /* ListViewController.swift */; };
 		DC074F571E51DF9600F2A90E /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC074F561E51DF9600F2A90E /* AddViewController.swift */; };
 		DC24C77E1E81343D0043753F /* PromoSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC24C77D1E81343D0043753F /* PromoSet.swift */; };
@@ -73,6 +74,7 @@
 		3D2592A01E6D6E1C00AA940D /* ListTableViewCellMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTableViewCellMessage.swift; sourceTree = "<group>"; };
 		3D3C3CCB1E682EC6001893E4 /* PersonnesSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonnesSet.swift; sourceTree = "<group>"; };
 		3D806A7C1E7006BA0073C4FA /* MessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
+		3DEA3A2C1E82D6D500185E19 /* ListGroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListGroupTableViewCell.swift; sourceTree = "<group>"; };
 		DC074F521E51DBEB00F2A90E /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		DC074F561E51DF9600F2A90E /* AddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		DC24C77D1E81343D0043753F /* PromoSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromoSet.swift; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 				DC4FAB5D1E5DED4800BC0745 /* Models */,
 				DFED6F8E1E55F3D400F5C275 /* Class Helpers */,
 				3D0A15291E828E630010E99B /* GroupViewController.swift */,
+				3DEA3A2C1E82D6D500185E19 /* ListGroupTableViewCell.swift */,
 				3D0A152B1E828F000010E99B /* GroupTableViewCell.swift */,
 				DC4FAB571E5DE96700BC0745 /* ProfileViewController.swift */,
 				DC24C7811E8145D80043753F /* PromoViewController.swift */,
@@ -390,6 +393,7 @@
 				DCE3FFFF1E51AADC0006D7E5 /* ViewController.swift in Sources */,
 				DC24C7821E8145D80043753F /* PromoViewController.swift in Sources */,
 				3D0A152C1E828F000010E99B /* GroupTableViewCell.swift in Sources */,
+				3DEA3A2D1E82D6D500185E19 /* ListGroupTableViewCell.swift in Sources */,
 				3D3C3CCC1E682EC6001893E4 /* PersonnesSet.swift in Sources */,
 				DC56D81F1E71795A00BA7C72 /* DateManager.swift in Sources */,
 				DC4FAB5C1E5DEABA00BC0745 /* Personne.swift in Sources */,

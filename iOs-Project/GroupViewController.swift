@@ -37,15 +37,22 @@ class GroupViewController: UIViewController, UITableViewDataSource, UITableViewD
     */
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
-        let cell = self.Groups.dequeueReusableCell(withIdentifier: "groupCell", for: indexPath) as! GroupTableViewCell
-        //get the msg datas from the fetched msg
-        let groups = self.groupSet.getGroups().object(at: indexPath)
-        cell.group.text = groups.name
-        return cell
+        
 
-    }
+        let groups = self.groupSet.getGroupsByUser(person: Session.getSession())
+        
+        
+            let cell = self.Groups.dequeueReusableCell(withIdentifier: "groupCell", for: indexPath) as! ListGroupTableViewCell
+
+        //get the msg datas from the fetched msg
+        
+        cell.group.text =  groups[indexPath.row].name
+        return cell
+        }
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        return GroupesSet.getNumbersOfMessages()
+        let groups = self.groupSet.getGroupsByUser(person: Session.getSession())
+        return groups.count
     }
 }
