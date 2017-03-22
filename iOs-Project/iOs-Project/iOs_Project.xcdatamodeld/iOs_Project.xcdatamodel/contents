@@ -2,8 +2,8 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16D32" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Groupe" representedClassName="Groupe" syncable="YES" codeGenerationType="class">
         <attribute name="dateCreation" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="titre" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="concerner" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Personne" inverseName="appartenir" inverseEntity="Personne" syncable="YES"/>
         <relationship name="contenir" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Message" inverseName="concerner" inverseEntity="Message" syncable="YES"/>
     </entity>
@@ -36,7 +36,7 @@
         <relationship name="contient" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Personne" inverseName="promo" inverseEntity="Personne" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Groupe" positionX="-450" positionY="-63" width="128" height="118"/>
+        <element name="Groupe" positionX="-450" positionY="-63" width="128" height="120"/>
         <element name="Message" positionX="-488" positionY="99" width="128" height="135"/>
         <element name="Personne" positionX="-702" positionY="54" width="128" height="253"/>
         <element name="Promo" positionX="-488" positionY="270" width="128" height="75"/>

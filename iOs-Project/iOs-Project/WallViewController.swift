@@ -290,7 +290,16 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBAction func myProfileAction(_ sender: Any) {
         self.performSegue(withIdentifier: profileSegueId, sender: self)
     }
+    
+    let groupListSegue="groupListSegue"
 
+    /// Go to the groupList page
+    ///
+    /// - Parameter sender: who send the action
+    @IBAction func myGroupsAction(_ sender: Any) {
+        self.performSegue(withIdentifier: groupListSegue, sender: self)
+    }
+    
     
     /// Send an image
     ///
@@ -303,7 +312,7 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
     }
     
-    
+
     
 
     
