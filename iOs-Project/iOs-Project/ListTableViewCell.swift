@@ -9,10 +9,13 @@
 import UIKit
 
 class ListTableViewCell: UITableViewCell {
-
-
-    @IBOutlet weak var prenom: UILabel!
+    
+    // MARK : - Outlets
+    
     @IBOutlet weak var nom: UILabel!
+    @IBOutlet weak var prenom: UILabel!
+    
+    // MARK: - Cell methods
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,4 +28,5 @@ class ListTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    
 }

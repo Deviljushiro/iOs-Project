@@ -37,6 +37,19 @@ class PersonnesSet {
         }
     }
     
+    /// Initialize the messages by fetching according to a group
+    ///
+    /// - Parameter group: messages's group
+    init(promo: Promo){
+        personsFetched = valueForPersonFetched(promo: promo)
+        do {
+            try personsFetched.performFetch()
+        }
+        catch let error as NSError{
+            fatalError("failed to get students\(error)")
+        }
+    }
+    
     // MARK: - Help methods
 
     /// Re-perform the fetch for the NSFetchResult
@@ -49,6 +62,18 @@ class PersonnesSet {
         }
         
     }
+    
+    /// Give a fetchResultController value to personFetched according to a promo
+    ///
+    /// - Parameter promo: group we want to get the students
+    /// - Returns: NSFetchResultController of the promo's students
+    func valueForPersonFetched(promo: Promo) -> NSFetchedResultsController<Personne> {
+        request.sortDescriptors = [NSSortDescriptor(key:#keyPath(Personne.nom),ascending:true)]
+        request.predicate = NSPredicate(format: "promo == %@", promo)
+        let fetchResultController = NSFetchedResultsController(fetchRequest: self.request, managedObjectContext: CoreDataManager.getContext(), sectionNameKeyPath: nil, cacheName: nil)
+        return fetchResultController
+    }
+
     
     // MARK: - Getters
     

@@ -53,16 +53,6 @@ class ProfileViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    // MARK: - Person data management
-    
-    /// Save an existing person
-    func save(){
-        //get context
-        if let error = CoreDataManager.save(){
-            DialogBoxHelper.alert(view: self, error: error)
-        }
-    }
-    
     
     // MARK: - Action
     
@@ -77,12 +67,12 @@ class ProfileViewController: UIViewController {
     
     /// When validation from the edit profile page, save and refresh
     ///
-    /// - Parameter segue: segue where it happens
+    /// - Parameter segue: segue where it comes from
+
     @IBAction func unwindToPersonAfterEditing(segue: UIStoryboardSegue) {
-        self.save()
+        CoreDataManager.save()
         self.viewDidLoad()
     }
-
     
     // MARK: - Navigation
      

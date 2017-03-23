@@ -79,7 +79,7 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let msg = self.msgFetched.getMessages().object(at: indexPath)
         cell.sendDate.text = msg.dateEnvoi
         cell.body?.text = msg.contenu
-        cell.sender.text = msg.ecritPar?.pseudo
+        cell.username.setTitle(msg.ecritPar?.pseudo, for: .normal)
         cell.senderPic.image = UIImage(data: msg.ecritPar!.photo as! Data)
         if let bimage = msg.image {  //the image isn't empty
             if let image = UIImage(data: bimage as Data){
@@ -288,18 +288,22 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
     ///
     /// - Parameter sender: who send the action
     @IBAction func myProfileAction(_ sender: Any) {
-        self.performSegue(withIdentifier: profileSegueId, sender: self)
+        self.performSegue(withIdentifier: self.profileSegueId, sender: self)
     }
-    
-    let groupListSegue="groupListSegue"
 
     /// Go to the groupList page
     ///
     /// - Parameter sender: who send the action
     @IBAction func myGroupsAction(_ sender: Any) {
-        self.performSegue(withIdentifier: groupListSegue, sender: self)
+        self.performSegue(withIdentifier: self.groupListSegueId, sender: self)
     }
     
+    /// Go to the profile of the sender
+    ///
+    /// - Parameter sender: who send the action
+    @IBAction func personProfileAction(_ sender: Any) {
+        self.performSegue(withIdentifier: self.personProfileSegueId, sender: self)
+    }
     
     /// Send an image
     ///
@@ -309,16 +313,22 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
         picker.sourceType = .photoLibrary
         picker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
         present(picker, animated: true, completion: nil)
-
     }
     
-
+    /// When comes from the profile page, save and refresh the updated students
+    ///
+    /// - Parameter segue: segue where it comes from
+    @IBAction func unwindToPersonAfterProfile(segue: UIStoryboardSegue) {
+        CoreDataManager.save()
+        self.viewDidLoad()
+    }
     
-
     
     // MARK: - Navigation
     
     let profileSegueId = "myProfileSegue"
+    let groupListSegueId = "groupListSegue"
+    let personProfileSegueId = "personProfileSegue"
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -328,6 +338,14 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
             let profileViewController = segue.destination as! ProfileViewController
             profileViewController.person = Session.getSession()
         }
+            //by clicking on a username
+        if segue.identifier == self.personProfileSegueId {
+            if let indexPath = self.Messages.indexPathForSelectedRow {
+                let profileViewController = segue.destination as! ProfileViewController
+                profileViewController.person = self.msgFetched.getMessages().object(at: indexPath).ecritPar
+            }
+        }
+
     }
     
 

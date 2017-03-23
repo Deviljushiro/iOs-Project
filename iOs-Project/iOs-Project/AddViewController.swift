@@ -60,7 +60,7 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
     /// - Parameters:
     ///   - picker: picker which has to pick image
     ///   - info: about finish picking media
-    @nonobjc func imagePickerController(_ picker: UIImagePickerController,
+    func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [String : AnyObject])
     {
         if let chosenImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
@@ -158,15 +158,18 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
         let promo = self.promotion.text ?? ""
         let pwd2 = self.confirmMotDePasse.text ?? ""
         
+        //check input
+        guard firstname != "" && lastname != "" && pwd != "" && pwd2 != "" else {
+            DialogBoxHelper.alert(view: self, WithTitle: "Inscription impossible", andMsg: "Informations manquantes")
+            return
+        }
         //check password
         guard pwd == pwd2 else {
             DialogBoxHelper.alert(view: self, WithTitle: "Inscription impossible", andMsg: "Mots de passe non conformes")
             return
         }
-        
         //save it
         Personne.createNewPersonne(firstName: firstname, name: lastname, tel: tel, city: city, pwd: pwd, image: imageData, isStudent: isStudent, isTeacher:  isTeacher, isSecretary: isSecretary, isRespo: isRespo, promo: promo)
-        self.performSegue(withIdentifier: "saveSegue", sender: self)
     }
 
     

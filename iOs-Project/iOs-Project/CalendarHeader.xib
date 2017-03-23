@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="CalendarHeader" customModule="iOs_Project" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="610" height="130"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="s4p-Ru-1Xf">
+                    <rect key="frame" x="20" y="48.5" width="570" height="73.5"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lundi" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vn2-ab-2BF">
+                            <rect key="frame" x="0.0" y="0.0" width="70.5" height="73.5"/>
+                            <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mardi" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SMS-5A-3XD">
+                            <rect key="frame" x="83.5" y="0.0" width="70" height="73.5"/>
+                            <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mercredi" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nLn-cx-Cxg">
+                            <rect key="frame" x="166.5" y="0.0" width="70.5" height="73.5"/>
+                            <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jeudi" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5lH-7A-aWJ">
+                            <rect key="frame" x="250" y="0.0" width="70" height="73.5"/>
+                            <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vendredi" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SnS-aS-6e1">
+                            <rect key="frame" x="333" y="0.0" width="70.5" height="73.5"/>
+                            <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Samedi" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XN9-jL-CgA">
+                            <rect key="frame" x="416.5" y="0.0" width="70" height="73.5"/>
+                            <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dimanche" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0et-Lp-hwb">
+                            <rect key="frame" x="499.5" y="0.0" width="70.5" height="73.5"/>
+                            <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="nLn-cx-Cxg" firstAttribute="width" secondItem="Vn2-ab-2BF" secondAttribute="width" id="2Aj-1B-QQb"/>
+                        <constraint firstItem="SMS-5A-3XD" firstAttribute="width" secondItem="Vn2-ab-2BF" secondAttribute="width" id="6vZ-VM-DVb"/>
+                        <constraint firstItem="5lH-7A-aWJ" firstAttribute="width" secondItem="Vn2-ab-2BF" secondAttribute="width" id="Dnw-yg-Ger"/>
+                        <constraint firstItem="XN9-jL-CgA" firstAttribute="width" secondItem="Vn2-ab-2BF" secondAttribute="width" id="QLm-4B-OJc"/>
+                        <constraint firstItem="SnS-aS-6e1" firstAttribute="width" secondItem="Vn2-ab-2BF" secondAttribute="width" id="jS9-ca-Myl"/>
+                        <constraint firstItem="0et-Lp-hwb" firstAttribute="width" secondItem="Vn2-ab-2BF" secondAttribute="width" id="l7I-vf-biv"/>
+                    </constraints>
+                </stackView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Guk-xz-Qtx">
+                    <rect key="frame" x="0.0" y="0.0" width="610" height="40"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Month" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mCo-XZ-ZrO">
+                            <rect key="frame" x="281.5" y="8" width="48.5" height="24.5"/>
+                            <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="9bD-MM-Ycq"/>
+                        <constraint firstItem="mCo-XZ-ZrO" firstAttribute="centerY" secondItem="Guk-xz-Qtx" secondAttribute="centerY" id="GQD-eX-fhT"/>
+                        <constraint firstItem="mCo-XZ-ZrO" firstAttribute="centerX" secondItem="Guk-xz-Qtx" secondAttribute="centerX" id="orY-ow-I6c"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="s4p-Ru-1Xf" secondAttribute="trailing" constant="20" id="AzO-qR-mx2"/>
+                <constraint firstItem="s4p-Ru-1Xf" firstAttribute="top" secondItem="Guk-xz-Qtx" secondAttribute="bottom" constant="8.5" id="BFy-wh-K5L"/>
+                <constraint firstItem="Guk-xz-Qtx" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="EKE-fX-hnu"/>
+                <constraint firstItem="s4p-Ru-1Xf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="NR3-kD-yQH"/>
+                <constraint firstAttribute="bottom" secondItem="s4p-Ru-1Xf" secondAttribute="bottom" constant="8" id="asu-nO-H50"/>
+                <constraint firstAttribute="trailing" secondItem="Guk-xz-Qtx" secondAttribute="trailing" id="l7M-tZ-Q7i"/>
+                <constraint firstItem="Guk-xz-Qtx" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="yg1-xF-Gqv"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="month" destination="mCo-XZ-ZrO" id="qJd-t2-PRl"/>
+            </connections>
+            <point key="canvasLocation" x="89" y="-428"/>
+        </view>
+    </objects>
+</document>

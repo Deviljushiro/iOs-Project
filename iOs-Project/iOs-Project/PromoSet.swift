@@ -20,7 +20,7 @@ class PromoSet {
     // MARK: - Variables
     
     fileprivate lazy var promoFetched : NSFetchedResultsController<Promo> = {
-        self.request.sortDescriptors = [NSSortDescriptor(key:#keyPath(Promo.annee),ascending:true)]
+        self.request.sortDescriptors = [NSSortDescriptor(key:#keyPath(Promo.annee),ascending:false)]
         let fetchResultController = NSFetchedResultsController(fetchRequest: self.request, managedObjectContext: CoreDataManager.getContext(), sectionNameKeyPath: nil, cacheName: nil)
         return fetchResultController
     }()
@@ -28,6 +28,19 @@ class PromoSet {
     // MARK : - Initialization
     
     init(){
+        do {
+            try promoFetched.performFetch()
+        }
+        catch let error as NSError{
+            fatalError("failed to get promos\(error)")
+        }
+    }
+    
+    // MARK : - Help methods
+    
+    
+    /// Re perform the fetch
+    func refreshPromos() {
         do {
             try promoFetched.performFetch()
         }
@@ -59,6 +72,13 @@ class PromoSet {
             return promos[0]
         }
         
+    }
+    
+    /// Get all the promos
+    ///
+    /// - Returns: the promo fetched result
+    func getPromos() -> NSFetchedResultsController<Promo> {
+        return self.promoFetched
     }
     
 }

@@ -51,7 +51,6 @@ class PromoViewController: UIViewController {
         }
         //create the new promo
         Promo.createNewPromo(year: year)
-        self.performSegue(withIdentifier: "saveSegue", sender: self)
     }
 
     /*
