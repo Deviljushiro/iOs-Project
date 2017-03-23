@@ -80,15 +80,15 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy MM dd"
         
-        let startDate = formatter.date(from: "2016 02 01")! // You can use date generated from a formatter
-        let endDate = Date()                                // You can also use dates created from this function
+        let startDate = DateManager.currentDate() // You can use date generated from a formatter
+        let endDate = startDate.addingTimeInterval(31104000)                         // You can also use dates created from this function
         let parameters = ConfigurationParameters(startDate: startDate,
                                                  endDate: endDate,
                                                  numberOfRows: 6, // Only 1, 2, 3, & 6 are allowed
             calendar: Calendar.current,
             generateInDates: .forAllMonths,
             generateOutDates: .tillEndOfGrid,
-            firstDayOfWeek: .sunday)
+            firstDayOfWeek: .monday)
         return parameters
     }
     
@@ -178,7 +178,7 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
     ///
     /// - Parameters:
     ///   - calendar: the calendar type
-    ///   - range: header range
+    ///   - range: time range
     ///   - month: calendar's month
     /// - Returns: the height
     func calendar(_ calendar: JTAppleCalendarView, sectionHeaderSizeFor range: (start: Date, end: Date), belongingTo month: Int) -> CGSize {
@@ -191,11 +191,11 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
     /// - Parameters:
     ///   - calendar: calendar type
     ///   - header: related header
-    ///   - range: header range
-    ///   - identifier: header id
+    ///   - range: time range
+    //   - identifier: header id
     func calendar(_ calendar: JTAppleCalendarView, willDisplaySectionHeader header: JTAppleHeaderView, range: (start: Date, end: Date), identifier: String) {
         let headerCell = (header as? CalendarHeader)
-        headerCell?.month.text = "MARS"
+        headerCell?.month.text = DateManager.getMonth(date: range.start)
     }
     
     // MARK: - Actions

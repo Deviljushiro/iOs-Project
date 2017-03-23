@@ -38,12 +38,6 @@ class DateManager {
     /// - Returns: the current date
     class func currentDateString() -> String{
         let date = NSDate()
-        /**let calendar = NSCalendar.current
-        let dateNeeded = calendar.dateComponents([.year, .month,.day], from: date as Date)
-        let year : String = String(format: "%04d", dateNeeded.year!)
-        let month = String(format: "%02d", dateNeeded.month!)
-        let day = String(format:"%02d",dateNeeded.day!)
-        let result :String = day+"/"+month+"/"+year**/
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd' 'HH:mm"
         let dateString = dateFormatter.string(from: date as Date)
@@ -51,5 +45,16 @@ class DateManager {
     
     }
     
+    /// Get the date's month
+    ///
+    /// - Parameter date: related date
+    /// - Returns: the month in string
+    class func getMonth(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMMM"
+        dateFormatter.locale = NSLocale(localeIdentifier: "FR") as Locale!
+        let dateString = dateFormatter.string(from: date as Date)
+        return dateString
+    }
     
 }
