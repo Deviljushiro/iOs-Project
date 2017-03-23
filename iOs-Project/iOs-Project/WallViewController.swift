@@ -22,7 +22,8 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
     // MARK: - Variables
     
     var msgFetched : MessagesSet = MessagesSet()
-    var sentImage : UIImage? = nil
+    var sentImage : UIImage? = nil  //To send image via message
+    var selectedPerson: Personne? = nil //To see sender's profile
     
     // MARK: - Constants
     
@@ -301,8 +302,8 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
     /// Go to the profile of the sender
     ///
     /// - Parameter sender: who send the action
-    @IBAction func personProfileAction(_ sender: Any) {
-        self.performSegue(withIdentifier: self.personProfileSegueId, sender: self)
+    @IBAction func personProfileAction(_ sender: UIButton) {
+        self.performSegue(withIdentifier: self.personProfileSegueId, sender: sender)
     }
     
     /// Send an image
@@ -340,10 +341,10 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
             //by clicking on a username
         if segue.identifier == self.personProfileSegueId {
-            if let indexPath = self.Messages.indexPathForSelectedRow {
-                let profileViewController = segue.destination as! ProfileViewController
-                profileViewController.person = self.msgFetched.getMessages().object(at: indexPath).ecritPar
-            }
+            //Get the selected person by the sender UIButton
+            self.selectedPerson = PersonnesSet.getPersonsByUsername(withUsername: ((sender as AnyObject).titleLabel??.text)!)
+            let profileViewController = segue.destination as! ProfileViewController
+            profileViewController.person = self.selectedPerson
         }
 
     }

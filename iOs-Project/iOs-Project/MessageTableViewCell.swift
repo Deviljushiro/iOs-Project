@@ -16,6 +16,8 @@ class MessageTableViewCell: UITableViewCell {
     @IBOutlet weak var body: UITextView!
     @IBOutlet weak var username: UIButton!
     
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
