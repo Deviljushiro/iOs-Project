@@ -15,17 +15,19 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     // MARK: - Variables
     
     var indexPathForProfile: IndexPath? = nil
-    var persons: PersonnesSet = PersonnesSet()
+    var promos: PromoSet = PromoSet()
     
     // MARK: - Outlet
     
-    @IBOutlet weak var Personnes: UITableView!
+    @IBOutlet weak var Promos: UITableView!
     
     // MARK: - View Loading
     
     /// What the view has to load before
     override func viewDidLoad() {
         super.viewDidLoad()
+        //delegate the persons fetched and refresh the list
+        self.promos.getPromos().delegate = self
     }
 
     /// Tell if view receive a warning
@@ -33,25 +35,6 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
-    // MARK: - Person data management
-    
-    /*
-    /// create a new person and save it
-    ///
-    /// - Parameters:
-    ///     - nom: lastname of the person
-    ///     - prenom: firstname of the person
-    func saveNewPerson(withLastName nom: String, andFirstname prenom: String, andTel tel: String, andCity ville: String, andPwd mdp: String, andImage image: NSData){
-        let person = Personne.createNewPersonne(firstName: prenom, name: nom, tel: tel, city: ville, pwd: mdp, image: image)
-        if let error = CoreDataManager.save() {
-            DialogBoxHelper.alert(view: self, error: error)
-        }
-        else {
-            self.listPersons.addPerson(person: person)
-        }
-    }*/
     
     // MARK: - Action Handler
     
@@ -61,7 +44,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     ///   - action: type of action
     ///   - indexPath: indexPath of the object
     func deleteHandlerAction(action: UITableViewRowAction, indexPath: IndexPath) {
-        let person = self.persons.getPersons().object(at: indexPath)
+        let person = self.promos.getPromos().object(at: indexPath)
         CoreDataManager.context.delete(person)
     }
     
@@ -75,10 +58,9 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     ///   - indexPath: the index of each cell
     /// - Returns: the cell with the defined values
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
-        let cell = self.Personnes.dequeueReusableCell(withIdentifier: "personCell", for: indexPath) as! ListTableViewCell
-        let person = self.persons.getPersons().object(at: indexPath)
-        cell.nom.text = person.nom
-        cell.prenom.text = person.prenom
+        let cell = self.Promos.dequeueReusableCell(withIdentifier: "promoCell", for: indexPath) as! PromoTableViewCell
+        let promo = self.promos.getPromos().object(at: indexPath)
+        cell.promo.text = promo.annee
         return cell
     }
 
@@ -89,7 +71,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     ///   - section: number of lines for each section
     /// - Returns: number of sections
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        guard let section = self.persons.getPersons().sections?[section] else {
+        guard let section = self.promos.getPromos().sections?[section] else {
             fatalError("unexpected section number")
         }
         return section.numberOfObjects
@@ -118,67 +100,61 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         return [delete]
     }
     
-
-    // MARK: - NSFetchResultController delegate protocol
-    
-    /// Start the update of a fetch result
-    ///
-    /// - Parameter controller: fetchresultcontroller
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        self.Personnes.beginUpdates()
-    }
-    
-    /// End the update of a fetch result
-    ///
-    /// - Parameter controller: fetchresultcontroller
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        self.Personnes.endUpdates()
-        CoreDataManager.save()
-    }
-    
-    /// Control the update of the fetch result
-    ///
-    /// - Parameters:
-    ///   - controller: fetchresultcontroller
-    ///   - anObject: object type
-    ///   - indexPath: indexpath of the object
-    ///   - type: type of modification
-    ///   - newIndexPath: if indexpath change
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        switch type{
-        case .delete:
-            if let indexPath = indexPath{
-                self.Personnes.deleteRows(at: [indexPath], with: .automatic)
-            }
-        default:
-            break
-        }
-    }
     
     // MARK: - Action
     
-    
-    /// Go to the Add page
+    /// Go to the registration page
     ///
-    /// - Parameter sender: who send action
-    @IBAction func addAction(_ sender: Any) {
-        self.performSegue(withIdentifier: self.addSegueId, sender: self)
+    /// - Parameter sender: who send the action
+    @IBAction func registrationAction(_ sender: Any) {
+        self.performSegue(withIdentifier: self.registerSegueId, sender: self)
+    }
+    
+    /// Go to the promo add page
+    ///
+    /// - Parameter sender: who send the action
+    @IBAction func promoAction(_ sender: Any) {
+        self.performSegue(withIdentifier: self.promoSegueId, sender: self)
+    }
+    
+    /// Go back to the Wall page
+    ///
+    /// - Parameter sender: who send the action
+    @IBAction func wallAction(_ sender: Any) {
+        self.performSegue(withIdentifier: "wallSegue", sender: self)
     }
     
     
-    /// When datas need to be obtained from the previous page
+    /// Go back to the previous page
     ///
-    /// - Parameter segue: The segue related to the previous page
-    @IBAction func unwindToPersonsListAfterSaving(segue: UIStoryboardSegue){
+    /// - Parameter sender: who send the action
+    @IBAction func backAction(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    /// After adding a new person in the DB, save the context
+    ///
+    /// - Parameter segue: where it comes from
+    @IBAction func unwindPersonsAfterAdd(segue: UIStoryboardSegue) {
+        DialogBoxHelper.alert(view: self, WithTitle: "Inscription réussie")
         CoreDataManager.save()
-        self.Personnes.reloadData()
-        }
-
-
+    }
+    
+    /// After adding a new promo in the DB, save the context and refresh the table
+    ///
+    /// - Parameter segue: where it comes from
+    @IBAction func unwindPromoAfterAdd(segue: UIStoryboardSegue) {
+        DialogBoxHelper.alert(view: self, WithTitle: "Ajout promo réussi")
+        CoreDataManager.save()
+        self.Promos.reloadData()
+        self.viewDidLoad()
+    }
+    
     // MARK: - Navigation
     
-    let profileSegueId = "profileSegue"
-    let addSegueId = "addSegue"
+    let studentSegueId = "studentSegue"
+    let registerSegueId = "registerSegue"
+    let promoSegueId = "promoSegue"
     
     /// prepare to send datas to the profile view ctrler
     ///
@@ -188,10 +164,10 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        if segue.identifier == self.profileSegueId{
-            if let indexPath = self.Personnes.indexPathForSelectedRow {
-                let profileViewController = segue.destination as! ProfileViewController
-                profileViewController.person = self.persons.getPersons().object(at: indexPath)
+        if segue.identifier == self.studentSegueId{
+            if let indexPath = self.Promos.indexPathForSelectedRow {
+                let studentViewController = segue.destination as! StudentViewController
+                studentViewController.promotion = self.promos.getPromos().object(at: indexPath)
             }
         }
     }

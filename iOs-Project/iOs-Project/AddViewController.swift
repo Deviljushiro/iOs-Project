@@ -29,8 +29,12 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
     @IBOutlet weak var image: UIImageView?
     @IBOutlet weak var motDePasse: UITextField!
     @IBOutlet weak var confirmMotDePasse: UITextField!
-    @IBOutlet weak var secretQ: UITextField!
-    @IBOutlet weak var secretA: UITextField!
+    @IBOutlet weak var promotion: UITextField!
+    @IBOutlet weak var studentSwitch: UISwitch!
+    @IBOutlet weak var secretartSwitch: UISwitch!
+    @IBOutlet weak var teachSwitch: UISwitch!
+    @IBOutlet weak var respoSwitch: UISwitch!
+
     
     // MARK: - View loading
 
@@ -129,12 +133,8 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
     /// - Parameter sender: who send action
     @IBAction func saveAction(_ sender: Any) {
         //create the attributes to save the new person
-        let firstname = self.prenomLabel.text ?? ""
-        let lastname = self.nomLabel.text ?? ""
-        let tel = self.telLabel.text ?? ""
-        let city = self.villeLabel.text ?? ""
-        let pwd = self.motDePasse.text ?? ""
-        //let pwd2 = self.confirmMotDePasse.text ?? ""
+        
+        //Image input
         var imageData: NSData
         if let image = self.image?.image {  //the image isn't empty
             imageData = UIImageJPEGRepresentation(image, 1)! as NSData
@@ -142,10 +142,34 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
         else {  //or it's empty
             imageData = UIImageJPEGRepresentation(#imageLiteral(resourceName: "default"), 1)! as NSData
         }
+        
+        //switch input
+        let isStudent = self.studentSwitch.isOn
+        let isTeacher = self.teachSwitch.isOn
+        let isSecretary = self.secretartSwitch.isOn
+        let isRespo = self.respoSwitch.isOn
+        
+        //text input
+        let firstname = self.prenomLabel.text ?? ""
+        let lastname = self.nomLabel.text ?? ""
+        let tel = self.telLabel.text ?? ""
+        let city = self.villeLabel.text ?? ""
+        let pwd = self.motDePasse.text ?? ""
+        let promo = self.promotion.text ?? ""
+        let pwd2 = self.confirmMotDePasse.text ?? ""
+        
+        //check input
+        guard firstname != "" && lastname != "" && pwd != "" && pwd2 != "" else {
+            DialogBoxHelper.alert(view: self, WithTitle: "Inscription impossible", andMsg: "Informations manquantes")
+            return
+        }
+        //check password
+        guard pwd == pwd2 else {
+            DialogBoxHelper.alert(view: self, WithTitle: "Inscription impossible", andMsg: "Mots de passe non conformes")
+            return
+        }
         //save it
-        Personne.createNewPersonne(firstName: firstname, name: lastname, tel: tel, city: city, pwd: pwd, image: imageData)
-        DialogBoxHelper.alert(view: self, WithTitle: "Inscription validée")
-        performSegue(withIdentifier: "backToLoginSegue", sender: self)
+        Personne.createNewPersonne(firstName: firstname, name: lastname, tel: tel, city: city, pwd: pwd, image: imageData, isStudent: isStudent, isTeacher:  isTeacher, isSecretary: isSecretary, isRespo: isRespo, promo: promo)
     }
 
     

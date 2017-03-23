@@ -27,6 +27,8 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var ProfileTel: UILabel!
     @IBOutlet weak var ProfileCityLabel: UILabel!
     @IBOutlet weak var ProfileCity: UILabel!
+    @IBOutlet weak var ProfilePromoLabel: UILabel!
+    @IBOutlet weak var ProfilePromo: UILabel!
 
     // MARK: - View loading
     
@@ -41,6 +43,7 @@ class ProfileViewController: UIViewController {
             self.ProfileTel.text = aperson.tel
             self.ProfileCity.text = aperson.ville
             self.ProfileImage.image = UIImage(data: aperson.photo as! Data)
+            self.ProfilePromo.text = aperson.promo?.annee
         }
     }
 
@@ -48,16 +51,6 @@ class ProfileViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    // MARK: - Person data management
-    
-    /// Save an existing person
-    func save(){
-        //get context
-        if let error = CoreDataManager.save(){
-            DialogBoxHelper.alert(view: self, error: error)
-        }
     }
     
     
@@ -74,12 +67,12 @@ class ProfileViewController: UIViewController {
     
     /// When validation from the edit profile page, save and refresh
     ///
-    /// - Parameter segue: segue where it happens
+    /// - Parameter segue: segue where it comes from
+
     @IBAction func unwindToPersonAfterEditing(segue: UIStoryboardSegue) {
-        self.save()
+        CoreDataManager.save()
         self.viewDidLoad()
     }
-
     
     // MARK: - Navigation
      

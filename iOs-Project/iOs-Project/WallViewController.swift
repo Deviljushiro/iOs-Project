@@ -17,6 +17,7 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var MessageField: UITextView!
     @IBOutlet weak var SideView: UIView!
     @IBOutlet weak var Messages: UITableView!
+    @IBOutlet weak var adminButton: UIButton!
 
     // MARK: - Variables
     
@@ -31,17 +32,30 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         //delegate the picker and messages fetched
         self.msgFetched.getMessages().delegate = self
         picker.delegate = self
         self.msgFetched.refreshMsg()
+        
         //start with the last messages
         if (msgFetched.getNumberMessages()>0) {
           self.Messages.scrollToRow(at: self.getLastIndexPath(), at: .bottom, animated: false)
         }
+        
         //Notifications to manage the keyboard
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
+        //Enable the admin to click on admin button
+        if Session.getSession().isAdmin(){
+            self.adminButton.isEnabled = true
+            self.adminButton.isHidden = false
+        }
+        else{
+            self.adminButton.isEnabled = false
+            self.adminButton.isHidden = true
+        }
     }
     
     
@@ -50,6 +64,7 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
         // Dispose of any resources that can be recreated.
     }
 
+    
     // MARK: - Table view datasource protocol
     
     /// Define the cell of the tableview
@@ -64,7 +79,7 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let msg = self.msgFetched.getMessages().object(at: indexPath)
         cell.sendDate.text = msg.dateEnvoi
         cell.body?.text = msg.contenu
-        cell.sender.text = msg.ecritPar?.pseudo
+        cell.username.setTitle(msg.ecritPar?.pseudo, for: .normal)
         cell.senderPic.image = UIImage(data: msg.ecritPar!.photo as! Data)
         if let bimage = msg.image {  //the image isn't empty
             if let image = UIImage(data: bimage as Data){
@@ -226,7 +241,7 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
     /// - Returns: index path
     func getLastIndexPath() -> IndexPath{
         // First figure out how many sections there are
-        var lastSectionIndex = self.Messages.numberOfSections - 1
+        let lastSectionIndex = self.Messages.numberOfSections - 1
         // Then grab the number of rows in the last section
         let lastRowIndex = self.Messages.numberOfRows(inSection: lastSectionIndex) - 1
         // Now just construct the index path
@@ -257,7 +272,7 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
     /// - Parameter sender: who send the action
     @IBAction func logoutAction(_ sender: Any) {
         Session.destroySession()
-        self.dismiss(animated: true, completion: nil)
+        self.performSegue(withIdentifier: "logoutSegue", sender: self)
     }
     
     
@@ -273,9 +288,22 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
     ///
     /// - Parameter sender: who send the action
     @IBAction func myProfileAction(_ sender: Any) {
-        self.performSegue(withIdentifier: profileSegueId, sender: self)
+        self.performSegue(withIdentifier: self.profileSegueId, sender: self)
     }
 
+    /// Go to the groupList page
+    ///
+    /// - Parameter sender: who send the action
+    @IBAction func myGroupsAction(_ sender: Any) {
+        self.performSegue(withIdentifier: self.groupListSegueId, sender: self)
+    }
+    
+    /// Go to the profile of the sender
+    ///
+    /// - Parameter sender: who send the action
+    @IBAction func personProfileAction(_ sender: Any) {
+        self.performSegue(withIdentifier: self.personProfileSegueId, sender: self)
+    }
     
     /// Send an image
     ///
@@ -285,16 +313,22 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
         picker.sourceType = .photoLibrary
         picker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
         present(picker, animated: true, completion: nil)
-
     }
     
+    /// When comes from the profile page, save and refresh the updated students
+    ///
+    /// - Parameter segue: segue where it comes from
+    @IBAction func unwindToPersonAfterProfile(segue: UIStoryboardSegue) {
+        CoreDataManager.save()
+        self.viewDidLoad()
+    }
     
-    
-
     
     // MARK: - Navigation
     
     let profileSegueId = "myProfileSegue"
+    let groupListSegueId = "groupListSegue"
+    let personProfileSegueId = "personProfileSegue"
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -304,6 +338,14 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
             let profileViewController = segue.destination as! ProfileViewController
             profileViewController.person = Session.getSession()
         }
+            //by clicking on a username
+        if segue.identifier == self.personProfileSegueId {
+            if let indexPath = self.Messages.indexPathForSelectedRow {
+                let profileViewController = segue.destination as! ProfileViewController
+                profileViewController.person = self.msgFetched.getMessages().object(at: indexPath).ecritPar
+            }
+        }
+
     }
     
 

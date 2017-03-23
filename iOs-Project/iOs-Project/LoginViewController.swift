@@ -26,28 +26,18 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
-        self.listPersons = PersonnesSet()
         
+        //create the respo of the section (admin) each time someone use the app on a new device
+        if PersonnesSet.getPersonsByUsername(withUsername: "anne.laurent") == nil {
+            Personne.createNewPersonne(firstName: "anne", name: "laurent", tel: "", city: "montpellier", pwd: "admin", image: UIImageJPEGRepresentation(#imageLiteral(resourceName: "default"), 1)! as NSData, isStudent: false, isTeacher: true, isSecretary: false, isRespo: true, promo: "")
+        }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    // MARK: - Person data management
-    
-    /// Save an existing person
-    func save(){
-        //get context
-        if let error = CoreDataManager.save(){
-            DialogBoxHelper.alert(view: self, error: error)
-        }
-    }
-    
-
 
     
     // MARK: - Action
@@ -62,31 +52,24 @@ class LoginViewController: UIViewController {
             return
         }
         let res = PersonnesSet.getPersonsByUsername(withUsername: user)
-        if res.count < 1 {
+        if res == nil {
             DialogBoxHelper.alert(view: self, WithTitle: "Connection impossible", andMsg: "Identifiant inconnu")
             return
         }
         else {
-            if res[0].mdp != pwd {
+            if res!.mdp != pwd {
                 DialogBoxHelper.alert(view: self, WithTitle: "Connection impossible", andMsg: "Mot de passe erroné")
                 return
             }
             else {
-                Session.createSession(person: res[0])
+                //create a Session with the first value of the result
+                Session.createSession(person: res!)
               //  if Session.getSession() != nil{
                     self.performSegue(withIdentifier: "loginSegue", sender: self)
              //   }
             }
             
         }
-    }
-    
-
-    /// Go to the registration Segue
-    ///
-    /// - Parameter sender: who send the action
-    @IBAction func registrationAction(_ sender: Any) {
-        self.performSegue(withIdentifier: "registerSegue", sender: self)
     }
     
     
