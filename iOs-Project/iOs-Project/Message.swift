@@ -12,22 +12,8 @@ import UIKit
 
 extension Message {
     
-    // MARK: - Methods
-    
-    /// Get the number of message in a set
-    ///
-    /// - Returns: how many messages are in the set
-    static func getNumbersOfMessages()-> Int{
-        var msgs: [Message] = []
-        let context = CoreDataManager.getContext()
-        let request : NSFetchRequest<Message> = Message.fetchRequest()
-        do {
-            try msgs = context.fetch(request)
-        } catch let error as NSError {
-            fatalError("failed to get number of messages\(error)")
-        }
-        return msgs.count
-    }
+
+    // MARK: - CRUD
     
     @discardableResult
     /// Create a new message in the DB
@@ -48,6 +34,23 @@ extension Message {
         msg.image = image
         msg.ecritPar = person
         CoreDataManager.save()
+    }
+    
+    // MARK: - Help Methods
+    
+    /// Get the number of message in a set
+    ///
+    /// - Returns: how many messages are in the set
+    static func getNumbersOfMessages()-> Int{
+        var msgs: [Message] = []
+        let context = CoreDataManager.getContext()
+        let request : NSFetchRequest<Message> = Message.fetchRequest()
+        do {
+            try msgs = context.fetch(request)
+        } catch let error as NSError {
+            fatalError("failed to get number of messages\(error)")
+        }
+        return msgs.count
     }
     
     // MARK: - Increment tools

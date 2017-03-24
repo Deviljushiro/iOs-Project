@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class WallViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, NSFetchedResultsControllerDelegate {
+class WallViewController: KeyboardViewController, UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, NSFetchedResultsControllerDelegate {
     
     // MARK: - Outlets
     
@@ -44,10 +44,6 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
           self.Messages.scrollToRow(at: self.getLastIndexPath(), at: .bottom, animated: false)
         }
         
-        //Notifications to manage the keyboard
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-        
         //Enable the admin to click on admin button
         if Session.getSession().isAdmin(){
             self.adminButton.isEnabled = true
@@ -59,7 +55,7 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
     
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -135,28 +131,19 @@ class WallViewController: UIViewController, UITableViewDataSource, UITableViewDe
         MessageField = nil
     }
     
-    // MARK : - Keyboard
+
+    // MARK: - Keyboard overriding
     
-    /// Size the keyboard and scroll the page according to it
+    /// Size the keyboard and scroll the page according to this message page
     ///
     /// - Parameter notification: notif which called the method
-    func keyboardWillShow(notification: NSNotification) {
+    override func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            if (self.MessageField?.frame.origin.y)! >= keyboardSize.height {
-                self.view.frame.origin.y = keyboardSize.height - (self.MessageField?.frame.origin.y)!
-            } else {
-                self.view.frame.origin.y = 0
+            if self.view.frame.origin.y == 0 {
+                self.view.frame.origin.y -= keyboardSize.height
             }
         }
     }
-    
-    /// Keyboard disappear
-    ///
-    /// - Parameter notification: notif which called the method
-    func keyboardWillHide(notification: NSNotification) {
-        self.view.frame.origin.y = 0
-    }
-
 
 
     // MARK: - NSFetchResultController delegate protocol

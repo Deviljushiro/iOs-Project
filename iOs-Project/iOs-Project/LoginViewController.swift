@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class LoginViewController: UIViewController {
+class LoginViewController: KeyboardViewController {
     
     // MARK: - Variables
     

@@ -101,6 +101,49 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     
+    // MARK: - NSFetchResultController delegate protocol
+    
+    /// Start the update of a fetch result
+    ///
+    /// - Parameter controller: fetchresultcontroller
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        self.Promos.beginUpdates()
+    }
+    
+    /// End the update of a fetch result
+    ///
+    /// - Parameter controller: fetchresultcontroller
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        self.Promos.endUpdates()
+        CoreDataManager.save()
+        self.Promos.reloadData()
+        self.viewDidLoad()
+    }
+    
+    /// Control the update of the fetch result
+    ///
+    /// - Parameters:
+    ///   - controller: fetchresultcontroller
+    ///   - anObject: object type
+    ///   - indexPath: indexpath of the object
+    ///   - type: type of modification
+    ///   - newIndexPath: if indexpath change
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type{
+        case .delete:
+            if let indexPath = indexPath{
+                self.Promos.deleteRows(at: [indexPath], with: .automatic)
+            }
+        case .insert:
+            if let newIndexPath = newIndexPath {
+                self.Promos.insertRows(at: [newIndexPath], with: .fade)
+            }
+        default:
+            break
+        }
+    }
+    
+    
     // MARK: - Action
     
     /// Go to the registration page
@@ -137,14 +180,6 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     /// - Parameter segue: where it comes from
     @IBAction func unwindPersonsAfterAdd(segue: UIStoryboardSegue) {
         DialogBoxHelper.alert(view: self, WithTitle: "Inscription réussie")
-        CoreDataManager.save()
-    }
-    
-    /// After adding a new promo in the DB, save the context and refresh the table
-    ///
-    /// - Parameter segue: where it comes from
-    @IBAction func unwindPromoAfterAdd(segue: UIStoryboardSegue) {
-        DialogBoxHelper.alert(view: self, WithTitle: "Ajout promo réussi")
         CoreDataManager.save()
         self.Promos.reloadData()
         self.viewDidLoad()

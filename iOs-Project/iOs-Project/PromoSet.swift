@@ -25,7 +25,7 @@ class PromoSet {
         return fetchResultController
     }()
 
-    // MARK : - Initialization
+    // MARK: - Initialization
     
     init(){
         do {
@@ -36,7 +36,7 @@ class PromoSet {
         }
     }
     
-    // MARK : - Help methods
+    // MARK: - Help methods
     
     
     /// Re perform the fetch
@@ -49,8 +49,25 @@ class PromoSet {
         }
     }
     
+    /// Check if a promo already exists
+    ///
+    /// - Parameter year: id of the promo we want to check
+    /// - Returns: TRUE if it exists, else FALSE
+    class func exist(year: String) -> Bool {
+        var promos: [Promo] = []
+        let request : NSFetchRequest<Promo> = Promo.fetchRequest()
+        request.predicate = NSPredicate(format: "annee == %@", year)
+        do {
+            try promos = CoreDataManager.context.fetch(request)
+        } catch let error as NSError {
+            fatalError("failed to get promo by year=\(year): \(error)")
+        }
+        return (promos != [])
+
+    }
     
-    //MARK : - Getters
+    
+    //MARK: - Getters
     
     /// Get the promo according to a specific year
     ///

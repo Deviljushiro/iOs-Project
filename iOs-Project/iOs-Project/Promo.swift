@@ -13,7 +13,7 @@ import UIKit
 extension Promo {
     
     
-    // MARK : - CRUD
+    // MARK: - CRUD
     
     @discardableResult
     /// Create a new promo in the DB

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EditProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
+class EditProfileViewController: KeyboardViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
     // MARK: - Constant
     
@@ -52,9 +52,6 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         //to tap the image
         let tapImage = UITapGestureRecognizer(target: self, action: #selector(self.changeImage))
         self.EditProfileImage.addGestureRecognizer(tapImage)
-        //notif for the kayboard management
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
     
@@ -89,29 +86,6 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     func textFieldDidEndEditing(textfield: UITextField){
         activeTextField = UITextField()
     }
-    
-    // MARK : - Keyboard
-    
-    /// Size the keyboard and scroll the page according to it
-    ///
-    /// - Parameter notification: notif which called the method
-    func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            if self.activeTextField.frame.origin.y >= keyboardSize.height {
-                self.view.frame.origin.y = keyboardSize.height - self.activeTextField.frame.origin.y
-            } else {
-                self.view.frame.origin.y = 0
-            }
-        }
-    }
-    
-    /// Keyboard disappear
-    ///
-    /// - Parameter notification: notif which called the method
-    func keyboardWillHide(notification: NSNotification) {
-        self.view.frame.origin.y = 0
-    }
-    
 
     //MARK: - Image delegates
     

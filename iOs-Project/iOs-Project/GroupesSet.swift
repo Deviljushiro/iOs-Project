@@ -25,7 +25,7 @@ class GroupesSet{
         return fetchResultController
     }()
     
-    // MARK : - Initialization
+    // MARK: - Initialization
     
     /// Initialize the messages by fetching all msg in the DB
     init(){

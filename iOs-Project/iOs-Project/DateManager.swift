@@ -57,4 +57,16 @@ class DateManager {
         return dateString
     }
     
+    /// Get the date's year
+    ///
+    /// - Parameter date: related date
+    /// - Returns: the year in string
+    class func getYear(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "Y"
+        dateFormatter.locale = NSLocale(localeIdentifier: "FR") as Locale!
+        let dateString = dateFormatter.string(from: date as Date)
+        return dateString
+    }
+    
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PromoViewController: UIViewController {
+class PromoViewController: KeyboardViewController {
 
     // MARK : - Outlet
     
@@ -49,8 +49,16 @@ class PromoViewController: UIViewController {
             DialogBoxHelper.alert(view: self, WithTitle: "Création impossible", andMsg: "Année manquante")
             return
         }
-        //create the new promo
-        Promo.createNewPromo(year: year)
+        //check if the promo exists
+        if PromoSet.exist(year: year) {
+            DialogBoxHelper.alert(view: self, WithTitle: "Création impossible", andMsg: "Promotion déjà existante")
+            return
+        }
+        else {
+            //create the new promo
+            Promo.createNewPromo(year: year)
+            self.dismiss(animated: true, completion: nil)
+        }
     }
 
     /*

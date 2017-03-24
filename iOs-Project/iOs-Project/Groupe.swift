@@ -12,6 +12,8 @@ import UIKit
 
 extension Groupe{
     
+    // MARK: - CRUD
+    
     /// Create a new group in the DB
     ///
     /// - Parameters:

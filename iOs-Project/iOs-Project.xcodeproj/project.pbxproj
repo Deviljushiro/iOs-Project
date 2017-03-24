@@ -20,6 +20,7 @@
 		1E9CBDBF1E842241004BBB6A /* GroupMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9CBDBE1E842241004BBB6A /* GroupMessageViewController.swift */; };
 		1E9CBDC11E842493004BBB6A /* CalendarHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E9CBDC01E842493004BBB6A /* CalendarHeader.xib */; };
 		1E9CBDC31E8424F7004BBB6A /* CalendarHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9CBDC21E8424F7004BBB6A /* CalendarHeader.swift */; };
+		1EA42A251E8555E200FF33F0 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA42A241E8555E200FF33F0 /* KeyboardViewController.swift */; };
 		3D0A15221E8275C90010E99B /* GroupesSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D0A15211E8275C90010E99B /* GroupesSet.swift */; };
 		3D0A15281E828B550010E99B /* Promo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D0A15271E828B550010E99B /* Promo.swift */; };
 		3D25929B1E6D4DBB00AA940D /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D25929A1E6D4DBB00AA940D /* Session.swift */; };
@@ -101,6 +102,7 @@
 		1E9CBDBE1E842241004BBB6A /* GroupMessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupMessageViewController.swift; sourceTree = "<group>"; };
 		1E9CBDC01E842493004BBB6A /* CalendarHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarHeader.xib; sourceTree = "<group>"; };
 		1E9CBDC21E8424F7004BBB6A /* CalendarHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarHeader.swift; sourceTree = "<group>"; };
+		1EA42A241E8555E200FF33F0 /* KeyboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
 		3D0A15211E8275C90010E99B /* GroupesSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupesSet.swift; sourceTree = "<group>"; };
 		3D0A15271E828B550010E99B /* Promo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Promo.swift; sourceTree = "<group>"; };
 		3D25929A1E6D4DBB00AA940D /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
@@ -279,6 +281,7 @@
 				DFED6F8C1E55F2DA00F5C275 /* DialogBoxHelper.swift */,
 				DF52D5AC1E71EEC2001ABB0C /* BasicTools.swift */,
 				3D25929A1E6D4DBB00AA940D /* Session.swift */,
+				1EA42A241E8555E200FF33F0 /* KeyboardViewController.swift */,
 			);
 			name = "Class Helpers";
 			sourceTree = "<group>";
@@ -474,6 +477,7 @@
 				3D25929F1E6D5D8900AA940D /* MessagesSet.swift in Sources */,
 				1E6CF4461E83E0F800B21EEF /* StudentViewController.swift in Sources */,
 				1E6CF4481E83E4A700B21EEF /* PromoTableViewCell.swift in Sources */,
+				1EA42A251E8555E200FF33F0 /* KeyboardViewController.swift in Sources */,
 				1E9CBDBF1E842241004BBB6A /* GroupMessageViewController.swift in Sources */,
 				DC4FAB581E5DE96700BC0745 /* ProfileViewController.swift in Sources */,
 				DFED6F8B1E55F11400F5C275 /* CoreDataManager.swift in Sources */,
