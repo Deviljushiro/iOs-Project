@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
+class AddViewController: KeyboardViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
 
     // MARK: - Constant
     
@@ -41,10 +41,9 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
     /// what the view has to load
     override func viewDidLoad() {
         super.viewDidLoad()
-        picker.delegate = self
+        
         // Do any additional setup after loading the view.
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        picker.delegate = self
     }
 
     /// warning memory
@@ -102,32 +101,10 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
         activeTextField = UITextField()
     }
     
-    // MARK : - Keyboard
-    
-    /// Size the keyboard and scroll the page according to it
-    ///
-    /// - Parameter notification: notif which called the method
-    func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            if self.activeTextField.frame.origin.y >= keyboardSize.height {
-                self.view.frame.origin.y = keyboardSize.height - self.activeTextField.frame.origin.y
-            } else {
-                self.view.frame.origin.y = 0
-            }
-        }
-    }
-    
-    /// Keyboard disappear
-    ///
-    /// - Parameter notification: notif which called the method
-    func keyboardWillHide(notification: NSNotification) {
-        self.view.frame.origin.y = 0
-    }
-
-    
 
     // MARK: - Action
 
+    
     /// Save the person by clicking on "Valider"
     ///
     /// - Parameter sender: who send action
@@ -170,8 +147,8 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
         }
         //save it
         Personne.createNewPersonne(firstName: firstname, name: lastname, tel: tel, city: city, pwd: pwd, image: imageData, isStudent: isStudent, isTeacher:  isTeacher, isSecretary: isSecretary, isRespo: isRespo, promo: promo)
+        self.dismiss(animated: true, completion: nil)
     }
-
     
     
     /// Cancel the registration by clicking on "Annuler"
@@ -181,7 +158,6 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
         self.dismiss(animated: true, completion: nil)
     }
 
-    
     
     /// Ask for a picture by clicking on the "Ajouter une image" button
     ///

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="eN0-4D-HP5">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="eN0-4D-HP5">
     <device id="ipad9_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
@@ -826,7 +826,7 @@
                                 <rect key="frame" x="256" y="717" width="641" height="45"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="send"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" enablesReturnKeyAutomatically="YES"/>
                                 <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES"/>
                             </textView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rcl-aa-0ro">
@@ -1267,8 +1267,7 @@
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="saveAction:" destination="fDa-t7-H0i" eventType="touchUpInside" id="hSI-nc-CEl"/>
-                                            <segue destination="emm-CN-eax" kind="unwind" unwindAction="unwindPersonsAfterAddWithSegue:" id="Xdu-dT-2g5"/>
+                                            <action selector="saveAction:" destination="fDa-t7-H0i" eventType="touchUpInside" id="m2w-bh-2Xf"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o2W-VH-F28">
@@ -1282,7 +1281,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="cancelAction:" destination="fDa-t7-H0i" eventType="touchUpInside" id="9dh-HK-rXK"/>
+                                            <action selector="cancelAction:" destination="fDa-t7-H0i" eventType="touchUpInside" id="DSa-RB-aR6"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1388,7 +1387,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QXv-u6-l1r" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="emm-CN-eax" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="463" y="109"/>
         </scene>
@@ -1431,7 +1429,6 @@
                                 </state>
                                 <connections>
                                     <action selector="saveAction:" destination="ArA-Q6-OHH" eventType="touchUpInside" id="Vsf-X9-7wn"/>
-                                    <action selector="saveAction:" destination="fDa-t7-H0i" eventType="touchUpInside" id="ttP-AG-QBE"/>
                                     <segue destination="rhI-cp-Wu5" kind="unwind" unwindAction="unwindPromoAfterAddWithSegue:" id="RSV-SF-H97"/>
                                 </connections>
                             </button>

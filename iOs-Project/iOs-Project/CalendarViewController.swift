@@ -81,7 +81,8 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
         formatter.dateFormat = "yyyy MM dd"
         
         let startDate = DateManager.currentDate() // You can use date generated from a formatter
-        let endDate = startDate.addingTimeInterval(31104000)                         // You can also use dates created from this function
+        //Scroll to 1 year since today
+        let endDate = startDate.addingTimeInterval(31104000)
         let parameters = ConfigurationParameters(startDate: startDate,
                                                  endDate: endDate,
                                                  numberOfRows: 6, // Only 1, 2, 3, & 6 are allowed
@@ -195,7 +196,8 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
     //   - identifier: header id
     func calendar(_ calendar: JTAppleCalendarView, willDisplaySectionHeader header: JTAppleHeaderView, range: (start: Date, end: Date), identifier: String) {
         let headerCell = (header as? CalendarHeader)
-        headerCell?.month.text = DateManager.getMonth(date: range.start)
+        //Header gets the month and year of the scrolled page
+        headerCell?.month.text = DateManager.getMonth(date: range.start)+"  "+DateManager.getYear(date: range.start)
     }
     
     // MARK: - Actions
