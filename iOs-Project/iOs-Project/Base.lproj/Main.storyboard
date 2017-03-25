@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="eN0-4D-HP5">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="eN0-4D-HP5">
     <device id="ipad9_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
@@ -436,44 +436,63 @@
                                             <action selector="backAction:" destination="hHi-A1-CHE" eventType="touchUpInside" id="Waw-Zu-XUj"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rum-Yu-Mj1">
-                                        <rect key="frame" x="187" y="8" width="44" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rum-Yu-Mj1">
+                                        <rect key="frame" x="183" y="8" width="49" height="37"/>
                                         <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="17"/>
                                         <state key="normal" title="Admin">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="adminAction:" destination="hHi-A1-CHE" eventType="touchUpInside" id="MLH-VI-RPd"/>
+                                            <segue destination="w9q-U9-9hd" kind="presentation" identifier="adminSegue" id="Roq-e1-FWC"/>
+                                        </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oHz-jp-Bxf">
-                                        <rect key="frame" x="-4" y="98" width="70" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oHz-jp-Bxf">
+                                        <rect key="frame" x="8" y="76" width="83" height="37"/>
                                         <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="17"/>
                                         <state key="normal" title="Mon profil">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="myProfileAction:" destination="hHi-A1-CHE" eventType="touchUpInside" id="zkZ-2B-Qdf"/>
+                                            <segue destination="jst-cl-SbP" kind="presentation" identifier="myProfileSegue" id="cII-ca-5pR"/>
+                                        </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gzI-hX-B0O">
-                                        <rect key="frame" x="-4" y="162" width="71" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gzI-hX-B0O" customClass="calendarSegue">
+                                        <rect key="frame" x="8" y="121" width="84" height="37"/>
                                         <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="17"/>
                                         <state key="normal" title="Calendrier">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <segue destination="3db-qW-Fy9" kind="show" id="jHN-mq-gBK"/>
+                                        </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hr1-02-fSb">
-                                        <rect key="frame" x="8" y="286" width="93" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hr1-02-fSb">
+                                        <rect key="frame" x="8" y="166" width="102" height="37"/>
                                         <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="17"/>
-                                        <state key="normal" title="Infos internes">
+                                        <state key="normal" title="Informations">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="infoAction:" destination="hHi-A1-CHE" eventType="touchUpInside" id="WzB-nm-FW1"/>
+                                            <segue destination="Jce-82-HGz" kind="presentation" identifier="infoSegue" id="BT9-A4-4Et"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="rum-Yu-Mj1" secondAttribute="trailing" constant="8" id="3C3-BI-GEx"/>
+                                    <constraint firstItem="gzI-hX-B0O" firstAttribute="top" secondItem="oHz-jp-Bxf" secondAttribute="bottom" constant="8" id="8me-Ck-saZ"/>
                                     <constraint firstItem="sls-mP-Bi1" firstAttribute="leading" secondItem="7xK-nd-Cly" secondAttribute="leading" constant="8" id="9By-Bf-Oz6"/>
+                                    <constraint firstItem="hr1-02-fSb" firstAttribute="top" secondItem="gzI-hX-B0O" secondAttribute="bottom" constant="8" id="AYk-a9-SqJ"/>
+                                    <constraint firstItem="hr1-02-fSb" firstAttribute="leading" secondItem="7xK-nd-Cly" secondAttribute="leading" constant="8" id="H3r-mm-Vo3"/>
                                     <constraint firstAttribute="width" constant="240" id="HEG-cC-Bj0"/>
                                     <constraint firstItem="sls-mP-Bi1" firstAttribute="top" secondItem="7xK-nd-Cly" secondAttribute="top" constant="8" id="Ity-iX-I0p"/>
+                                    <constraint firstItem="oHz-jp-Bxf" firstAttribute="leading" secondItem="7xK-nd-Cly" secondAttribute="leading" constant="8" id="RsB-cH-Hij"/>
+                                    <constraint firstItem="rum-Yu-Mj1" firstAttribute="top" secondItem="7xK-nd-Cly" secondAttribute="top" constant="8" id="YPU-V9-u3T"/>
+                                    <constraint firstItem="oHz-jp-Bxf" firstAttribute="top" secondItem="sls-mP-Bi1" secondAttribute="bottom" constant="8" id="nxc-CT-H1w"/>
+                                    <constraint firstItem="gzI-hX-B0O" firstAttribute="leading" secondItem="7xK-nd-Cly" secondAttribute="leading" constant="8" id="vqs-6H-sc5"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VXm-1f-EgJ">
@@ -486,6 +505,9 @@
                                 <state key="normal" title="Envoyer" backgroundImage="green">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="sendMessage:" destination="hHi-A1-CHE" eventType="touchUpInside" id="kAK-GK-bD1"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="slh-dh-4wF">
                                 <rect key="frame" x="248" y="717" width="40" height="43"/>
@@ -494,6 +516,9 @@
                                     <constraint firstAttribute="height" constant="43" id="Mod-sV-Ctl"/>
                                 </constraints>
                                 <state key="normal" backgroundImage="file"/>
+                                <connections>
+                                    <action selector="addImage:" destination="hHi-A1-CHE" eventType="touchUpInside" id="jmu-ga-mt6"/>
+                                </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="nkl-gx-rRb">
                                 <rect key="frame" x="296" y="719" width="595" height="41"/>
@@ -505,7 +530,7 @@
                                 <rect key="frame" x="240" y="20" width="784" height="691"/>
                                 <color key="backgroundColor" red="0.095633434889999994" green="0.16339810239999999" blue="0.23818005170000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="177" id="aAc-8D-zy9">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="messageCell2" rowHeight="177" id="aAc-8D-zy9" customClass="MessageTableViewCell" customModule="iOs_Project" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="784" height="177"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aAc-8D-zy9" id="kIl-sD-6cu">
@@ -519,12 +544,6 @@
                                                         <constraint firstAttribute="height" constant="56" id="dvr-J1-juh"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qD3-UW-KO1">
-                                                    <rect key="frame" x="72" y="8" width="43" height="27"/>
-                                                    <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="17"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NcD-Cz-bd5">
                                                     <rect key="frame" x="72" y="40" width="472" height="128"/>
                                                     <constraints>
@@ -532,12 +551,6 @@
                                                         <constraint firstAttribute="height" constant="128" id="jIB-qp-XKP"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Lz-EG-iOV">
-                                                    <rect key="frame" x="123" y="11" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" type="italicSystem" pointSize="17"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="cx1-kq-6Lr">
                                                     <rect key="frame" x="72" y="39" width="704" height="137"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -545,26 +558,56 @@
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                     <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES"/>
                                                 </textView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vjp-m9-h1A">
+                                                    <rect key="frame" x="72" y="13" width="57" height="17"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="17" id="awH-Fr-Lbr"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="17"/>
+                                                    <state key="normal" title="Pseudo">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="personProfileAction:" destination="hHi-A1-CHE" eventType="touchUpInside" id="aVt-pN-IhG"/>
+                                                        <segue destination="jst-cl-SbP" kind="presentation" identifier="personProfileSegue" id="svp-ef-0Zp"/>
+                                                    </connections>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Lz-EG-iOV">
+                                                    <rect key="frame" x="137" y="13" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="italicSystem" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" red="0.095633434889999994" green="0.16339810239999999" blue="0.23818005170000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstItem="NcD-Cz-bd5" firstAttribute="leading" secondItem="m3v-u6-8cy" secondAttribute="trailing" constant="8" id="4QD-Ae-PWQ"/>
-                                                <constraint firstItem="cx1-kq-6Lr" firstAttribute="top" secondItem="qD3-UW-KO1" secondAttribute="bottom" constant="4" id="CP6-BW-e3u"/>
-                                                <constraint firstItem="qD3-UW-KO1" firstAttribute="top" secondItem="kIl-sD-6cu" secondAttribute="topMargin" id="JJE-oB-up3"/>
-                                                <constraint firstItem="2Lz-EG-iOV" firstAttribute="top" secondItem="kIl-sD-6cu" secondAttribute="topMargin" constant="3" id="NZR-1e-eGd"/>
-                                                <constraint firstItem="qD3-UW-KO1" firstAttribute="leading" secondItem="m3v-u6-8cy" secondAttribute="trailing" constant="8" id="Vzc-TM-rIq"/>
+                                                <constraint firstItem="2Lz-EG-iOV" firstAttribute="leading" secondItem="Vjp-m9-h1A" secondAttribute="trailing" constant="8" id="4i3-h6-v45"/>
+                                                <constraint firstItem="2Lz-EG-iOV" firstAttribute="top" secondItem="kIl-sD-6cu" secondAttribute="topMargin" constant="5" id="9bG-zs-BfE"/>
+                                                <constraint firstItem="Vjp-m9-h1A" firstAttribute="top" secondItem="kIl-sD-6cu" secondAttribute="topMargin" constant="5" id="AZk-ox-rn7"/>
+                                                <constraint firstItem="Vjp-m9-h1A" firstAttribute="leading" secondItem="m3v-u6-8cy" secondAttribute="trailing" constant="8" id="SGT-Ia-Ftn"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="NcD-Cz-bd5" secondAttribute="bottom" id="YSe-oC-IF6"/>
                                                 <constraint firstItem="cx1-kq-6Lr" firstAttribute="leading" secondItem="m3v-u6-8cy" secondAttribute="trailing" constant="8" id="Ydi-Gm-bcW"/>
                                                 <constraint firstAttribute="bottom" secondItem="cx1-kq-6Lr" secondAttribute="bottom" id="ZaK-wD-Knn"/>
                                                 <constraint firstAttribute="trailing" secondItem="cx1-kq-6Lr" secondAttribute="trailing" constant="8" id="fZ5-Vr-QS6"/>
                                                 <constraint firstItem="m3v-u6-8cy" firstAttribute="top" secondItem="kIl-sD-6cu" secondAttribute="topMargin" id="gOR-S2-AdO"/>
                                                 <constraint firstItem="m3v-u6-8cy" firstAttribute="leading" secondItem="kIl-sD-6cu" secondAttribute="leadingMargin" id="jdA-v5-TJ3"/>
-                                                <constraint firstItem="2Lz-EG-iOV" firstAttribute="leading" secondItem="qD3-UW-KO1" secondAttribute="trailing" constant="8" id="uKV-e3-jII"/>
-                                                <constraint firstItem="NcD-Cz-bd5" firstAttribute="top" secondItem="qD3-UW-KO1" secondAttribute="bottom" constant="4.5" id="zCk-Fk-K9W"/>
+                                                <constraint firstItem="cx1-kq-6Lr" firstAttribute="top" secondItem="2Lz-EG-iOV" secondAttribute="bottom" constant="5" id="l9X-Cl-s6I"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="body" destination="cx1-kq-6Lr" id="9Qd-is-4m9"/>
+                                            <outlet property="msgImage" destination="NcD-Cz-bd5" id="dPf-9M-UCB"/>
+                                            <outlet property="sendDate" destination="2Lz-EG-iOV" id="ggn-Bw-fwz"/>
+                                            <outlet property="senderPic" destination="m3v-u6-8cy" id="cim-7n-p4R"/>
+                                            <outlet property="username" destination="Vjp-m9-h1A" id="ph0-Jx-Vhq"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="hHi-A1-CHE" id="IEO-ov-UdN"/>
+                                    <outlet property="delegate" destination="hHi-A1-CHE" id="Q82-cc-IL0"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -586,6 +629,11 @@
                             <constraint firstItem="slh-dh-4wF" firstAttribute="leading" secondItem="7xK-nd-Cly" secondAttribute="trailing" constant="8" id="zMo-zB-2ue"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="ListMessages" destination="bCr-80-FDm" id="ymz-kV-Lu1"/>
+                        <outlet property="MessageField" destination="nkl-gx-rRb" id="kOD-kO-zbb"/>
+                        <outlet property="adminButton" destination="rum-Yu-Mj1" id="e3M-bd-eKc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yAP-hb-uCa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -664,7 +712,7 @@
                                                 </imageView>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="justified" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IDx-v9-sSQ">
                                                     <rect key="frame" x="306" y="44.5" width="420" height="346.5"/>
-                                                    <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -908,16 +956,8 @@
                                             <segue destination="w9q-U9-9hd" kind="presentation" identifier="adminSegue" id="wf7-Ie-X96"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iDM-lb-DOp">
-                                        <rect key="frame" x="-4" y="106" width="70" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="17"/>
-                                        <state key="normal" title="Mon profil">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4wX-di-F74">
-                                        <rect key="frame" x="3" y="173" width="71" height="30"/>
+                                        <rect key="frame" x="3" y="173" width="93" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="17"/>
                                         <state key="normal" title="Calendrier">
@@ -925,10 +965,18 @@
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EY2-h4-hAt">
-                                        <rect key="frame" x="-5" y="228" width="86" height="30"/>
+                                        <rect key="frame" x="-5" y="228" width="116" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="17"/>
                                         <state key="normal" title="Informations">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iDM-lb-DOp">
+                                        <rect key="frame" x="11" y="76" width="85" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="17"/>
+                                        <state key="normal" title="Mon profil">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
@@ -996,7 +1044,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hQt-S3-fcv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2449" y="-795"/>
+            <point key="canvasLocation" x="2448.6328125" y="-795.3125"/>
         </scene>
         <!--Calendrier-->
         <scene sceneID="12q-Jd-inF">
@@ -1844,7 +1892,9 @@
         <image name="yellow" width="256" height="117"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ceF-nG-IKi"/>
-        <segue reference="3ko-7Z-0yv"/>
+        <segue reference="cII-ca-5pR"/>
+        <segue reference="jHN-mq-gBK"/>
+        <segue reference="BT9-A4-4Et"/>
+        <segue reference="Roq-e1-FWC"/>
     </inferredMetricsTieBreakers>
 </document>

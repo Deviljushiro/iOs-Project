@@ -24,7 +24,7 @@ extension Message {
     ///   - sendDate: of the msg
     ///   - image: of the msg
     /// - Returns: the msg created
-    static func createNewMessage(body: String,image: NSData?,person: Personne){
+    static func createNewMessage(body: String,image: NSData?,person: Personne,group: Groupe?){
         //create a msg
         let msg = Message(context: CoreDataManager.getContext())
         //save datas into the person
@@ -33,6 +33,7 @@ extension Message {
         msg.contenu = body
         msg.image = image
         msg.ecritPar = person
+        msg.concerner = group
         CoreDataManager.save()
     }
     

@@ -28,10 +28,15 @@ class LoginViewController: KeyboardViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        //create the respo of the section (admin) each time someone use the app on a new device
+        //create the default group concerning everybody if it doesn't already exist
+        if GroupesSet.getGroupByName(groupName: "All") == nil {
+            Groupe.createNewGroup(name: "All")
+        }
+        //create the respo of the section (admin) each time someone use the app on a new devic
         if PersonnesSet.getPersonsByUsername(withUsername: "anne.laurent") == nil {
             Personne.createNewPersonne(firstName: "anne", name: "laurent", tel: "", city: "montpellier", pwd: "admin", image: UIImageJPEGRepresentation(#imageLiteral(resourceName: "default"), 1)! as NSData, isStudent: false, isTeacher: true, isSecretary: false, isRespo: true, promo: "")
         }
+
     }
 
     override func didReceiveMemoryWarning() {

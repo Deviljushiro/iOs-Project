@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class GroupViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -16,7 +17,7 @@ class GroupViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     //MARK: - Variables
     
-    var groupSet: GroupesSet = GroupesSet();
+    var groupSet: GroupesSet = GroupesSet(person: Session.getSession());
     
     //MARK: - View loading
     
@@ -34,23 +35,19 @@ class GroupViewController: UIViewController, UITableViewDataSource, UITableViewD
     //MARK: - Table view delegate protocol
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
-        
-        
-        let groups = self.groupSet.getGroupsByUser(person: Session.getSession())
-        
-        
+        let group = self.groupSet.getGroups().object(at: indexPath)
         let cell = self.Groups.dequeueReusableCell(withIdentifier: "groupCell", for: indexPath) as! ListGroupTableViewCell
-        
         //get the msg datas from the fetched msg
-        
-        cell.group.text =  groups[indexPath.row].name
+        cell.group.text = group.name
         return cell
     }
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        let groups = self.groupSet.getGroupsByUser(person: Session.getSession())
-        return groups.count
+        guard let section = self.groupSet.getGroups().sections?[section] else {
+            fatalError("unexpected section number")
+        }
+        return section.numberOfObjects
     }
 
     //MARK: - Actions
@@ -64,15 +61,25 @@ class GroupViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
   
+    let groupMessageSegueId = "groupMessageSegue"
 
-    /*
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
+    
+    /// prepare to send datas to the group message view ctrler
+    ///
+    /// - Parameters:
+    ///   - segue: the related segue to the other view
+    ///   - sender: who send datas
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-    }
-    */
-
-    }
+        if segue.identifier == self.groupMessageSegueId{
+            if let indexPath = self.Groups.indexPathForSelectedRow {
+                let groupMessageViewController = segue.destination as! GroupMessageViewController
+                groupMessageViewController.group = self.groupSet.getGroups().object(at: indexPath)
+            }
+        }
+     }
+    
+}

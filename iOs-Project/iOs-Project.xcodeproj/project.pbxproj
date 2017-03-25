@@ -264,7 +264,6 @@
 				DF0217291E85D9DD00E4511B /* Group Controller */,
 				DF0217231E85D90200E4511B /* Infos Controller */,
 				DCE3FFFC1E51AADC0006D7E5 /* AppDelegate.swift */,
-				1E6CF4411E83DC8900B21EEF /* GroupViewController.swift */,
 				DCE3002D1E51B4FC0006D7E5 /* HomeViewController.swift */,
 				DCE3FFFE1E51AADC0006D7E5 /* ViewController.swift */,
 				1E6CF4431E83DC9800B21EEF /* GroupTableViewCell.swift */,
@@ -338,6 +337,7 @@
 		DF0217291E85D9DD00E4511B /* Group Controller */ = {
 			isa = PBXGroup;
 			children = (
+				1E6CF4411E83DC8900B21EEF /* GroupViewController.swift */,
 				1E9CBDBE1E842241004BBB6A /* GroupMessageViewController.swift */,
 				3DEA3A2C1E82D6D500185E19 /* ListGroupTableViewCell.swift */,
 			);
