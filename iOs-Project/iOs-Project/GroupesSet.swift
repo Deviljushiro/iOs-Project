@@ -48,7 +48,7 @@ class GroupesSet{
     /// - Returns: NSFetchResultController of the promo's students
     func valueForGroupFetched(person: Personne) -> NSFetchedResultsController<Groupe> {
         self.request.sortDescriptors = [NSSortDescriptor(key:#keyPath(Groupe.name),ascending:true)]
-        self.request.predicate = NSPredicate(format: "concerner CONTAINS %@", person)
+        self.request.predicate = NSPredicate(format: "concerner CONTAINS %@ and name != 'All'", person)
         let fetchResultController = NSFetchedResultsController(fetchRequest: self.request, managedObjectContext: CoreDataManager.getContext(), sectionNameKeyPath: nil, cacheName: nil)
         return fetchResultController
     }

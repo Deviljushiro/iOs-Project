@@ -15,6 +15,7 @@ class InfoViewController: UIViewController, UITableViewDelegate, UITableViewData
     //MARK: - Outlets
     
     @IBOutlet weak var Infos: UITableView!
+    @IBOutlet weak var addButton: UIButton!
     
     //MARK: - Variables
     
@@ -28,6 +29,17 @@ class InfoViewController: UIViewController, UITableViewDelegate, UITableViewData
         // Do any additional setup after loading the view.
         self.infos.getInfos().delegate = self
         self.infos.refresh()
+        
+        //Enable the admin to click on add button
+        if Session.getSession().isAdmin(){
+            self.addButton.isEnabled = true
+            self.addButton.isHidden = false
+        }
+        else{
+            self.addButton.isEnabled = false
+            self.addButton.isHidden = true
+        }
+
     }
 
     override func didReceiveMemoryWarning() {

@@ -104,7 +104,7 @@ extension Personne {
     ///
     /// - Returns: True if he is, else False
     func isAdmin() -> Bool {
-        return self.estRespo
+        return (self.estRespo || self.estSecretaire)
     }
     
     

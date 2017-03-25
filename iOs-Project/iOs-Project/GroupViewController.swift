@@ -14,6 +14,7 @@ class GroupViewController: UIViewController, UITableViewDataSource, UITableViewD
     //MARK: - Outlets
     
     @IBOutlet weak var Groups: UITableView!
+    @IBOutlet weak var adminButton: UIButton!
     
     //MARK: - Variables
     
@@ -25,6 +26,17 @@ class GroupViewController: UIViewController, UITableViewDataSource, UITableViewD
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        //Enable the admin to click on admin button
+        if Session.getSession().isAdmin(){
+            self.adminButton.isEnabled = true
+            self.adminButton.isHidden = false
+        }
+        else{
+            self.adminButton.isEnabled = false
+            self.adminButton.isHidden = true
+        }
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -38,7 +50,12 @@ class GroupViewController: UIViewController, UITableViewDataSource, UITableViewD
         let group = self.groupSet.getGroups().object(at: indexPath)
         let cell = self.Groups.dequeueReusableCell(withIdentifier: "groupCell", for: indexPath) as! ListGroupTableViewCell
         //get the msg datas from the fetched msg
-        cell.group.text = group.name
+        if group.name!.hasPrefix("2") { //If this is a promo group under the year 3000
+            cell.group.text = "Promotion "+group.name!
+        }
+        else {
+            cell.group.text = group.name
+        }
         return cell
     }
     
@@ -60,11 +77,27 @@ class GroupViewController: UIViewController, UITableViewDataSource, UITableViewD
         self.dismiss(animated: true, completion: nil)
     }
     
-  
-    let groupMessageSegueId = "groupMessageSegue"
+    /// Go to the session profile page
+    ///
+    /// - Parameter sender: <#sender description#>
+    @IBAction func myProfileAction(_ sender: Any) {
+        self.performSegue(withIdentifier: self.myProfileSegueId, sender: self)
+    }
+    
+    
+    /// Go to the info page
+    ///
+    /// - Parameter sender: <#sender description#>
+    @IBAction func infoAction(_ sender: Any) {
+        self.performSegue(withIdentifier: self.infoSegueId, sender: self)
+    }
 
     // MARK: - Navigation
     
+    let groupMessageSegueId = "groupMessageSegue"
+    let myProfileSegueId = "myProfileSegue"
+    let infoSegueId = "infoSegue"
+
     
     /// prepare to send datas to the group message view ctrler
     ///
@@ -74,6 +107,10 @@ class GroupViewController: UIViewController, UITableViewDataSource, UITableViewD
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == self.myProfileSegueId {
+            let profileViewController = segue.destination as! ProfileViewController
+            profileViewController.person = Session.getSession()
+        }
         if segue.identifier == self.groupMessageSegueId{
             if let indexPath = self.Groups.indexPathForSelectedRow {
                 let groupMessageViewController = segue.destination as! GroupMessageViewController

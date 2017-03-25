@@ -60,7 +60,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cell = self.Promos.dequeueReusableCell(withIdentifier: "promoCell", for: indexPath) as! PromoTableViewCell
         let promo = self.promos.getPromos().object(at: indexPath)
-        cell.promo.text = promo.annee
+        cell.promo.text = "Promotion "+promo.annee!
         return cell
     }
 

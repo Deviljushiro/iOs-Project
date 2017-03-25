@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1E6CF4421E83DC8900B21EEF /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6CF4411E83DC8900B21EEF /* GroupViewController.swift */; };
-		1E6CF4441E83DC9800B21EEF /* GroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6CF4431E83DC9800B21EEF /* GroupTableViewCell.swift */; };
 		1E6CF4461E83E0F800B21EEF /* StudentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6CF4451E83E0F800B21EEF /* StudentViewController.swift */; };
 		1E6CF4481E83E4A700B21EEF /* PromoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6CF4471E83E4A700B21EEF /* PromoTableViewCell.swift */; };
 		1E9CBDB21E840DA1004BBB6A /* JTAppleCalendar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E9CBDB11E840DA1004BBB6A /* JTAppleCalendar.framework */; };
@@ -26,7 +25,6 @@
 		3D25929B1E6D4DBB00AA940D /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D25929A1E6D4DBB00AA940D /* Session.swift */; };
 		3D25929D1E6D596600AA940D /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D25929C1E6D596600AA940D /* Message.swift */; };
 		3D25929F1E6D5D8900AA940D /* MessagesSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D25929E1E6D5D8900AA940D /* MessagesSet.swift */; };
-		3D2592A11E6D6E1C00AA940D /* ListTableViewCellMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2592A01E6D6E1C00AA940D /* ListTableViewCellMessage.swift */; };
 		3D3C3CCC1E682EC6001893E4 /* PersonnesSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D3C3CCB1E682EC6001893E4 /* PersonnesSet.swift */; };
 		3D3C3CCD1E682EC6001893E4 /* PersonnesSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D3C3CCB1E682EC6001893E4 /* PersonnesSet.swift */; };
 		3D806A7D1E7006BA0073C4FA /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D806A7C1E7006BA0073C4FA /* MessageTableViewCell.swift */; };
@@ -47,14 +45,11 @@
 		DCE3000A1E51AADC0006D7E5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCE300081E51AADC0006D7E5 /* LaunchScreen.storyboard */; };
 		DCE300151E51AADC0006D7E5 /* iOs_ProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE300141E51AADC0006D7E5 /* iOs_ProjectTests.swift */; };
 		DCE300201E51AADC0006D7E5 /* iOs_ProjectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE3001F1E51AADC0006D7E5 /* iOs_ProjectUITests.swift */; };
-		DCE3002E1E51B4FC0006D7E5 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE3002D1E51B4FC0006D7E5 /* HomeViewController.swift */; };
 		DCE3FFFD1E51AADC0006D7E5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE3FFFC1E51AADC0006D7E5 /* AppDelegate.swift */; };
-		DCE3FFFF1E51AADC0006D7E5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE3FFFE1E51AADC0006D7E5 /* ViewController.swift */; };
 		DF0217221E85D77900E4511B /* AddInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0217211E85D77900E4511B /* AddInfoViewController.swift */; };
 		DF02172B1E85DA9000E4511B /* InformationSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF02172A1E85DA9000E4511B /* InformationSet.swift */; };
 		DF02172D1E85DBF100E4511B /* Information.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF02172C1E85DBF100E4511B /* Information.swift */; };
 		DF36A7351E55C50200B051F5 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF36A7341E55C50200B051F5 /* EditProfileViewController.swift */; };
-		DF52D5AD1E71EEC2001ABB0C /* BasicTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF52D5AC1E71EEC2001ABB0C /* BasicTools.swift */; };
 		DFA8AAFC1E85A72500EE7A98 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA8AAFB1E85A72500EE7A98 /* InfoViewController.swift */; };
 		DFA8AAFE1E85AC5300EE7A98 /* InfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA8AAFD1E85AC5300EE7A98 /* InfoTableViewCell.swift */; };
 		DFED6F8B1E55F11400F5C275 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFED6F8A1E55F11400F5C275 /* CoreDataManager.swift */; };
@@ -96,7 +91,6 @@
 
 /* Begin PBXFileReference section */
 		1E6CF4411E83DC8900B21EEF /* GroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupViewController.swift; sourceTree = "<group>"; };
-		1E6CF4431E83DC9800B21EEF /* GroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupTableViewCell.swift; sourceTree = "<group>"; };
 		1E6CF4451E83E0F800B21EEF /* StudentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentViewController.swift; sourceTree = "<group>"; };
 		1E6CF4471E83E4A700B21EEF /* PromoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromoTableViewCell.swift; sourceTree = "<group>"; };
 		1E9CBDB11E840DA1004BBB6A /* JTAppleCalendar.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = JTAppleCalendar.framework; sourceTree = "<group>"; };
@@ -113,7 +107,6 @@
 		3D25929A1E6D4DBB00AA940D /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		3D25929C1E6D596600AA940D /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		3D25929E1E6D5D8900AA940D /* MessagesSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesSet.swift; sourceTree = "<group>"; };
-		3D2592A01E6D6E1C00AA940D /* ListTableViewCellMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTableViewCellMessage.swift; sourceTree = "<group>"; };
 		3D3C3CCB1E682EC6001893E4 /* PersonnesSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonnesSet.swift; sourceTree = "<group>"; };
 		3D806A7C1E7006BA0073C4FA /* MessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		3DEA3A2C1E82D6D500185E19 /* ListGroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListGroupTableViewCell.swift; sourceTree = "<group>"; };
@@ -138,15 +131,12 @@
 		DCE3001B1E51AADC0006D7E5 /* iOs-ProjectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iOs-ProjectUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCE3001F1E51AADC0006D7E5 /* iOs_ProjectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOs_ProjectUITests.swift; sourceTree = "<group>"; };
 		DCE300211E51AADC0006D7E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DCE3002D1E51B4FC0006D7E5 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		DCE3FFF91E51AADC0006D7E5 /* iOs-Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOs-Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCE3FFFC1E51AADC0006D7E5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		DCE3FFFE1E51AADC0006D7E5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		DF0217211E85D77900E4511B /* AddInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddInfoViewController.swift; sourceTree = "<group>"; };
 		DF02172A1E85DA9000E4511B /* InformationSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationSet.swift; sourceTree = "<group>"; };
 		DF02172C1E85DBF100E4511B /* Information.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Information.swift; sourceTree = "<group>"; };
 		DF36A7341E55C50200B051F5 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
-		DF52D5AC1E71EEC2001ABB0C /* BasicTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicTools.swift; sourceTree = "<group>"; };
 		DFA8AAFB1E85A72500EE7A98 /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		DFA8AAFD1E85AC5300EE7A98 /* InfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoTableViewCell.swift; sourceTree = "<group>"; };
 		DFED6F8A1E55F11400F5C275 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
@@ -264,10 +254,6 @@
 				DF0217291E85D9DD00E4511B /* Group Controller */,
 				DF0217231E85D90200E4511B /* Infos Controller */,
 				DCE3FFFC1E51AADC0006D7E5 /* AppDelegate.swift */,
-				DCE3002D1E51B4FC0006D7E5 /* HomeViewController.swift */,
-				DCE3FFFE1E51AADC0006D7E5 /* ViewController.swift */,
-				1E6CF4431E83DC9800B21EEF /* GroupTableViewCell.swift */,
-				3D2592A01E6D6E1C00AA940D /* ListTableViewCellMessage.swift */,
 				DCE300001E51AADC0006D7E5 /* Main.storyboard */,
 				DCE300081E51AADC0006D7E5 /* LaunchScreen.storyboard */,
 				DC56D81C1E7154BF00BA7C72 /* Assets.xcassets */,
@@ -292,6 +278,7 @@
 			children = (
 				DC4FAB521E5DDC5D00BC0745 /* WallViewController.swift */,
 				3D806A7C1E7006BA0073C4FA /* MessageTableViewCell.swift */,
+				1E9CBDBE1E842241004BBB6A /* GroupMessageViewController.swift */,
 			);
 			name = "Message Controller";
 			sourceTree = "<group>";
@@ -338,7 +325,6 @@
 			isa = PBXGroup;
 			children = (
 				1E6CF4411E83DC8900B21EEF /* GroupViewController.swift */,
-				1E9CBDBE1E842241004BBB6A /* GroupMessageViewController.swift */,
 				3DEA3A2C1E82D6D500185E19 /* ListGroupTableViewCell.swift */,
 			);
 			name = "Group Controller";
@@ -350,7 +336,6 @@
 				DFED6F8A1E55F11400F5C275 /* CoreDataManager.swift */,
 				DC56D81E1E71795A00BA7C72 /* DateManager.swift */,
 				DFED6F8C1E55F2DA00F5C275 /* DialogBoxHelper.swift */,
-				DF52D5AC1E71EEC2001ABB0C /* BasicTools.swift */,
 				3D25929A1E6D4DBB00AA940D /* Session.swift */,
 				1EA42A241E8555E200FF33F0 /* KeyboardViewController.swift */,
 			);
@@ -518,24 +503,20 @@
 				1E6CF4421E83DC8900B21EEF /* GroupViewController.swift in Sources */,
 				DC4FAB511E5DD19C00BC0745 /* LoginViewController.swift in Sources */,
 				DC426FCD1E52001A00809823 /* ListTableViewCell.swift in Sources */,
-				DF52D5AD1E71EEC2001ABB0C /* BasicTools.swift in Sources */,
 				DFED6F8D1E55F2DA00F5C275 /* DialogBoxHelper.swift in Sources */,
 				3D25929D1E6D596600AA940D /* Message.swift in Sources */,
 				1E9CBDC31E8424F7004BBB6A /* CalendarHeader.swift in Sources */,
 				DC4FAB531E5DDC5D00BC0745 /* WallViewController.swift in Sources */,
 				DC24C77E1E81343D0043753F /* PromoSet.swift in Sources */,
-				DCE3FFFF1E51AADC0006D7E5 /* ViewController.swift in Sources */,
 				DC24C7821E8145D80043753F /* PromoViewController.swift in Sources */,
 				3DEA3A2D1E82D6D500185E19 /* ListGroupTableViewCell.swift in Sources */,
 				3D3C3CCC1E682EC6001893E4 /* PersonnesSet.swift in Sources */,
 				DC56D81F1E71795A00BA7C72 /* DateManager.swift in Sources */,
 				DFA8AAFC1E85A72500EE7A98 /* InfoViewController.swift in Sources */,
 				DC4FAB5C1E5DEABA00BC0745 /* Personne.swift in Sources */,
-				3D2592A11E6D6E1C00AA940D /* ListTableViewCellMessage.swift in Sources */,
 				1E9CBDBB1E84108A004BBB6A /* CalendarView.swift in Sources */,
 				DCE300051E51AADC0006D7E5 /* iOs_Project.xcdatamodeld in Sources */,
 				1E9CBDB91E840ED6004BBB6A /* CalendarCellView.swift in Sources */,
-				1E6CF4441E83DC9800B21EEF /* GroupTableViewCell.swift in Sources */,
 				DF02172D1E85DBF100E4511B /* Information.swift in Sources */,
 				DFA8AAFE1E85AC5300EE7A98 /* InfoTableViewCell.swift in Sources */,
 				DC074F571E51DF9600F2A90E /* AddViewController.swift in Sources */,
@@ -547,7 +528,6 @@
 				3D0A15281E828B550010E99B /* Promo.swift in Sources */,
 				DFEE4ABA1E7F02F300E12701 /* Groupe.swift in Sources */,
 				3D0A15221E8275C90010E99B /* GroupesSet.swift in Sources */,
-				DCE3002E1E51B4FC0006D7E5 /* HomeViewController.swift in Sources */,
 				3D25929B1E6D4DBB00AA940D /* Session.swift in Sources */,
 				3D25929F1E6D5D8900AA940D /* MessagesSet.swift in Sources */,
 				DF0217221E85D77900E4511B /* AddInfoViewController.swift in Sources */,

@@ -304,14 +304,6 @@ class WallViewController: KeyboardViewController, UITableViewDataSource, UITable
         present(picker, animated: true, completion: nil)
     }
     
-    /// When comes from the profile page, save and refresh the updated students
-    ///
-    /// - Parameter segue: segue where it comes from
-    @IBAction func unwindToPersonAfterProfile(segue: UIStoryboardSegue) {
-        CoreDataManager.save()
-        self.viewDidLoad()
-    }
-    
     
     // MARK: - Navigation
     
