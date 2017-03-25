@@ -14,7 +14,7 @@ class GroupesSet{
     
     // MARK: - CoreData Constant
     
-    let context = CoreDataManager.getContext()
+    let context = CoreDataManager.context
     let request : NSFetchRequest<Groupe> = Groupe.fetchRequest()
 
     // MARK: - Variables
@@ -23,7 +23,7 @@ class GroupesSet{
     
     fileprivate lazy var groupFetched : NSFetchedResultsController<Groupe> = {
         self.request.sortDescriptors = [NSSortDescriptor(key:#keyPath(Groupe.name),ascending:true)]
-        let fetchResultController = NSFetchedResultsController(fetchRequest: self.request, managedObjectContext: CoreDataManager.getContext(), sectionNameKeyPath: nil, cacheName: nil)
+        let fetchResultController = NSFetchedResultsController(fetchRequest: self.request, managedObjectContext: self.context, sectionNameKeyPath: nil, cacheName: nil)
         return fetchResultController
     }()
     
@@ -49,7 +49,7 @@ class GroupesSet{
     func valueForGroupFetched(person: Personne) -> NSFetchedResultsController<Groupe> {
         self.request.sortDescriptors = [NSSortDescriptor(key:#keyPath(Groupe.name),ascending:true)]
         self.request.predicate = NSPredicate(format: "concerner CONTAINS %@ and name != 'All'", person)
-        let fetchResultController = NSFetchedResultsController(fetchRequest: self.request, managedObjectContext: CoreDataManager.getContext(), sectionNameKeyPath: nil, cacheName: nil)
+        let fetchResultController = NSFetchedResultsController(fetchRequest: self.request, managedObjectContext: self.context, sectionNameKeyPath: nil, cacheName: nil)
         return fetchResultController
     }
 
@@ -83,7 +83,7 @@ class GroupesSet{
     /// - Returns: return true if there is groups in the database
     static func getNumbersOfGroups()-> Int{
         var groups: [Groupe] = []
-        let context = CoreDataManager.getContext()
+        let context = CoreDataManager.context
         let request : NSFetchRequest<Groupe> = Groupe.fetchRequest()
         do {
             try groups = context.fetch(request)

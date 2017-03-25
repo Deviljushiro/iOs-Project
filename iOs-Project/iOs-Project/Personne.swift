@@ -44,7 +44,7 @@ extension Personne {
         //let group: NSSet = []
         //group.adding(GroupesSet.getGroupByName(groupName:)
         //create a person
-        let person = Personne(context: CoreDataManager.getContext())
+        let person = Personne(context: CoreDataManager.context)
         //save datas into the person
         person.nom = name
         person.prenom = firstName

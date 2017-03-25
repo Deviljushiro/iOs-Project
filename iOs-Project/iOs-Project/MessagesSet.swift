@@ -14,7 +14,7 @@ class MessagesSet {
     
     // MARK: - CoreData Constant
     
-    let context = CoreDataManager.getContext()
+    let context = CoreDataManager.context
     let request : NSFetchRequest<Message> = Message.fetchRequest()
     
     
@@ -26,7 +26,7 @@ class MessagesSet {
     fileprivate lazy var msgFetched : NSFetchedResultsController<Message> = {
         self.request.sortDescriptors = [NSSortDescriptor(key:#keyPath(Message.dateEnvoi),ascending:true)]
         self.request.predicate = NSPredicate(format: "concerner.name == %@",self.currentGroupName)
-        let fetchResultController = NSFetchedResultsController(fetchRequest: self.request, managedObjectContext: CoreDataManager.getContext(), sectionNameKeyPath: nil, cacheName: nil)
+        let fetchResultController = NSFetchedResultsController(fetchRequest: self.request, managedObjectContext: self.context, sectionNameKeyPath: nil, cacheName: nil)
         return fetchResultController}()
     
     // MARK : - Initialization

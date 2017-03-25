@@ -508,7 +508,7 @@
                                         <rect key="frame" x="0.0" y="28" width="784" height="177"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aAc-8D-zy9" id="kIl-sD-6cu">
-                                            <rect key="frame" x="0.0" y="0.0" width="784" height="177"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="784" height="176"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="m3v-u6-8cy">
@@ -668,31 +668,31 @@
                                         <rect key="frame" x="0.0" y="28" width="784" height="400"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bke-Zx-N0g" id="kfi-yA-15E">
-                                            <rect key="frame" x="0.0" y="0.0" width="784" height="400"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="784" height="399"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TITRE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0F8-P3-LmG">
-                                                    <rect key="frame" x="363.5" y="8" width="58" height="28.5"/>
+                                                    <rect key="frame" x="363" y="8" width="58" height="29"/>
                                                     <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="20"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AHI-0P-JSz">
-                                                    <rect key="frame" x="58" y="44.5" width="240" height="240"/>
+                                                    <rect key="frame" x="58" y="45" width="240" height="240"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="240" id="C7j-Z4-P8W"/>
                                                         <constraint firstAttribute="height" constant="240" id="zWg-SY-K9Q"/>
                                                     </constraints>
                                                 </imageView>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="justified" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IDx-v9-sSQ">
-                                                    <rect key="frame" x="306" y="44.5" width="420" height="346.5"/>
+                                                    <rect key="frame" x="306" y="45" width="420" height="346"/>
                                                     <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cJ3-A6-dON">
-                                                    <rect key="frame" x="58" y="8" width="240" height="28.5"/>
+                                                    <rect key="frame" x="58" y="8" width="240" height="29"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="240" id="Mhn-rp-p4X"/>
                                                     </constraints>
@@ -701,7 +701,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="http://www.tabernatech.fr" translatesAutoresizingMaskIntoConstraints="NO" id="gny-5T-Byh">
-                                                    <rect key="frame" x="58" y="292" width="240" height="33"/>
+                                                    <rect key="frame" x="58" y="293" width="240" height="33"/>
                                                     <color key="backgroundColor" red="0.62672897039999997" green="0.83439785710000003" blue="0.85526635360000003" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
@@ -987,7 +987,7 @@
                                         <rect key="frame" x="0.0" y="28" width="764" height="63"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="p7o-OZ-bR4" id="CV0-0r-FvR">
-                                            <rect key="frame" x="0.0" y="0.0" width="764" height="63"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="764" height="62"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Groupe" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qrf-h6-L0n">
@@ -1101,7 +1101,7 @@
                                         <rect key="frame" x="0.0" y="28" width="824" height="209"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JJj-04-cEv" id="vjA-08-8L8">
-                                            <rect key="frame" x="0.0" y="0.0" width="824" height="209"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="824" height="208"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3cI-vN-tL1">
@@ -1203,7 +1203,6 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" enablesReturnKeyAutomatically="YES"/>
-                                <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES"/>
                             </textView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rcl-aa-0ro">
                                 <rect key="frame" x="0.0" y="20" width="200" height="748"/>
@@ -1380,6 +1379,10 @@
                                         <state key="normal" title="Créer un événement">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="addEventAction:" destination="w9q-U9-9hd" eventType="touchUpInside" id="cdL-eQ-izf"/>
+                                            <segue destination="MpI-bc-Udk" kind="presentation" identifier="addEventSegue" id="Qu6-8E-mQ7"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -1405,7 +1408,7 @@
                                         <rect key="frame" x="0.0" y="28" width="784" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="epL-Xn-2CX" id="Z0G-9q-cXT">
-                                            <rect key="frame" x="0.0" y="0.0" width="784" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="784" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Promo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uZJ-Yf-Hif">
@@ -1454,6 +1457,146 @@
             </objects>
             <point key="canvasLocation" x="2144.53125" y="175.78125"/>
         </scene>
+        <!--Add Event View Controller-->
+        <scene sceneID="6KQ-p6-mI9">
+            <objects>
+                <viewController id="MpI-bc-Udk" customClass="AddEventViewController" customModule="iOs_Project" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="w1r-GW-c6K"/>
+                        <viewControllerLayoutGuide type="bottom" id="F2U-3V-Ipn"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3yQ-AE-egJ">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tCb-2g-Vta">
+                                <rect key="frame" x="120" y="450" width="250" height="140"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="140" id="Km6-Bh-YWG"/>
+                                    <constraint firstAttribute="width" constant="250" id="aeL-3e-t9L"/>
+                                </constraints>
+                                <date key="date" timeIntervalSinceReferenceDate="512148894.96169901">
+                                    <!--2017-03-25 15:34:54 +0000-->
+                                </date>
+                                <locale key="locale" localeIdentifier="fr"/>
+                            </datePicker>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="YAv-vI-4rL">
+                                <rect key="frame" x="654" y="450" width="250" height="140"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="250" id="9VX-g8-x37"/>
+                                    <constraint firstAttribute="height" constant="140" id="tnA-TQ-zkb"/>
+                                </constraints>
+                                <date key="date" timeIntervalSinceReferenceDate="512149310.66241598">
+                                    <!--2017-03-25 15:41:50 +0000-->
+                                </date>
+                                <locale key="locale" localeIdentifier="fr"/>
+                            </datePicker>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CREATION D'UN EVENEMENT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rzN-UJ-sTr">
+                                <rect key="frame" x="353.5" y="98.5" width="317" height="33"/>
+                                <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="23"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Titre" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8he-iM-m29">
+                                <rect key="frame" x="362" y="171.5" width="300" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="nl6-3t-3HK"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Description de l'événement" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Xb5-YV-Ey0">
+                                <rect key="frame" x="362" y="209" width="300" height="200"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="2Ak-vu-6m5"/>
+                                    <constraint firstAttribute="height" constant="200" id="TaC-Xh-EZ2"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q4Y-5X-z2P">
+                                <rect key="frame" x="470" y="582" width="84" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="84" id="jfo-kx-5Es"/>
+                                    <constraint firstAttribute="height" constant="30" id="pjs-Wd-5xJ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="17"/>
+                                <state key="normal" title="Valider" backgroundImage="green">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="saveAction:" destination="MpI-bc-Udk" eventType="touchUpInside" id="lGP-3t-qzG"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date de début" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yst-It-bJm">
+                                <rect key="frame" x="220" y="417" width="120" height="24.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="H2s-Us-One"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date de fin" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uUD-aL-0si">
+                                <rect key="frame" x="684" y="417" width="120" height="24.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="N4e-In-xWn"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6H3-Xd-oYB">
+                                <rect key="frame" x="470" y="620" width="84" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="bYy-ex-dMz"/>
+                                    <constraint firstAttribute="width" constant="84" id="scl-8U-hFK"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="17"/>
+                                <state key="normal" title="Annuler" backgroundImage="red">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="backAction:" destination="MpI-bc-Udk" eventType="touchUpInside" id="A2Z-ki-E9v"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.095633434889999994" green="0.16339810239999999" blue="0.23818005170000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="6H3-Xd-oYB" firstAttribute="top" secondItem="Q4Y-5X-z2P" secondAttribute="bottom" constant="8" id="2Ig-5P-66a"/>
+                            <constraint firstItem="Yst-It-bJm" firstAttribute="top" secondItem="Xb5-YV-Ey0" secondAttribute="bottom" constant="8" id="BK6-tB-iNl"/>
+                            <constraint firstItem="rzN-UJ-sTr" firstAttribute="centerY" secondItem="3yQ-AE-egJ" secondAttribute="centerY" multiplier="0.3" id="C9X-K6-zuW"/>
+                            <constraint firstItem="Yst-It-bJm" firstAttribute="leading" secondItem="3yQ-AE-egJ" secondAttribute="leadingMargin" constant="200" id="G02-rD-nRi"/>
+                            <constraint firstItem="Xb5-YV-Ey0" firstAttribute="top" secondItem="8he-iM-m29" secondAttribute="bottom" constant="8" id="GQm-Y3-scv"/>
+                            <constraint firstItem="6H3-Xd-oYB" firstAttribute="centerX" secondItem="3yQ-AE-egJ" secondAttribute="centerX" id="J46-7c-4xg"/>
+                            <constraint firstItem="tCb-2g-Vta" firstAttribute="top" secondItem="Yst-It-bJm" secondAttribute="bottom" constant="8" id="JdN-Wz-UIf"/>
+                            <constraint firstItem="tCb-2g-Vta" firstAttribute="leading" secondItem="3yQ-AE-egJ" secondAttribute="leadingMargin" constant="100" id="Mfh-PT-qoi"/>
+                            <constraint firstItem="Q4Y-5X-z2P" firstAttribute="centerX" secondItem="3yQ-AE-egJ" secondAttribute="centerX" id="SEu-RC-Ptc"/>
+                            <constraint firstItem="Xb5-YV-Ey0" firstAttribute="centerX" secondItem="3yQ-AE-egJ" secondAttribute="centerX" id="Sja-LD-cPU"/>
+                            <constraint firstItem="uUD-aL-0si" firstAttribute="top" secondItem="Xb5-YV-Ey0" secondAttribute="bottom" constant="8" id="T10-dr-AnI"/>
+                            <constraint firstItem="rzN-UJ-sTr" firstAttribute="centerX" secondItem="3yQ-AE-egJ" secondAttribute="centerX" id="V29-uh-bkP"/>
+                            <constraint firstItem="8he-iM-m29" firstAttribute="centerX" secondItem="3yQ-AE-egJ" secondAttribute="centerX" id="XTb-a6-qr4"/>
+                            <constraint firstItem="YAv-vI-4rL" firstAttribute="top" secondItem="uUD-aL-0si" secondAttribute="bottom" constant="8" id="cw8-bT-bZx"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="YAv-vI-4rL" secondAttribute="trailing" constant="100" id="jIv-Pv-4nN"/>
+                            <constraint firstItem="Q4Y-5X-z2P" firstAttribute="top" secondItem="Yst-It-bJm" secondAttribute="bottom" constant="140" id="orv-3q-Ais"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="uUD-aL-0si" secondAttribute="trailing" constant="200" id="pld-eg-dUP"/>
+                            <constraint firstItem="8he-iM-m29" firstAttribute="top" secondItem="rzN-UJ-sTr" secondAttribute="bottom" constant="40" id="r7E-bC-sGy"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="body" destination="Xb5-YV-Ey0" id="Da3-wO-wbn"/>
+                        <outlet property="endDate" destination="YAv-vI-4rL" id="Cqj-3U-Dvv"/>
+                        <outlet property="startDate" destination="tCb-2g-Vta" id="PtA-wS-eLp"/>
+                        <outlet property="title" destination="8he-iM-m29" id="6ff-FB-Ebx"/>
+                        <outlet property="titleField" destination="8he-iM-m29" id="901-r3-i3h"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="K91-2c-HTS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1706.8359375" y="1235.9375"/>
+        </scene>
         <!--Student View Controller-->
         <scene sceneID="ZYp-0L-g8c">
             <objects>
@@ -1474,7 +1617,7 @@
                                         <rect key="frame" x="0.0" y="28" width="784" height="68"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="26O-2y-ub8" id="2wG-3M-8jc">
-                                            <rect key="frame" x="0.0" y="0.0" width="784" height="68"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="784" height="67"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nom" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Pw-ue-rQb">
@@ -1890,9 +2033,9 @@
         <image name="yellow" width="256" height="117"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="xU6-l4-Ufd"/>
-        <segue reference="wf7-Ie-X96"/>
-        <segue reference="LvI-cL-4Pd"/>
-        <segue reference="Huy-oQ-5xc"/>
+        <segue reference="ODK-yO-Xa8"/>
+        <segue reference="3ko-7Z-0yv"/>
+        <segue reference="ceF-nG-IKi"/>
+        <segue reference="4Ea-2S-kjY"/>
     </inferredMetricsTieBreakers>
 </document>

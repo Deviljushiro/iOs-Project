@@ -45,6 +45,18 @@ class DateManager {
     
     }
     
+    /// Get the entire date in string from a date type
+    ///
+    /// - Parameter date: we want to change in string
+    /// - Returns: the string date
+    class func getStringDate(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd' 'HH:mm"
+        dateFormatter.locale = NSLocale(localeIdentifier: "FR") as Locale!
+        let dateString = dateFormatter.string(from: date as Date)
+        return dateString
+    }
+    
     /// Get the date's month
     ///
     /// - Parameter date: related date

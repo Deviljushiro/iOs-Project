@@ -14,14 +14,14 @@ class PromoSet {
     
     // MARK: - Core Data constants
     
-    let context = CoreDataManager.getContext()
+    let context = CoreDataManager.context
     let request : NSFetchRequest<Promo> = Promo.fetchRequest()
     
     // MARK: - Variables
     
     fileprivate lazy var promoFetched : NSFetchedResultsController<Promo> = {
         self.request.sortDescriptors = [NSSortDescriptor(key:#keyPath(Promo.annee),ascending:false)]
-        let fetchResultController = NSFetchedResultsController(fetchRequest: self.request, managedObjectContext: CoreDataManager.getContext(), sectionNameKeyPath: nil, cacheName: nil)
+        let fetchResultController = NSFetchedResultsController(fetchRequest: self.request, managedObjectContext: self.context, sectionNameKeyPath: nil, cacheName: nil)
         return fetchResultController
     }()
 

@@ -10,6 +10,8 @@ import Foundation
 import CoreData
 import UIKit
 
+/* INFORMATION will regroup documents and important mail or shared news */
+
 extension Information {
     
     
@@ -26,7 +28,7 @@ extension Information {
     ///   - date: creation of the information
     static func createNewInfo(title: String, body: String, url: String, picture: NSData){
         //create an info
-        let info = Information(context: CoreDataManager.getContext())
+        let info = Information(context: CoreDataManager.context)
         //save datas into the promo
         info.titre = title
         info.desc = body

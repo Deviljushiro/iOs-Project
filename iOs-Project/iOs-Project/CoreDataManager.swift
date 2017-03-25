@@ -39,13 +39,6 @@ class CoreDataManager: NSObject {
         }
     }
     
-    /// Get the context of the core data
-    ///
-    /// - Returns: The context
-    class func getContext() -> NSManagedObjectContext {
-        return CoreDataManager.context
-    }
-    
     
     
 }

@@ -160,13 +160,12 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         self.performSegue(withIdentifier: self.promoSegueId, sender: self)
     }
     
-    /// Go back to the Wall page
+    /// Go to the add event page
     ///
     /// - Parameter sender: who send the action
-    @IBAction func wallAction(_ sender: Any) {
-        self.performSegue(withIdentifier: "wallSegue", sender: self)
+    @IBAction func addEventAction(_ sender: Any) {
+        performSegue(withIdentifier: self.addEventSegueId, sender: self)
     }
-    
     
     /// Go back to the previous page
     ///
@@ -181,6 +180,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     let studentSegueId = "studentSegue"
     let registerSegueId = "registerSegue"
     let promoSegueId = "promoSegue"
+    let addEventSegueId = "addEventSegue"
     
     /// prepare to send datas to the profile view ctrler
     ///

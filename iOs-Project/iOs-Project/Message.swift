@@ -26,7 +26,7 @@ extension Message {
     /// - Returns: the msg created
     static func createNewMessage(body: String,image: NSData?,person: Personne,group: Groupe?){
         //create a msg
-        let msg = Message(context: CoreDataManager.getContext())
+        let msg = Message(context: CoreDataManager.context)
         //save datas into the person
         msg.dateEnvoi = DateManager.currentDateString()
         msg.id = autoIncrementMessages()
@@ -44,7 +44,7 @@ extension Message {
     /// - Returns: how many messages are in the set
     static func getNumbersOfMessages()-> Int{
         var msgs: [Message] = []
-        let context = CoreDataManager.getContext()
+        let context = CoreDataManager.context
         let request : NSFetchRequest<Message> = Message.fetchRequest()
         do {
             try msgs = context.fetch(request)

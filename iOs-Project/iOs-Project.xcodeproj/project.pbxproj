@@ -27,6 +27,9 @@
 		3D25929F1E6D5D8900AA940D /* MessagesSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D25929E1E6D5D8900AA940D /* MessagesSet.swift */; };
 		3D3C3CCC1E682EC6001893E4 /* PersonnesSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D3C3CCB1E682EC6001893E4 /* PersonnesSet.swift */; };
 		3D3C3CCD1E682EC6001893E4 /* PersonnesSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D3C3CCB1E682EC6001893E4 /* PersonnesSet.swift */; };
+		3D515CF51E86C24B0074D547 /* Evenement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D515CF41E86C24B0074D547 /* Evenement.swift */; };
+		3D515CF71E86C4670074D547 /* EvenementSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D515CF61E86C4670074D547 /* EvenementSet.swift */; };
+		3D515CF91E86C5190074D547 /* AddEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D515CF81E86C5190074D547 /* AddEventViewController.swift */; };
 		3D806A7D1E7006BA0073C4FA /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D806A7C1E7006BA0073C4FA /* MessageTableViewCell.swift */; };
 		3DEA3A2D1E82D6D500185E19 /* ListGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEA3A2C1E82D6D500185E19 /* ListGroupTableViewCell.swift */; };
 		DC074F531E51DBEB00F2A90E /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC074F521E51DBEB00F2A90E /* ListViewController.swift */; };
@@ -108,6 +111,9 @@
 		3D25929C1E6D596600AA940D /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		3D25929E1E6D5D8900AA940D /* MessagesSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesSet.swift; sourceTree = "<group>"; };
 		3D3C3CCB1E682EC6001893E4 /* PersonnesSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonnesSet.swift; sourceTree = "<group>"; };
+		3D515CF41E86C24B0074D547 /* Evenement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Evenement.swift; sourceTree = "<group>"; };
+		3D515CF61E86C4670074D547 /* EvenementSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EvenementSet.swift; sourceTree = "<group>"; };
+		3D515CF81E86C5190074D547 /* AddEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEventViewController.swift; sourceTree = "<group>"; };
 		3D806A7C1E7006BA0073C4FA /* MessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		3DEA3A2C1E82D6D500185E19 /* ListGroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListGroupTableViewCell.swift; sourceTree = "<group>"; };
 		DC074F521E51DBEB00F2A90E /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
@@ -184,11 +190,21 @@
 			name = Calendar;
 			sourceTree = "<group>";
 		};
+		3D515CFA1E86CB1F0074D547 /* Event */ = {
+			isa = PBXGroup;
+			children = (
+				3D515CF81E86C5190074D547 /* AddEventViewController.swift */,
+			);
+			name = Event;
+			sourceTree = "<group>";
+		};
 		DC4FAB5D1E5DED4800BC0745 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				DF02172A1E85DA9000E4511B /* InformationSet.swift */,
 				DF02172C1E85DBF100E4511B /* Information.swift */,
+				3D515CF41E86C24B0074D547 /* Evenement.swift */,
+				3D515CF61E86C4670074D547 /* EvenementSet.swift */,
 				3D0A15271E828B550010E99B /* Promo.swift */,
 				DC4FAB5B1E5DEABA00BC0745 /* Personne.swift */,
 				DFEE4AB91E7F02F200E12701 /* Groupe.swift */,
@@ -253,6 +269,7 @@
 				DF0217251E85D95D00E4511B /* Promos Controller */,
 				DF0217291E85D9DD00E4511B /* Group Controller */,
 				DF0217231E85D90200E4511B /* Infos Controller */,
+				3D515CFA1E86CB1F0074D547 /* Event */,
 				DCE3FFFC1E51AADC0006D7E5 /* AppDelegate.swift */,
 				DCE300001E51AADC0006D7E5 /* Main.storyboard */,
 				DCE300081E51AADC0006D7E5 /* LaunchScreen.storyboard */,
@@ -406,7 +423,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Jean MIQUEL";
 				TargetAttributes = {
 					DCE3000F1E51AADC0006D7E5 = {
@@ -516,12 +533,15 @@
 				DC4FAB5C1E5DEABA00BC0745 /* Personne.swift in Sources */,
 				1E9CBDBB1E84108A004BBB6A /* CalendarView.swift in Sources */,
 				DCE300051E51AADC0006D7E5 /* iOs_Project.xcdatamodeld in Sources */,
+				3D515CF51E86C24B0074D547 /* Evenement.swift in Sources */,
 				1E9CBDB91E840ED6004BBB6A /* CalendarCellView.swift in Sources */,
 				DF02172D1E85DBF100E4511B /* Information.swift in Sources */,
+				3D515CF71E86C4670074D547 /* EvenementSet.swift in Sources */,
 				DFA8AAFE1E85AC5300EE7A98 /* InfoTableViewCell.swift in Sources */,
 				DC074F571E51DF9600F2A90E /* AddViewController.swift in Sources */,
 				DCE3FFFD1E51AADC0006D7E5 /* AppDelegate.swift in Sources */,
 				DFEE4AB81E7EBA0600E12701 /* ForgotPwdViewController.swift in Sources */,
+				3D515CF91E86C5190074D547 /* AddEventViewController.swift in Sources */,
 				DC074F531E51DBEB00F2A90E /* ListViewController.swift in Sources */,
 				3D806A7D1E7006BA0073C4FA /* MessageTableViewCell.swift in Sources */,
 				1E9CBDBD1E8410E4004BBB6A /* CalendarViewController.swift in Sources */,
@@ -594,6 +614,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -644,6 +665,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
