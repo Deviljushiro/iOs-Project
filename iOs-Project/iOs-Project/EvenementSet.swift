@@ -36,5 +36,39 @@ class EvenementSet {
         }
     }
     
+    // MARK: - Getters
+    
+    /// Get the event for a specific date
+    ///
+    /// - Parameter date: we want to find the event
+    /// - Returns: the event corresponding
+    class func getEventByDate(date: Date) -> [Evenement]? {
+        let NSdate = date as NSDate
+        let NSdate2 = date-60*60*24 as NSDate
+        let NSdate3 = date+60*60*24 as NSDate
+        var events: [Evenement] = []
+        let request : NSFetchRequest<Evenement> = Evenement.fetchRequest()
+        request.predicate = NSPredicate(format: "dateDebut >= %@ and dateDebut <= %@ and dateFin >= %@", NSdate2, NSdate3, NSdate)
+        do {
+            try events = CoreDataManager.context.fetch(request)
+        } catch let error as NSError {
+            fatalError("failed to get events by date=\(date): \(error)")
+        }
+        if events == [] {
+            return nil
+        }
+        else {
+            return events
+        }
+    }
+    
+    /// If a date has an event
+    ///
+    /// - Parameter date: we want to know if there's an event
+    /// - Returns: TRUE if there's an event, else FALSE
+    class func dateHasEvent(date: Date) -> Bool {
+        return getEventByDate(date: date) != nil
+    }
+    
 }
 

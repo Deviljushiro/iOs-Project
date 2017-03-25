@@ -24,14 +24,15 @@ extension Evenement {
     ///   - body: of the event
     ///   - start: date of the event
     ///   - end: date of the event
-    static func createNewEvent(title: String, body: String, start: String, end: String){
+    static func createNewEvent(title: String, body: String, start: Date, end: Date){
         //create an info
         let event = Evenement(context: CoreDataManager.context)
         //save datas into the promo
         event.titre = title
         event.desc = body
-        event.dateDebut = start
-        event.dateFin = end
+        //convert the dates
+        event.dateDebut = start as NSDate?
+        event.dateFin = end as NSDate?
         CoreDataManager.save()
     }
 }

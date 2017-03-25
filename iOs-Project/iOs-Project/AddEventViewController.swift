@@ -59,8 +59,6 @@ class AddEventViewController: UIViewController {
         let body = self.body.text ?? ""
         let start = self.startDate.date
         let end = self.endDate.date
-        let stringStart = DateManager.getStringDate(date: start)
-        let stringEnd = DateManager.getStringDate(date: end)
         
         //If the dates are correct in time
         if start <= DateManager.currentDate() || end <= start {
@@ -69,7 +67,7 @@ class AddEventViewController: UIViewController {
         }
         else {
             //Create the event in the DB
-            Evenement.createNewEvent(title: title, body: body, start: stringStart, end: stringEnd)
+            Evenement.createNewEvent(title: title, body: body, start: start, end: end)
             self.dismiss(animated: true, completion: nil)
         }
         
