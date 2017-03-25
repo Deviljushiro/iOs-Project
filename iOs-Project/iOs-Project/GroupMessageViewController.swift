@@ -10,6 +10,8 @@ import UIKit
 
 class GroupMessageViewController: UIViewController {
 
+    //MARK: - View loading
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

@@ -9,6 +9,8 @@
 import UIKit
 
 class MessageTableViewCell: UITableViewCell {
+    
+    //MARK: - Outlets
 
     @IBOutlet weak var sendDate: UILabel!
     @IBOutlet weak var senderPic: UIImageView!
@@ -16,7 +18,7 @@ class MessageTableViewCell: UITableViewCell {
     @IBOutlet weak var body: UITextView!
     @IBOutlet weak var username: UIButton!
     
-    
+    //MARK: - Cell methods
     
     override func awakeFromNib() {
         super.awakeFromNib()

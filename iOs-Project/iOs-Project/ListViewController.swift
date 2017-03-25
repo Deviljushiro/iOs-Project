@@ -174,16 +174,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBAction func backAction(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
-    
-    /// After adding a new person in the DB, save the context
-    ///
-    /// - Parameter segue: where it comes from
-    @IBAction func unwindPersonsAfterAdd(segue: UIStoryboardSegue) {
-        DialogBoxHelper.alert(view: self, WithTitle: "Inscription réussie")
-        CoreDataManager.save()
-        self.Promos.reloadData()
-        self.viewDidLoad()
-    }
+
     
     // MARK: - Navigation
     

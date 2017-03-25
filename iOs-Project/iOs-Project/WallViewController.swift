@@ -272,6 +272,14 @@ class WallViewController: KeyboardViewController, UITableViewDataSource, UITable
     }
     
     
+    /// Go to the infos page
+    ///
+    /// - Parameter sender: who send the action
+    @IBAction func infoAction(_ sender: Any) {
+        self.performSegue(withIdentifier: "infoSegue", sender: self)
+    }
+    
+    
     /// Go to the profile page
     ///
     /// - Parameter sender: who send the action
