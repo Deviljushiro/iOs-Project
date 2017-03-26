@@ -15,6 +15,7 @@ class GroupViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     @IBOutlet weak var Groups: UITableView!
     @IBOutlet weak var adminButton: UIButton!
+    @IBOutlet weak var profilePic: UIImageView!
     
     //MARK: - Variables
     
@@ -36,7 +37,9 @@ class GroupViewController: UIViewController, UITableViewDataSource, UITableViewD
             self.adminButton.isEnabled = false
             self.adminButton.isHidden = true
         }
-
+        //Get the profile pic and make it circle
+        self.profilePic.image = UIImage(data: Session.getSession().photo as! Data)
+        self.profilePic.maskCircle(anyImage: self.profilePic.image!)
     }
 
     override func didReceiveMemoryWarning() {

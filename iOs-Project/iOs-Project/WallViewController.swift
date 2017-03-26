@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class WallViewController: KeyboardViewController, UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, NSFetchedResultsControllerDelegate {
+class WallViewController: KeyboardViewController, UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, NSFetchedResultsControllerDelegate, UISearchBarDelegate {
     
     // MARK: - Outlets
     
@@ -17,12 +17,16 @@ class WallViewController: KeyboardViewController, UITableViewDataSource, UITable
     @IBOutlet weak var SideView: UIView!
     @IBOutlet weak var Messages: UITableView!
     @IBOutlet weak var adminButton: UIButton!
+    @IBOutlet weak var profilePic: UIImageView!
+    @IBOutlet weak var searchBar: UISearchBar!
 
     // MARK: - Variables
     
     var msgFetched : MessagesSet = MessagesSet()
     var sentImage : UIImage? = nil  //To send image via message
     var selectedPerson: Personne? = nil //To see sender's profile
+    var filteredMsg = [Message]()
+    var searchActive: Bool = false //To check if we are searching
     
     // MARK: - Constants
     
@@ -52,14 +56,42 @@ class WallViewController: KeyboardViewController, UITableViewDataSource, UITable
             self.adminButton.isEnabled = false
             self.adminButton.isHidden = true
         }
+        
+        //Get the profile pic and make it circle
+        self.profilePic.image = UIImage(data: Session.getSession().photo as! Data)
+        self.profilePic.maskCircle(anyImage: self.profilePic.image!)
+        
+        // Delegate the search bar
+        self.searchBar.delegate = self
     }
     
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
+    
+    // MARK: - Search bar protocol
+    
+    /// When text is input in the search bar
+    ///
+    /// - Parameters:
+    ///   - searchBar: where text is input
+    ///   - searchText: the text input
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        if searchText == "" {   //If the input text is empty
+            self.msgFetched = MessagesSet()
+        }
+        else {  //If not
+            let groupAll = GroupesSet.getGroupByName(groupName: "All")
+            self.msgFetched = MessagesSet(string: searchText, group: groupAll!)
+        }
+        self.Messages.reloadData()
+        self.viewDidLoad()
+    }
+    
     
     // MARK: - Table view datasource protocol
     
@@ -70,6 +102,7 @@ class WallViewController: KeyboardViewController, UITableViewDataSource, UITable
     ///   - indexPath: the index of each cell
     /// - Returns: the cell with the defined values
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
+        //create the cell
         let cell = self.Messages.dequeueReusableCell(withIdentifier: "messageCell", for: indexPath) as! MessageTableViewCell
         //get the msg datas from the fetched msg
         let msg = self.msgFetched.getMessages().object(at: indexPath)
@@ -89,21 +122,26 @@ class WallViewController: KeyboardViewController, UITableViewDataSource, UITable
         else {  //or it's empty
             cell.msgImage.image = nil
         }
+        cell.senderPic.maskCircle(anyImage: cell.senderPic.image!) //Circle image
         return cell
     }
     
-    /// Tell the number of sections
+    /// Tell the number of sections (for a search or not)
     ///
     /// - Parameters:
     ///   - tableView: Table view related
     ///   - section: number of lines for each section
     /// - Returns: number of sections
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        guard let section = self.msgFetched.getMessages().sections?[section] else {
-            fatalError("unexpected section number")
-        }
-        print(section.numberOfObjects)
+        //if self.searchController.isActive && self.searchController.searchBar.text != "" {
+          //  return self.filteredMsg.count
+        //}
+        //else {
+            guard let section = self.msgFetched.getMessages().sections?[section] else {
+                fatalError("unexpected section number")
+            }
         return section.numberOfObjects
+       // }
     }
     
     // MARK: - Text view protocol
@@ -121,14 +159,14 @@ class WallViewController: KeyboardViewController, UITableViewDataSource, UITable
     ///
     /// - Parameter textView: the text view
     func textViewDidBeginEditing(_ textView: UITextView){
-        MessageField = textView
+        self.MessageField = textView
     }
     
     /// After edition of the text view
     ///
     /// - Parameter textView: related text view
     func textViewDidEndEditing(_ textView: UITextView){
-        MessageField = nil
+        self.MessageField = nil
     }
     
 
@@ -140,7 +178,7 @@ class WallViewController: KeyboardViewController, UITableViewDataSource, UITable
     override func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             if self.view.frame.origin.y == 0 {
-                self.view.frame.origin.y -= keyboardSize.height
+                self.view.frame.origin.y = 0
             }
         }
     }
@@ -253,7 +291,7 @@ class WallViewController: KeyboardViewController, UITableViewDataSource, UITable
     /// - Parameter sender: who send the action
     @IBAction func logoutAction(_ sender: Any) {
         Session.destroySession()
-        self.performSegue(withIdentifier: "logoutSegue", sender: self)
+        self.dismiss(animated: true, completion: nil)
     }
     
     
@@ -329,6 +367,5 @@ class WallViewController: KeyboardViewController, UITableViewDataSource, UITable
         }
 
     }
-    
-
 }
+

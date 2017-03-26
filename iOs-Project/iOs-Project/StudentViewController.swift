@@ -20,6 +20,7 @@ class StudentViewController: UIViewController, UITableViewDataSource, UITableVie
     // MARK: - Outlet
     
     @IBOutlet weak var Personnes: UITableView!
+    @IBOutlet weak var profilePic: UIImageView!
     
     // MARK: - View Loading
     
@@ -30,9 +31,14 @@ class StudentViewController: UIViewController, UITableViewDataSource, UITableVie
         if let apromo = self.promotion {
             self.persons = PersonnesSet(promo: apromo)
         }
+        
         //delegate the persons fetched and refresh the list
         self.persons.getPersons().delegate = self
         self.persons.refreshPersons()
+        
+        //Get the profile pic make it circle
+        self.profilePic.image = UIImage(data: Session.getSession().photo as! Data)
+        self.profilePic.maskCircle(anyImage: self.profilePic.image!)
     }
     
     /// Tell if view receive a warning
@@ -152,6 +158,14 @@ class StudentViewController: UIViewController, UITableViewDataSource, UITableVie
         self.dismiss(animated: true, completion: nil)
     }
     
+    
+    /// Go to the session profile page
+    ///
+    /// - Parameter sender: who send the action
+    @IBAction func myProfileAction(_ sender: Any) {
+        self.performSegue(withIdentifier: self.myProfileSegueId, sender: self)
+    }
+    
     /// When comes from the profile page, save and refresh the updated students
     ///
     /// - Parameter segue: segue where it comes from
@@ -165,6 +179,7 @@ class StudentViewController: UIViewController, UITableViewDataSource, UITableVie
     // MARK: - Navigation
     
     let profileSegueId = "profileSegue"
+    let myProfileSegueId = "myProfileSegue"
     
     /// prepare to send datas to the profile view ctrler
     ///
@@ -179,6 +194,10 @@ class StudentViewController: UIViewController, UITableViewDataSource, UITableVie
                 let profileViewController = segue.destination as! ProfileViewController
                 profileViewController.person = self.persons.getPersons().object(at: indexPath)
             }
+        }
+        if segue.identifier == self.myProfileSegueId {
+            let profileViewController = segue.destination as! ProfileViewController
+            profileViewController.person = Session.getSession()
         }
     }
     

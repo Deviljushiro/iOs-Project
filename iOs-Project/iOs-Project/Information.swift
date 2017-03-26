@@ -26,7 +26,7 @@ extension Information {
     ///   - url: of the information
     ///   - picture: of the information
     ///   - date: creation of the information
-    static func createNewInfo(title: String, body: String, url: String, picture: NSData){
+    static func createNewInfo(title: String, body: String, url: String, picture: NSData, KW: String){
         //create an info
         let info = Information(context: CoreDataManager.context)
         //save datas into the promo
@@ -35,6 +35,7 @@ extension Information {
         info.lien = url
         info.image = picture
         info.dateCreation = DateManager.currentDateString()
+        info.possede = MotClefSet.getKWByWord(word: KW)
         CoreDataManager.save()
     }
     

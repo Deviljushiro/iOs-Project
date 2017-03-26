@@ -9,13 +9,15 @@
 import UIKit
 import CoreData
 
-class GroupMessageViewController: KeyboardViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, NSFetchedResultsControllerDelegate {
+class GroupMessageViewController: KeyboardViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, NSFetchedResultsControllerDelegate, UISearchBarDelegate {
 
     // MARK: - Outlets
     
     @IBOutlet weak var MessageField: UITextView!
     @IBOutlet weak var adminButton: UIButton!
     @IBOutlet weak var ListMessages: UITableView!
+    @IBOutlet weak var profilePic: UIImageView!
+    @IBOutlet weak var searchBar: UISearchBar!
     
     // MARK: - Variables
     
@@ -48,7 +50,9 @@ class GroupMessageViewController: KeyboardViewController, UITableViewDelegate, U
             self.ListMessages.scrollToRow(at: self.getLastIndexPath(), at: .bottom, animated: false)
         }
         
-
+        //Get the profile pic make it circle
+        self.profilePic.image = UIImage(data: Session.getSession().photo as! Data)
+        self.profilePic.maskCircle(anyImage: self.profilePic.image!)
         
         //Enable the admin to click on admin button
         if Session.getSession().isAdmin(){
@@ -59,6 +63,9 @@ class GroupMessageViewController: KeyboardViewController, UITableViewDelegate, U
             self.adminButton.isEnabled = false
             self.adminButton.isHidden = true
         }
+        
+        //delegate the search bar
+        self.searchBar.delegate = self
 
 
     }
@@ -66,6 +73,26 @@ class GroupMessageViewController: KeyboardViewController, UITableViewDelegate, U
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    
+    // MARK: - Search bar protocol
+    
+    /// When text is input in the search bar
+    ///
+    /// - Parameters:
+    ///   - searchBar: where text is input
+    ///   - searchText: the text input
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        if searchText == "" {   //If the input text is empty
+            self.msgFetched = MessagesSet()
+        }
+        else {  //If not
+            self.msgFetched = MessagesSet(string: searchText, group: self.group!)
+        }
+        self.ListMessages.reloadData()
+        self.viewDidLoad()
     }
     
     
@@ -98,6 +125,7 @@ class GroupMessageViewController: KeyboardViewController, UITableViewDelegate, U
         else {  //or it's empty
             cell.msgImage.image = nil
         }
+        cell.senderPic.maskCircle(anyImage: cell.senderPic.image!) //Circle image
         return cell
     }
     
@@ -285,7 +313,7 @@ class GroupMessageViewController: KeyboardViewController, UITableViewDelegate, U
     /// Go the to profile of the sender
     ///
     /// - Parameter sender: who send the action
-    @IBAction func personProfileAction(_ sender: UIButton) {
+    @IBAction func personProfileAction(sender: UIButton) {
         self.performSegue(withIdentifier: self.personProfileSegueId, sender: self)
     }
 

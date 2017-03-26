@@ -53,6 +53,10 @@
 		DF02172B1E85DA9000E4511B /* InformationSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF02172A1E85DA9000E4511B /* InformationSet.swift */; };
 		DF02172D1E85DBF100E4511B /* Information.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF02172C1E85DBF100E4511B /* Information.swift */; };
 		DF36A7351E55C50200B051F5 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF36A7341E55C50200B051F5 /* EditProfileViewController.swift */; };
+		DF44B6E41E87CED7009CC8A4 /* CalendarEventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF44B6E31E87CED7009CC8A4 /* CalendarEventTableViewCell.swift */; };
+		DF44B6E61E87E905009CC8A4 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF44B6E51E87E905009CC8A4 /* ImageManager.swift */; };
+		DF44B6E81E8829AB009CC8A4 /* MotClef.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF44B6E71E8829AB009CC8A4 /* MotClef.swift */; };
+		DF44B6EC1E883590009CC8A4 /* MotClefSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF44B6EB1E883590009CC8A4 /* MotClefSet.swift */; };
 		DFA8AAFC1E85A72500EE7A98 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA8AAFB1E85A72500EE7A98 /* InfoViewController.swift */; };
 		DFA8AAFE1E85AC5300EE7A98 /* InfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA8AAFD1E85AC5300EE7A98 /* InfoTableViewCell.swift */; };
 		DFED6F8B1E55F11400F5C275 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFED6F8A1E55F11400F5C275 /* CoreDataManager.swift */; };
@@ -143,6 +147,10 @@
 		DF02172A1E85DA9000E4511B /* InformationSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationSet.swift; sourceTree = "<group>"; };
 		DF02172C1E85DBF100E4511B /* Information.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Information.swift; sourceTree = "<group>"; };
 		DF36A7341E55C50200B051F5 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		DF44B6E31E87CED7009CC8A4 /* CalendarEventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarEventTableViewCell.swift; sourceTree = "<group>"; };
+		DF44B6E51E87E905009CC8A4 /* ImageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
+		DF44B6E71E8829AB009CC8A4 /* MotClef.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotClef.swift; sourceTree = "<group>"; };
+		DF44B6EB1E883590009CC8A4 /* MotClefSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotClefSet.swift; sourceTree = "<group>"; };
 		DFA8AAFB1E85A72500EE7A98 /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		DFA8AAFD1E85AC5300EE7A98 /* InfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoTableViewCell.swift; sourceTree = "<group>"; };
 		DFED6F8A1E55F11400F5C275 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
@@ -186,21 +194,24 @@
 				1E9CBDB81E840ED6004BBB6A /* CalendarCellView.swift */,
 				1E9CBDBA1E84108A004BBB6A /* CalendarView.swift */,
 				1E9CBDBC1E8410E4004BBB6A /* CalendarViewController.swift */,
+				DF44B6E31E87CED7009CC8A4 /* CalendarEventTableViewCell.swift */,
 			);
 			name = Calendar;
 			sourceTree = "<group>";
 		};
-		3D515CFA1E86CB1F0074D547 /* Event */ = {
+		3D515CFA1E86CB1F0074D547 /* Event Controller */ = {
 			isa = PBXGroup;
 			children = (
 				3D515CF81E86C5190074D547 /* AddEventViewController.swift */,
 			);
-			name = Event;
+			name = "Event Controller";
 			sourceTree = "<group>";
 		};
 		DC4FAB5D1E5DED4800BC0745 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				DF44B6EB1E883590009CC8A4 /* MotClefSet.swift */,
+				DF44B6E71E8829AB009CC8A4 /* MotClef.swift */,
 				DF02172A1E85DA9000E4511B /* InformationSet.swift */,
 				DF02172C1E85DBF100E4511B /* Information.swift */,
 				3D515CF41E86C24B0074D547 /* Evenement.swift */,
@@ -269,7 +280,7 @@
 				DF0217251E85D95D00E4511B /* Promos Controller */,
 				DF0217291E85D9DD00E4511B /* Group Controller */,
 				DF0217231E85D90200E4511B /* Infos Controller */,
-				3D515CFA1E86CB1F0074D547 /* Event */,
+				3D515CFA1E86CB1F0074D547 /* Event Controller */,
 				DCE3FFFC1E51AADC0006D7E5 /* AppDelegate.swift */,
 				DCE300001E51AADC0006D7E5 /* Main.storyboard */,
 				DCE300081E51AADC0006D7E5 /* LaunchScreen.storyboard */,
@@ -350,6 +361,7 @@
 		DFED6F8E1E55F3D400F5C275 /* Class Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				DF44B6E51E87E905009CC8A4 /* ImageManager.swift */,
 				DFED6F8A1E55F11400F5C275 /* CoreDataManager.swift */,
 				DC56D81E1E71795A00BA7C72 /* DateManager.swift */,
 				DFED6F8C1E55F2DA00F5C275 /* DialogBoxHelper.swift */,
@@ -533,11 +545,13 @@
 				DC4FAB5C1E5DEABA00BC0745 /* Personne.swift in Sources */,
 				1E9CBDBB1E84108A004BBB6A /* CalendarView.swift in Sources */,
 				DCE300051E51AADC0006D7E5 /* iOs_Project.xcdatamodeld in Sources */,
+				DF44B6EC1E883590009CC8A4 /* MotClefSet.swift in Sources */,
 				3D515CF51E86C24B0074D547 /* Evenement.swift in Sources */,
 				1E9CBDB91E840ED6004BBB6A /* CalendarCellView.swift in Sources */,
 				DF02172D1E85DBF100E4511B /* Information.swift in Sources */,
 				3D515CF71E86C4670074D547 /* EvenementSet.swift in Sources */,
 				DFA8AAFE1E85AC5300EE7A98 /* InfoTableViewCell.swift in Sources */,
+				DF44B6E81E8829AB009CC8A4 /* MotClef.swift in Sources */,
 				DC074F571E51DF9600F2A90E /* AddViewController.swift in Sources */,
 				DCE3FFFD1E51AADC0006D7E5 /* AppDelegate.swift in Sources */,
 				DFEE4AB81E7EBA0600E12701 /* ForgotPwdViewController.swift in Sources */,
@@ -545,7 +559,9 @@
 				DC074F531E51DBEB00F2A90E /* ListViewController.swift in Sources */,
 				3D806A7D1E7006BA0073C4FA /* MessageTableViewCell.swift in Sources */,
 				1E9CBDBD1E8410E4004BBB6A /* CalendarViewController.swift in Sources */,
+				DF44B6E41E87CED7009CC8A4 /* CalendarEventTableViewCell.swift in Sources */,
 				3D0A15281E828B550010E99B /* Promo.swift in Sources */,
+				DF44B6E61E87E905009CC8A4 /* ImageManager.swift in Sources */,
 				DFEE4ABA1E7F02F300E12701 /* Groupe.swift in Sources */,
 				3D0A15221E8275C90010E99B /* GroupesSet.swift in Sources */,
 				3D25929B1E6D4DBB00AA940D /* Session.swift in Sources */,

@@ -20,6 +20,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     // MARK: - Outlet
     
     @IBOutlet weak var Promos: UITableView!
+    @IBOutlet weak var profilPic: UIImageView!
     
     // MARK: - View Loading
     
@@ -28,6 +29,10 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         super.viewDidLoad()
         //delegate the persons fetched and refresh the list
         self.promos.getPromos().delegate = self
+        
+        //Get the profile pic and make it circle
+        self.profilPic.image = UIImage(data: Session.getSession().photo as! Data)
+        self.profilPic.maskCircle(anyImage: self.profilPic.image!)
     }
 
     /// Tell if view receive a warning
@@ -174,6 +179,12 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         self.dismiss(animated: true, completion: nil)
     }
 
+    /// Go to the session profile page
+    ///
+    /// - Parameter sender: who send the action
+    @IBAction func myProfileAction(_ sender: Any) {
+        self.performSegue(withIdentifier: self.myProfileSegueId, sender: self)
+    }
     
     // MARK: - Navigation
     
@@ -181,6 +192,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     let registerSegueId = "registerSegue"
     let promoSegueId = "promoSegue"
     let addEventSegueId = "addEventSegue"
+    let myProfileSegueId = "myProfileSegue"
     
     /// prepare to send datas to the profile view ctrler
     ///
@@ -195,6 +207,10 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 let studentViewController = segue.destination as! StudentViewController
                 studentViewController.promotion = self.promos.getPromos().object(at: indexPath)
             }
+        }
+        if segue.identifier == self.myProfileSegueId {
+            let profileViewController = segue.destination as! ProfileViewController
+            profileViewController.person = Session.getSession()
         }
     }
 

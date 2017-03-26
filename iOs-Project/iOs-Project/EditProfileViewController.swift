@@ -39,9 +39,14 @@ class EditProfileViewController: KeyboardViewController, UIImagePickerController
             self.CityTextField.text = aperson.ville
             self.EditProfileImage.image = UIImage(data: aperson.photo as! Data)
         }
-        //to tap the image
+        
+        //To tap the image
         let tapImage = UITapGestureRecognizer(target: self, action: #selector(self.changeImage))
         self.EditProfileImage.addGestureRecognizer(tapImage)
+        
+        //Circle the image
+        self.EditProfileImage.maskCircle(anyImage: self.EditProfileImage.image!)
+
     }
     
     

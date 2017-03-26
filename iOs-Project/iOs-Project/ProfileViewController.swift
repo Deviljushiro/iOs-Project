@@ -55,6 +55,9 @@ class ProfileViewController: UIViewController {
             self.editButton.isEnabled = false
             self.editButton.isHidden = true
         }
+        
+        //Circle the image
+        self.ProfileImage.maskCircle(anyImage: self.ProfileImage.image!)
     }
 
     /// if receive a memory warning

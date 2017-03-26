@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -22,25 +22,36 @@
                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z5U-7z-v9T">
-                    <rect key="frame" x="60.5" y="110" width="30" height="30"/>
+                    <rect key="frame" x="70.5" y="96" width="10" height="10"/>
                     <color key="backgroundColor" red="1" green="0.76404207101234034" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="30" id="HKw-4y-Ejd"/>
-                        <constraint firstAttribute="width" constant="30" id="O0o-eb-68n"/>
+                        <constraint firstAttribute="height" constant="10" id="FNo-5D-UQb"/>
+                        <constraint firstAttribute="width" constant="10" id="iyR-0N-nv6"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v6I-KC-cU7">
+                    <rect key="frame" x="50" y="50.5" width="50" height="50"/>
+                    <color key="backgroundColor" white="1" alpha="0.51386443661971826" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="L3u-8y-Sl1"/>
+                        <constraint firstAttribute="width" constant="50" id="hgN-fX-OHU"/>
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="0.50196081400000003" green="0.0" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.48221149778119021" green="0.075314541311938682" blue="0.27048813452916892" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="Z5U-7z-v9T" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="8zm-O0-PHf"/>
+                <constraint firstItem="v6I-KC-cU7" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Qel-Rp-72C"/>
                 <constraint firstItem="lED-0S-6rY" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Snd-ms-7XT"/>
-                <constraint firstAttribute="bottom" secondItem="Z5U-7z-v9T" secondAttribute="bottom" constant="10" id="d5m-MP-Ggs"/>
+                <constraint firstItem="v6I-KC-cU7" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="gAa-sr-k9h"/>
                 <constraint firstItem="lED-0S-6rY" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="qgT-Tg-jcS"/>
+                <constraint firstItem="Z5U-7z-v9T" firstAttribute="top" secondItem="lED-0S-6rY" secondAttribute="bottom" constant="8" id="qq4-Xl-IjZ"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="dayLabel" destination="lED-0S-6rY" id="0tP-tj-Rgz"/>
                 <outlet property="event" destination="Z5U-7z-v9T" id="8vA-gC-cxn"/>
+                <outlet property="selectedView" destination="v6I-KC-cU7" id="eBU-lt-bs5"/>
             </connections>
             <point key="canvasLocation" x="143" y="-389"/>
         </view>

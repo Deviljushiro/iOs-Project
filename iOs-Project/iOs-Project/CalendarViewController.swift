@@ -9,11 +9,16 @@
 import UIKit
 import JTAppleCalendar
 
-class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, JTAppleCalendarViewDelegate {
+class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, JTAppleCalendarViewDelegate, UITableViewDelegate, UITableViewDataSource {
 
     // MARK: - Outlets
     
     @IBOutlet weak var calendarView: CalendarView!
+    @IBOutlet weak var eventView: UITableView!
+    
+    // MARK: - Variables
+    
+    var selectedEvent: [Evenement] = []
     
     // MARK: - Constants
     
@@ -23,7 +28,6 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
     let white = UIColor(colorWithHexValue: 0xECEAED)
     let darkPurple = UIColor(colorWithHexValue: 0x3A284C)
     let dimPurple = UIColor(colorWithHexValue: 0x574865)
-    
     
     // MARK: - View loading
     
@@ -41,14 +45,13 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
         let doubleTapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didDoubleTapCollectionView(gesture:)))
         doubleTapGesture.numberOfTapsRequired = 2  // add double tap
         calendarView.addGestureRecognizer(doubleTapGesture)
-        calendarView.allowsMultipleSelection  = true    //range selection
-        calendarView.rangeSelectionWillBeUsed = true
         
         //Cell inset
         calendarView.cellInset = CGPoint(x: 0, y: 0)       // default is (3,3)
         
         //Add the header
         calendarView.registerHeaderView(xibFileNames: ["CalendarHeader"])
+        
     }
     
     
@@ -104,7 +107,7 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
         let myCustomCell = cell as! CalendarCellView
         // Setup Cell text
         myCustomCell.dayLabel.text = cellState.text
-    
+        handleCellSelection(view: cell, cellState: cellState)
         handleCellTextColor(view: cell, cellState: cellState)
         handleCellEvent(view: cell, cellState: cellState)
     }
@@ -120,6 +123,7 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
     func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date, cell: JTAppleDayCellView?, cellState: CellState) {
         handleCellEvent(view: cell, cellState: cellState)
         handleCellTextColor(view: cell, cellState: cellState)
+        handleCellSelection(view: cell, cellState: cellState)
     }
     
     /// Handle the date deselection
@@ -132,7 +136,10 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
     func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date, cell: JTAppleDayCellView?, cellState: CellState) {
         handleCellEvent(view: cell, cellState: cellState)
         handleCellTextColor(view: cell, cellState: cellState)
+        handleCellSelection(view: cell, cellState: cellState)
     }
+    
+    // MARK: - Cells protocol
     
     /// Handle the text color of the cell
     ///
@@ -156,7 +163,7 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
         }
     }
     
-    /// Handle if there's an event for a date
+    /// Handle if there's an event for a date and display big point on the cell
     ///
     /// - Parameters:
     ///   - view: calendar view
@@ -166,10 +173,33 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
             return
         }
         if EvenementSet.dateHasEvent(date: cellState.date)  {
-            myCustomCell.event.layer.cornerRadius =  20
+            //Show the event mark
+            myCustomCell.event.layer.cornerRadius =  3
             myCustomCell.event.isHidden = false
         } else {
             myCustomCell.event.isHidden = true
+        }
+    }
+    
+    /// Handle the selection of a cell and get the corresponding events
+    ///
+    /// - Parameters:
+    ///   - view: the calendar view
+    ///   - cellState: the related cell
+    func handleCellSelection(view: JTAppleDayCellView?, cellState: CellState) {
+        guard let myCustomCell = view as? CalendarCellView  else {
+            return
+        }
+        if cellState.isSelected {
+            //make selection view appear
+            myCustomCell.selectedView.layer.cornerRadius =  25
+            myCustomCell.selectedView.isHidden = false
+            //get events of the date and reload the tableview
+            self.selectedEvent = EvenementSet.getEventByDate(date: cellState.date)
+            self.eventView.reloadData()
+        }
+        else {
+            myCustomCell.selectedView.isHidden = true
         }
     }
     
@@ -199,6 +229,35 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
         //Header gets the month and year of the scrolled page
         headerCell?.month.text = DateManager.getMonth(date: range.start)+"  "+DateManager.getYear(date: range.start)
     }
+    
+    
+    // MARK: - TableView data source protocol
+    
+    /// Define the cell of the tableview
+    ///
+    /// - Parameters:
+    ///   - tableView: Tableview related
+    ///   - indexPath: the index of each cell
+    /// - Returns: the cell with the defined values
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
+        let cell = self.eventView.dequeueReusableCell(withIdentifier: "eventCell", for: indexPath) as! CalendarEventTableViewCell
+        cell.eventTitle.text = self.selectedEvent[indexPath.row].titre
+        cell.eventBody.text = self.selectedEvent[indexPath.row].desc
+        cell.eventStart.text = DateManager.FromDateToString(date: self.selectedEvent[indexPath.row].dateDebut as! Date)
+        cell.eventEnd.text = DateManager.FromDateToString(date: self.selectedEvent[indexPath.row].dateFin as! Date)
+        return cell
+    }
+    
+    /// Tell the number of sections
+    ///
+    /// - Parameters:
+    ///   - tableView: Table view related
+    ///   - section: number of lines for each section
+    /// - Returns: number of sections
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
+        return self.selectedEvent.count
+    }
+
     
     // MARK: - Actions
 

@@ -55,7 +55,7 @@ class DateManager {
     /// - Returns: the string date
     class func FromDateToString(date: Date) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd' 'HH:mm"
+        dateFormatter.dateFormat = "dd/MM/yyyy' 'HH:mm"
         dateFormatter.locale = NSLocale(localeIdentifier: "FR") as Locale!
         let dateString = dateFormatter.string(from: date as Date)
         return dateString

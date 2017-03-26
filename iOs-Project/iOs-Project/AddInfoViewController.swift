@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddInfoViewController: KeyboardViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class AddInfoViewController: KeyboardViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPickerViewDelegate {
     
     //MARK: - Outlets
     
@@ -16,6 +16,11 @@ class AddInfoViewController: KeyboardViewController, UIImagePickerControllerDele
     @IBOutlet weak var body: UITextView!
     @IBOutlet weak var url: UITextField!
     @IBOutlet weak var titleField: UITextField!
+    
+    @IBOutlet weak var docSwitch: UISwitch!
+    @IBOutlet weak var medSwitch: UISwitch!
+    @IBOutlet weak var admSwitch: UISwitch!
+    @IBOutlet weak var divSwitch: UISwitch!
     
     //MARK: - Constant
     
@@ -27,7 +32,12 @@ class AddInfoViewController: KeyboardViewController, UIImagePickerControllerDele
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        picker.delegate = self
+        self.picker.delegate = self
+        //Initialize switches
+        self.docSwitch.isOn = false
+        self.medSwitch.isOn = false
+        self.admSwitch.isOn = false
+        self.divSwitch.isOn = false
     }
 
     override func didReceiveMemoryWarning() {
@@ -63,6 +73,70 @@ class AddInfoViewController: KeyboardViewController, UIImagePickerControllerDele
     //MARK: - Actions
     
     
+    /// Enables switches & fields by selecting Document
+    ///
+    /// - Parameter sender: where comes from the action
+    @IBAction func docActivation(_ sender: UISwitch) {
+        if sender.isOn {
+            self.medSwitch.isEnabled = false
+            self.admSwitch.isEnabled = false
+            self.divSwitch.isEnabled = false
+        }
+        else {
+            self.medSwitch.isEnabled = true
+            self.admSwitch.isEnabled = true
+            self.divSwitch.isEnabled = true
+        }
+    }
+    
+    /// Enables switches & fields by selecting Media
+    ///
+    /// - Parameter sender: where comes from the action
+    @IBAction func medActivation(_ sender: UISwitch) {
+        if sender.isOn {
+            self.docSwitch.isEnabled = false
+            self.admSwitch.isEnabled = false
+            self.divSwitch.isEnabled = false
+        }
+        else {
+            self.docSwitch.isEnabled = true
+            self.admSwitch.isEnabled = true
+            self.divSwitch.isEnabled = true
+        }
+    }
+    
+    /// Enables switches & fields by selecting Administratif
+    ///
+    /// - Parameter sender: where comes from the action
+    @IBAction func admActivation(_ sender: UISwitch) {
+        if sender.isOn {
+            self.medSwitch.isEnabled = false
+            self.docSwitch.isEnabled = false
+            self.divSwitch.isEnabled = false
+        }
+        else {
+            self.medSwitch.isEnabled = true
+            self.docSwitch.isEnabled = true
+            self.divSwitch.isEnabled = true
+        }
+    }
+    
+    /// Enables switches & fields by selecting Divers
+    ///
+    /// - Parameter sender: where comes from the action
+    @IBAction func divActivation(_ sender: UISwitch) {
+        if sender.isOn {
+            self.medSwitch.isEnabled = false
+            self.admSwitch.isEnabled = false
+            self.docSwitch.isEnabled = false
+        }
+        else {
+            self.medSwitch.isEnabled = true
+            self.admSwitch.isEnabled = true
+            self.docSwitch.isEnabled = true
+        }
+    }
+    
     /// Go to the previous page
     ///
     /// - Parameter sender: who send the action
@@ -80,14 +154,36 @@ class AddInfoViewController: KeyboardViewController, UIImagePickerControllerDele
             return
         }
         let link = self.url.text ?? ""
-        //put blank image if there's not
-        var photoData: NSData? = UIImageJPEGRepresentation(#imageLiteral(resourceName: "blank"), 1) as NSData?
-        if let photo = self.picture.image {
-            photoData = UIImageJPEGRepresentation(photo, 1)! as NSData?
+        //check if there's a keyword selected
+        if self.docSwitch.isOn || self.admSwitch.isOn || self.medSwitch.isOn || self.divSwitch.isOn {
+            //put blank image if there's not
+            var photoData: NSData? = UIImageJPEGRepresentation(#imageLiteral(resourceName: "blank"), 1) as NSData?
+            if let photo = self.picture.image {
+                photoData = UIImageJPEGRepresentation(photo, 1)! as NSData?
+            }
+            //create the new info according to the keyword selected
+            if self.docSwitch.isOn {
+                Information.createNewInfo(title: title, body: content, url: link, picture: photoData!, KW: "Documents")
+                dismiss(animated: true, completion: nil)
+            }
+            else if self.medSwitch.isOn {
+                Information.createNewInfo(title: title, body: content, url: link, picture: photoData!, KW: "Medias")
+                dismiss(animated: true, completion: nil)
+            }
+            else if self.admSwitch.isOn {
+                Information.createNewInfo(title: title, body: content, url: link, picture: photoData!, KW: "Administration")
+                dismiss(animated: true, completion: nil)
+            }
+            else {
+                Information.createNewInfo(title: title, body: content, url: link, picture: photoData!, KW: "Divers")
+                dismiss(animated: true, completion: nil)
+            }
+            
         }
-        //create the new info
-        Information.createNewInfo(title: title, body: content, url: link, picture: photoData!)
-        dismiss(animated: true, completion: nil)
+        else {
+            DialogBoxHelper.alert(view: self, WithTitle: "Création impossible", andMsg: "Mot clef manquant")
+            return
+        }
     }
     
     

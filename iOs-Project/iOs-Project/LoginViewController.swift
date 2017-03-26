@@ -32,9 +32,22 @@ class LoginViewController: KeyboardViewController {
         if GroupesSet.getGroupByName(groupName: "All") == nil {
             Groupe.createNewGroup(name: "All")
         }
+        
+        
+        /** CORE DATA THAT NEEDS TO ALWAYS BE IN THE DB
+            IN CASE OF NO LOCAL DB, WE HAVE TO INSERT THEM 
+            LIKE THIS : **/
+        
         //create the respo of the section (admin) each time someone use the app on a new devic
         if PersonnesSet.getPersonsByUsername(withUsername: "anne.laurent") == nil {
             Personne.createNewPersonne(firstName: "anne", name: "laurent", tel: "", city: "montpellier", pwd: "admin", image: UIImageJPEGRepresentation(#imageLiteral(resourceName: "default"), 1)! as NSData, isStudent: false, isTeacher: true, isSecretary: false, isRespo: true, promo: "")
+        }
+        //create the different keywords if there's no KW in the Core data
+        if MotClefSet().getKW().fetchedObjects?.count == 0 {
+            MotClef.createNewKeyword(word: "Documents")
+            MotClef.createNewKeyword(word: "Medias")
+            MotClef.createNewKeyword(word: "Administration")
+            MotClef.createNewKeyword(word: "Divers")
         }
 
     }

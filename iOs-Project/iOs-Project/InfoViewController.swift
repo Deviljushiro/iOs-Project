@@ -10,17 +10,20 @@ import UIKit
 import CoreData
 import Foundation
 
-class InfoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate {
+class InfoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate, UISearchBarDelegate {
 
     //MARK: - Outlets
     
     @IBOutlet weak var Infos: UITableView!
     @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var profilePic: UIImageView!
+    @IBOutlet weak var searchBar: UISearchBar!
     
     //MARK: - Variables
     
     var group: Groupe? = nil    //the group of the info page
     var infos: InformationSet = InformationSet()
+    var chosenScope: String = "Tous"  //the selected scope of the search bar
     
     //MARK: - View loading
     
@@ -39,12 +42,80 @@ class InfoViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.addButton.isEnabled = false
             self.addButton.isHidden = true
         }
-
+        
+        //Get the profile pic and make it circle
+        self.profilePic.image = UIImage(data: Session.getSession().photo as! Data)
+        self.profilePic.maskCircle(anyImage: self.profilePic.image!)
+        
+        //delegate the search bar
+        self.searchBar.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    
+    // MARK: - Search bar protocol
+    
+    /// When text is input in the search bar
+    ///
+    /// - Parameters:
+    ///   - searchBar: where text is input
+    ///   - searchText: the text input
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        if self.chosenScope == "Tous" {  //If the scope is about all keywords
+            if searchText == "" {   //If the input text is empty
+                self.infos = InformationSet()
+            }
+            else {  //If not
+                self.infos = InformationSet(title: searchText)
+            }
+        }
+        else {  //If there's a specific scope selected
+            if searchText == "" {   //If the input text is empty
+                self.infos = InformationSet(keyword: self.chosenScope)
+            }
+            else {  //If not
+                self.infos = InformationSet(keyword: self.chosenScope, title: searchText)
+            }
+        }
+        self.Infos.reloadData()
+        self.viewDidLoad()
+    }
+    
+    
+    /// When a scope is clicked
+    ///
+    /// - Parameters:
+    ///   - searchBar: where the scope is activated
+    ///   - selectedScope: the selected scope
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        //Get the chosen scope from the array of scope titles
+        let scopeTitles: [String] = ["Tous","Documents","Medias","Administration","Divers"]
+        self.chosenScope = scopeTitles[selectedScope]
+        //If there's a specific keyword
+        if self.chosenScope != "Tous" {
+            if self.searchBar.text == "" {  //If the search bar is empty
+                self.infos = InformationSet(keyword: self.chosenScope)
+            }
+            else {
+                self.infos = InformationSet(keyword: self.chosenScope, title: self.searchBar.text!)
+            }
+        }
+        else { //if not
+            if self.searchBar.text == "" {  //If the search bar is empty
+                self.infos = InformationSet()
+            }
+            else {
+                self.infos = InformationSet(title: self.searchBar.text!)
+            }
+        }
+        self.Infos.reloadData()
+        self.viewDidLoad()
+
     }
     
     
@@ -138,17 +209,32 @@ class InfoViewController: UIViewController, UITableViewDelegate, UITableViewData
     ///
     /// - Parameter sender: who send the action
     @IBAction func addAction(_ sender: Any) {
-        self.performSegue(withIdentifier: "addInfoSegue", sender: self)
+        self.performSegue(withIdentifier: self.addInfoSegueId, sender: self)
     }
     
-    /*
+    /// Go to the session profile page
+    ///
+    /// - Parameter sender: who send the action
+    @IBAction func myProfileAction(_ sender: Any) {
+        self.performSegue(withIdentifier: self.myProfileSegueId, sender: self)
+    }
+    
+    
     // MARK: - Navigation
+    
+    let addInfoSegueId = "addInfoSegue"
+    let myProfileSegueId = "myProfileSegue"
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == self.myProfileSegueId {
+            let profileViewController = segue.destination as! ProfileViewController
+            profileViewController.person = Session.getSession()
+        }
+
     }
-    */
+    
 
 }

@@ -10,9 +10,12 @@ import UIKit
 import JTAppleCalendar
 
 class CalendarCellView: JTAppleDayCellView {
+    
+    //MARK: - Outlets
 
     @IBOutlet weak var dayLabel: UILabel!
     @IBOutlet weak var event: UIView!
+    @IBOutlet weak var selectedView: UIView!
 
     
     

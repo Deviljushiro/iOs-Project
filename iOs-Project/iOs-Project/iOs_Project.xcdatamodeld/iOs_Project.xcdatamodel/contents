@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16D32" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16A323" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Evenement" representedClassName="Evenement" syncable="YES" codeGenerationType="class">
         <attribute name="dateDebut" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="dateFin" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -22,6 +22,7 @@
         <attribute name="lien" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="titre" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="concerne" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Groupe" inverseName="posseder" inverseEntity="Groupe" syncable="YES"/>
+        <relationship name="possede" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MotClef" inverseName="concerne" inverseEntity="MotClef" syncable="YES"/>
     </entity>
     <entity name="Message" representedClassName="Message" syncable="YES" codeGenerationType="class">
         <attribute name="contenu" optional="YES" attributeType="String" syncable="YES"/>
@@ -30,6 +31,10 @@
         <attribute name="image" optional="YES" attributeType="Binary" syncable="YES"/>
         <relationship name="concerner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Groupe" inverseName="contenir" inverseEntity="Groupe" syncable="YES"/>
         <relationship name="ecritPar" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Personne" inverseName="ecrire" inverseEntity="Personne" syncable="YES"/>
+    </entity>
+    <entity name="MotClef" representedClassName="MotClef" syncable="YES" codeGenerationType="class">
+        <attribute name="mot" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="concerne" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Information" inverseName="possede" inverseEntity="Information" syncable="YES"/>
     </entity>
     <entity name="Personne" representedClassName="Personne" syncable="YES" codeGenerationType="class">
         <attribute name="estEleve" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
@@ -53,11 +58,12 @@
         <relationship name="contient" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Personne" inverseName="promo" inverseEntity="Personne" syncable="YES"/>
     </entity>
     <elements>
+        <element name="Evenement" positionX="-578" positionY="405" width="128" height="118"/>
         <element name="Groupe" positionX="-378" positionY="9" width="128" height="135"/>
-        <element name="Information" positionX="-288" positionY="270" width="128" height="135"/>
+        <element name="Information" positionX="-288" positionY="270" width="128" height="150"/>
         <element name="Message" positionX="-533" positionY="-90" width="128" height="135"/>
         <element name="Personne" positionX="-702" positionY="54" width="128" height="268"/>
         <element name="Promo" positionX="-488" positionY="270" width="128" height="75"/>
-        <element name="Evenement" positionX="-578" positionY="405" width="128" height="118"/>
+        <element name="MotClef" positionX="-504" positionY="54" width="128" height="75"/>
     </elements>
 </model>

@@ -54,6 +54,20 @@ class MessagesSet {
         }
     }
     
+    /// Initialize the messages with a selection from a keyword according to a specific group
+    ///
+    /// - Parameter group: messages's group
+    init(string: String, group: Groupe){
+        self.currentGroupName=group.name!
+        self.msgFetched = self.valueForMessageFetched(string: string)
+        do {
+            try msgFetched.performFetch()
+        }
+        catch let error as NSError{
+            fatalError("failed to get messages\(error)")
+        }
+    }
+    
     // MARK: - Help methods
     
     /// Re-perform the fetch for the NSFetchResult
@@ -67,6 +81,17 @@ class MessagesSet {
 
     }
     
+    /// Change the request of the fetch result according to  a keyword
+    ///
+    /// - Parameter string: keyword
+    /// - Returns: the new fetch result controller
+    func valueForMessageFetched(string: String) -> NSFetchedResultsController<Message> {
+        request.sortDescriptors = [NSSortDescriptor(key:#keyPath(Message.dateEnvoi),ascending:true)]
+        request.predicate = NSPredicate(format: "contenu CONTAINS %@ and concerner.name == %@", string ,self.currentGroupName)
+        let fetchResultController = NSFetchedResultsController(fetchRequest: self.request, managedObjectContext: self.context, sectionNameKeyPath: nil, cacheName: nil)
+        return fetchResultController
+    }
+    
 
 
     // MARK: - Getters
@@ -77,15 +102,7 @@ class MessagesSet {
     func getMessages() -> NSFetchedResultsController<Message>  {
         return msgFetched
     }
-    /*
-    func getMessagesWithoutGroup() -> NSFetchedResultsController<Message>{
-        request.sortDescriptors = [NSSortDescriptor(key:#keyPath(Message.dateEnvoi),ascending:true)]
-        request.predicate = NSPredicate(format: "concerner == %@", nil)
-        let fetchResultController = NSFetchedResultsController(fetchRequest: self.request, managedObjectContext: CoreDataManager.getContext(), sectionNameKeyPath: nil, cacheName: nil)
-        return fetchResultController
 
-    }
-    */
     /// Get the number of msg in the DB
     ///
     /// - Returns: number of msg (int)

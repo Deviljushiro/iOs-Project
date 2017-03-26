@@ -30,6 +30,7 @@ class AddViewController: KeyboardViewController, UIImagePickerControllerDelegate
     @IBOutlet weak var motDePasse: UITextField!
     @IBOutlet weak var confirmMotDePasse: UITextField!
     @IBOutlet weak var promotion: UITextField!
+    
     @IBOutlet weak var studentSwitch: UISwitch!
     @IBOutlet weak var secretartSwitch: UISwitch!
     @IBOutlet weak var teachSwitch: UISwitch!
@@ -44,6 +45,13 @@ class AddViewController: KeyboardViewController, UIImagePickerControllerDelegate
         
         // Do any additional setup after loading the view.
         picker.delegate = self
+        //Initialize switches & fields
+        self.studentSwitch.isOn = false
+        self.teachSwitch.isOn = false
+        self.respoSwitch.isOn = false
+        self.secretartSwitch.isOn = false
+        self.promotion.isHidden = true
+
     }
 
     /// warning memory
@@ -87,22 +95,72 @@ class AddViewController: KeyboardViewController, UIImagePickerControllerDelegate
         return true
     }
     
-    /// Before editing the text field
-    ///
-    /// - Parameter textfield: the text field
-    func textFieldDidBeginEditing(textfield: UITextField){
-        activeTextField = textfield
-    }
-    
-    /// After edition of the text field
-    ///
-    /// - Parameter textField: related text field
-    func textFieldDidEndEditing(textfield: UITextField){
-        activeTextField = UITextField()
-    }
-    
 
     // MARK: - Action
+
+    /// Enables switches & fields by selecting Student
+    ///
+    /// - Parameter sender: where comes from the action
+    @IBAction func StudentActivation(_ sender: UISwitch) {
+        if sender.isOn {
+            self.respoSwitch.isEnabled = false
+            self.teachSwitch.isEnabled = false
+            self.secretartSwitch.isEnabled = false
+            self.promotion.isHidden = false
+        }
+        else {
+            self.respoSwitch.isEnabled = true
+            self.teachSwitch.isEnabled = true
+            self.secretartSwitch.isEnabled = true
+            self.promotion.isHidden = true
+
+        }
+    }
+    
+    /// Enables switches & fields by selecting Secretaire
+    ///
+    /// - Parameter sender: where comes from the action
+    @IBAction func SecreActivation(_ sender: UISwitch) {
+        if sender.isOn {
+            self.respoSwitch.isEnabled = false
+            self.teachSwitch.isEnabled = false
+            self.studentSwitch.isEnabled = false
+        }
+        else {
+            self.respoSwitch.isEnabled = true
+            self.teachSwitch.isEnabled = true
+            self.studentSwitch.isEnabled = true
+        }
+    }
+    
+    /// Enables switches & fields by selecting Teacher
+    ///
+    /// - Parameter sender: where comes from the action
+    @IBAction func TeacherActivation(_ sender: UISwitch) {
+        if sender.isOn || self.respoSwitch.isOn {
+            self.secretartSwitch.isEnabled = false
+            self.studentSwitch.isEnabled = false
+        }
+        else {
+            self.secretartSwitch.isEnabled = true
+            self.studentSwitch.isEnabled = true
+        }
+    }
+    
+    
+    /// Enables switches & fields by selecting Respo
+    ///
+    /// - Parameter sender: where comes from the action
+    @IBAction func RespoActivation(_ sender: UISwitch) {
+        if sender.isOn || self.teachSwitch.isOn {
+            self.secretartSwitch.isEnabled = false
+            self.studentSwitch.isEnabled = false
+        }
+        else {
+            self.secretartSwitch.isEnabled = true
+            self.studentSwitch.isEnabled = true
+        }
+    }
 
     
     /// Save the person by clicking on "Valider"
