@@ -12,7 +12,8 @@ import UIKit
 
 class DateManager {
 
-    // MARK: - Tool Methods
+    
+    // MARK: - Current date
 
     /// Get the current date
     ///
@@ -44,6 +45,36 @@ class DateManager {
         return dateString
     
     }
+    
+    
+    //MARK: - Converters
+    
+    /// Convert a date into string
+    ///
+    /// - Parameter date: we want to change in string
+    /// - Returns: the string date
+    class func FromDateToString(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd' 'HH:mm"
+        dateFormatter.locale = NSLocale(localeIdentifier: "FR") as Locale!
+        let dateString = dateFormatter.string(from: date as Date)
+        return dateString
+    }
+    
+    /// Convert a string in date
+    ///
+    /// - Parameter string: we want to change in date
+    /// - Returns: the date
+    class func FromStringToDate(string: String) -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd' 'HH:mm"
+        dateFormatter.locale = NSLocale(localeIdentifier: "FR") as Locale!
+        let date = dateFormatter.date(from: string)
+        return date!
+    }
+    
+    
+    //MARK: - Getters
     
     /// Get the date's month
     ///

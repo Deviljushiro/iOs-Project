@@ -104,9 +104,9 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
         let myCustomCell = cell as! CalendarCellView
         // Setup Cell text
         myCustomCell.dayLabel.text = cellState.text
-        
+    
         handleCellTextColor(view: cell, cellState: cellState)
-        handleCellSelection(view: cell, cellState: cellState)
+        handleCellEvent(view: cell, cellState: cellState)
     }
     
     
@@ -118,7 +118,7 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
     ///   - cell: corresponding date
     ///   - cellState: state of each cell
     func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date, cell: JTAppleDayCellView?, cellState: CellState) {
-        handleCellSelection(view: cell, cellState: cellState)
+        handleCellEvent(view: cell, cellState: cellState)
         handleCellTextColor(view: cell, cellState: cellState)
     }
     
@@ -130,7 +130,7 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
     ///   - cell: corresponding date
     ///   - cellState: state of each cell
     func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date, cell: JTAppleDayCellView?, cellState: CellState) {
-        handleCellSelection(view: cell, cellState: cellState)
+        handleCellEvent(view: cell, cellState: cellState)
         handleCellTextColor(view: cell, cellState: cellState)
     }
     
@@ -156,20 +156,20 @@ class CalendarViewController: UIViewController, JTAppleCalendarViewDataSource, J
         }
     }
     
-    /// Handle the calendar selection
+    /// Handle if there's an event for a date
     ///
     /// - Parameters:
     ///   - view: calendar view
     ///   - cellState: state of each cell
-    func handleCellSelection(view: JTAppleDayCellView?, cellState: CellState) {
+    func handleCellEvent(view: JTAppleDayCellView?, cellState: CellState) {
         guard let myCustomCell = view as? CalendarCellView  else {
             return
         }
-        if cellState.isSelected {
-            myCustomCell.selectedView.layer.cornerRadius =  25
-            myCustomCell.selectedView.isHidden = false
+        if EvenementSet.dateHasEvent(date: cellState.date)  {
+            myCustomCell.event.layer.cornerRadius =  20
+            myCustomCell.event.isHidden = false
         } else {
-            myCustomCell.selectedView.isHidden = true
+            myCustomCell.event.isHidden = true
         }
     }
     

@@ -17,20 +17,11 @@ class EditProfileViewController: KeyboardViewController, UIImagePickerController
     // MARK: - Variables
     
     var person: Personne? = nil
-    var activeTextField = UITextField()
     
     // MARK: - Outlets
     
-    @IBOutlet weak var EditProfileTitle: UILabel!
     @IBOutlet weak var EditProfileImage: UIImageView!
-    @IBOutlet weak var EditProfileFirstnameLabel: UILabel!
-    @IBOutlet weak var EditProfileNameLabel: UILabel!
-    @IBOutlet weak var EditProfileTelLabel: UILabel!
-    @IBOutlet weak var EditProfileCityLabel: UILabel!
-    
-    
-    @IBOutlet weak var FirstnameTextField: UITextField!
-    @IBOutlet weak var NameTextField: UITextField!
+    @IBOutlet weak var EditProfileUsername: UILabel!
     @IBOutlet weak var TelTextField: UITextField!
     @IBOutlet weak var CityTextField: UITextField!
    
@@ -43,8 +34,7 @@ class EditProfileViewController: KeyboardViewController, UIImagePickerController
         // Do any additional setup after loading the view.
         picker.delegate = self
         if let aperson = self.person{
-            self.FirstnameTextField.text = aperson.prenom
-            self.NameTextField.text = aperson.nom
+            self.EditProfileUsername.text = aperson.pseudo
             self.TelTextField.text = aperson.tel
             self.CityTextField.text = aperson.ville
             self.EditProfileImage.image = UIImage(data: aperson.photo as! Data)
@@ -73,19 +63,6 @@ class EditProfileViewController: KeyboardViewController, UIImagePickerController
         return true
     }
     
-    /// Before editing the text field
-    ///
-    /// - Parameter textfield: the text field
-    func textFieldDidBeginEditing(textfield: UITextField){
-        activeTextField = textfield
-    }
-    
-    /// After edition of the text field
-    ///
-    /// - Parameter textField: related text field
-    func textFieldDidEndEditing(textfield: UITextField){
-        activeTextField = UITextField()
-    }
 
     //MARK: - Image delegates
     
@@ -129,12 +106,6 @@ class EditProfileViewController: KeyboardViewController, UIImagePickerController
     /// - Parameter sender: who send action
     @IBAction func saveAction(_ sender: UIBarButtonItem) {
         guard let person = self.person else { return }
-        guard (self.FirstnameTextField.text != "") && (self.NameTextField.text != "")
-        else {
-            DialogBoxHelper.alert(view: self, WithTitle: "Echec modification", andMsg: "Prénom ou nom manquant")
-            return }
-        person.prenom = self.FirstnameTextField.text
-        person.nom = self.NameTextField.text
         person.tel = self.TelTextField.text
         person.ville = self.CityTextField.text
         person.photo = UIImageJPEGRepresentation(self.EditProfileImage.image!,1)! as NSData

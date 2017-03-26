@@ -13,7 +13,6 @@ class WallViewController: KeyboardViewController, UITableViewDataSource, UITable
     
     // MARK: - Outlets
     
-    @IBOutlet weak var ListMessages: UITableView!
     @IBOutlet weak var MessageField: UITextView!
     @IBOutlet weak var SideView: UIView!
     @IBOutlet weak var Messages: UITableView!
@@ -103,6 +102,7 @@ class WallViewController: KeyboardViewController, UITableViewDataSource, UITable
         guard let section = self.msgFetched.getMessages().sections?[section] else {
             fatalError("unexpected section number")
         }
+        print(section.numberOfObjects)
         return section.numberOfObjects
     }
     
@@ -201,7 +201,7 @@ class WallViewController: KeyboardViewController, UITableViewDataSource, UITable
             self.sentImage = chosenImage
             let image = sentImage
             let imageData = UIImageJPEGRepresentation(image!, 1)! as NSData
-            Message.createNewMessage(body: "", image: imageData, person: Session.getSession())
+            Message.createNewMessage(body: "", image: imageData, person: Session.getSession(), group: GroupesSet.getGroupByName(groupName: "All"))
             //refresh the page
             self.viewDidLoad()
             dismiss(animated:true, completion: nil)
@@ -214,13 +214,6 @@ class WallViewController: KeyboardViewController, UITableViewDataSource, UITable
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
-
-    
-    
-    // MARK: - Message data management
-    
-    
-
     
     // MARK: - Index tools
     
@@ -249,7 +242,7 @@ class WallViewController: KeyboardViewController, UITableViewDataSource, UITable
             DialogBoxHelper.alert(view: self, WithTitle: "Echec envoi", andMsg: "Message vide")
             return
         }
-        Message.createNewMessage(body: body, image: nil, person: Session.getSession())
+        Message.createNewMessage(body: body, image: nil, person: Session.getSession(), group: GroupesSet.getGroupByName(groupName: "All"))
         //refresh the page
         self.viewDidLoad()
     }
@@ -276,7 +269,7 @@ class WallViewController: KeyboardViewController, UITableViewDataSource, UITable
     ///
     /// - Parameter sender: who send the action
     @IBAction func infoAction(_ sender: Any) {
-        self.performSegue(withIdentifier: "infoSegue", sender: self)
+        self.performSegue(withIdentifier: self.infoSegueId, sender: self)
     }
     
     
@@ -311,17 +304,10 @@ class WallViewController: KeyboardViewController, UITableViewDataSource, UITable
         present(picker, animated: true, completion: nil)
     }
     
-    /// When comes from the profile page, save and refresh the updated students
-    ///
-    /// - Parameter segue: segue where it comes from
-    @IBAction func unwindToPersonAfterProfile(segue: UIStoryboardSegue) {
-        CoreDataManager.save()
-        self.viewDidLoad()
-    }
-    
     
     // MARK: - Navigation
     
+    let infoSegueId = "infoSegue"
     let profileSegueId = "myProfileSegue"
     let groupListSegueId = "groupListSegue"
     let personProfileSegueId = "personProfileSegue"

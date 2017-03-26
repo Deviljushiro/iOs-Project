@@ -19,8 +19,7 @@ extension Groupe{
     /// - Parameters:
     ///   - name : name we want for the group
     static func createNewGroup(name n: String){
-        
-        let group = Groupe(context: CoreDataManager.getContext())
+        let group = Groupe(context: CoreDataManager.context)
         //save datas into the group
         group.name=n
         group.id=Groupe.autoIncrementGroups();

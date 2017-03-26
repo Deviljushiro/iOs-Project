@@ -14,21 +14,24 @@ class GroupesSet{
     
     // MARK: - CoreData Constant
     
-    let context = CoreDataManager.getContext()
+    let context = CoreDataManager.context
     let request : NSFetchRequest<Groupe> = Groupe.fetchRequest()
 
     // MARK: - Variables
     
+    
+    
     fileprivate lazy var groupFetched : NSFetchedResultsController<Groupe> = {
         self.request.sortDescriptors = [NSSortDescriptor(key:#keyPath(Groupe.name),ascending:true)]
-        let fetchResultController = NSFetchedResultsController(fetchRequest: self.request, managedObjectContext: CoreDataManager.getContext(), sectionNameKeyPath: nil, cacheName: nil)
+        let fetchResultController = NSFetchedResultsController(fetchRequest: self.request, managedObjectContext: self.context, sectionNameKeyPath: nil, cacheName: nil)
         return fetchResultController
     }()
     
     // MARK: - Initialization
     
     /// Initialize the messages by fetching all msg in the DB
-    init(){
+    init(person: Personne){
+        groupFetched = valueForGroupFetched(person: person)
         do {
             try groupFetched.performFetch()
         }
@@ -36,6 +39,20 @@ class GroupesSet{
             fatalError("failed to get messages\(error)")
         }
     }
+    
+    // MARK: - Help methods
+    
+    /// Give a fetchResultController value to personFetched according to a promo
+    ///
+    /// - Parameter promo: group we want to get the students
+    /// - Returns: NSFetchResultController of the promo's students
+    func valueForGroupFetched(person: Personne) -> NSFetchedResultsController<Groupe> {
+        self.request.sortDescriptors = [NSSortDescriptor(key:#keyPath(Groupe.name),ascending:true)]
+        self.request.predicate = NSPredicate(format: "concerner CONTAINS %@ and name != 'All'", person)
+        let fetchResultController = NSFetchedResultsController(fetchRequest: self.request, managedObjectContext: self.context, sectionNameKeyPath: nil, cacheName: nil)
+        return fetchResultController
+    }
+
     
     // MARK: - Getters
 
@@ -61,35 +78,12 @@ class GroupesSet{
     }
     
     
-    // MARK: - Getters
-    
-    /// Get groups for a specific person
-    ///
-    /// - Parameter person: name of the person we want his groups
-    /// - Returns: return the tab of groups of the person
-    func getGroupsByUser(person p: Personne)-> [Groupe]{
-        let groups = p.appartenir
-        return groups!.allObjects as! [Groupe]
-        /*
-        var groups: [Groupe] = []
-        let request : NSFetchRequest<Groupe> = Groupe.fetchRequest()
-        request.predicate = NSPredicate(format: " concerner == %@", p)
-        do {
-            try groups = CoreDataManager.context.fetch(request)
-        } catch let error as NSError {
-            fatalError("failed to get the groups of the person=\(p): \(error)")
-        }
-        return groups
-        */
-        
-    }
-    
     /// return true if there is groups in the database
     ///
     /// - Returns: return true if there is groups in the database
     static func getNumbersOfGroups()-> Int{
         var groups: [Groupe] = []
-        let context = CoreDataManager.getContext()
+        let context = CoreDataManager.context
         let request : NSFetchRequest<Groupe> = Groupe.fetchRequest()
         do {
             try groups = context.fetch(request)

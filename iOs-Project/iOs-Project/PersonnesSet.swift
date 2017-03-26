@@ -14,14 +14,14 @@ class PersonnesSet {
     
     // MARK: - Core Data constants
     
-    let context = CoreDataManager.getContext()
+    let context = CoreDataManager.context
     let request : NSFetchRequest<Personne> = Personne.fetchRequest()
     
     // MARK: - Variables
     
     fileprivate lazy var personsFetched : NSFetchedResultsController<Personne> = {
         self.request.sortDescriptors = [NSSortDescriptor(key:#keyPath(Personne.nom),ascending:true)]
-        let fetchResultController = NSFetchedResultsController(fetchRequest: self.request, managedObjectContext: CoreDataManager.getContext(), sectionNameKeyPath: nil, cacheName: nil)
+        let fetchResultController = NSFetchedResultsController(fetchRequest: self.request, managedObjectContext: self.context, sectionNameKeyPath: nil, cacheName: nil)
         return fetchResultController
     }()
 
@@ -70,7 +70,7 @@ class PersonnesSet {
     func valueForPersonFetched(promo: Promo) -> NSFetchedResultsController<Personne> {
         request.sortDescriptors = [NSSortDescriptor(key:#keyPath(Personne.nom),ascending:true)]
         request.predicate = NSPredicate(format: "promo == %@", promo)
-        let fetchResultController = NSFetchedResultsController(fetchRequest: self.request, managedObjectContext: CoreDataManager.getContext(), sectionNameKeyPath: nil, cacheName: nil)
+        let fetchResultController = NSFetchedResultsController(fetchRequest: self.request, managedObjectContext: self.context, sectionNameKeyPath: nil, cacheName: nil)
         return fetchResultController
     }
 
@@ -88,7 +88,7 @@ class PersonnesSet {
     /// - Returns: return a tab of persons with the lastname
     func getPersonsByLastname(withLastname: String) -> [Personne] {
         var persons: [Personne] = []
-        let context = CoreDataManager.getContext()
+        let context = CoreDataManager.context
         let request : NSFetchRequest<Personne> = Personne.fetchRequest()
         request.predicate = NSPredicate(format: "nom == %@", withLastname)
         do {
@@ -125,7 +125,7 @@ class PersonnesSet {
     /// - Returns: array of persons
     func getAllPersons() -> [Personne] {
         var persons: [Personne] = []
-        let context = CoreDataManager.getContext()
+        let context = CoreDataManager.context
         let request : NSFetchRequest<Personne> = Personne.fetchRequest()
         do {
             try persons = context.fetch(request)

@@ -44,7 +44,7 @@ extension Personne {
         //let group: NSSet = []
         //group.adding(GroupesSet.getGroupByName(groupName:)
         //create a person
-        let person = Personne(context: CoreDataManager.getContext())
+        let person = Personne(context: CoreDataManager.context)
         //save datas into the person
         person.nom = name
         person.prenom = firstName
@@ -57,41 +57,35 @@ extension Personne {
         person.estProf = isTeacher
         person.estSecretaire = isSecretary
         person.estRespo = isRespo
-       
+        //Manage the different groups according to the role of the person
+        let globalGroup = GroupesSet.getGroupByName(groupName: "All")
+        person.addToAppartenir(globalGroup!) //Add the person to the Global group
         if isRespo
         {
             if GroupesSet.getGroupByName(groupName:"responsable") == nil{
                 Groupe.createNewGroup(name: "responsable")
             }
-
             person.addToAppartenir(GroupesSet.getGroupByName(groupName:"responsable")!)
-            //group.adding(GroupesSet.getGroupByName(groupName:"responsable")!)
         }
         if isTeacher{
             if GroupesSet.getGroupByName(groupName:"professeurs") == nil{
                 Groupe.createNewGroup(name: "professeurs")
             }
-
             person.addToAppartenir(GroupesSet.getGroupByName(groupName:"professeurs")!)
-            //group.adding(GroupesSet.getGroupByName(groupName:"professeurs")!)
         }
         if isSecretary
         {
             if GroupesSet.getGroupByName(groupName:"secretaire") == nil{
                 Groupe.createNewGroup(name: "secretaire")
             }
-
             person.addToAppartenir(GroupesSet.getGroupByName(groupName:"secretaire")!)
-            //group.adding(GroupesSet.getGroupByName(groupName:"secretaires")!)
         }
         if isStudent
         {
             if GroupesSet.getGroupByName(groupName:"etudiant") == nil{
                 Groupe.createNewGroup(name: "etudiant")
             }
-
             person.addToAppartenir(GroupesSet.getGroupByName(groupName:"etudiant")!)
-            //group.adding(GroupesSet.getGroupByName(groupName:"etudiant")!)
             if GroupesSet.getGroupByName(groupName:promo) == nil{
                 Groupe.createNewGroup(name: promo)
             }
@@ -110,7 +104,7 @@ extension Personne {
     ///
     /// - Returns: True if he is, else False
     func isAdmin() -> Bool {
-        return self.estRespo
+        return (self.estRespo || self.estSecretaire)
     }
     
     

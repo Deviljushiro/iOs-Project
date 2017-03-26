@@ -14,14 +14,14 @@ class InformationSet {
     
     // MARK: - Core Data constants
     
-    let context = CoreDataManager.getContext()
+    let context = CoreDataManager.context
     let request : NSFetchRequest<Information> = Information.fetchRequest()
     
     // MARK: - Variables
     
     fileprivate lazy var infoFetched : NSFetchedResultsController<Information> = {
         self.request.sortDescriptors = [NSSortDescriptor(key:#keyPath(Information.dateCreation),ascending:false)]
-        let fetchResultController = NSFetchedResultsController(fetchRequest: self.request, managedObjectContext: CoreDataManager.getContext(), sectionNameKeyPath: nil, cacheName: nil)
+        let fetchResultController = NSFetchedResultsController(fetchRequest: self.request, managedObjectContext: self.context, sectionNameKeyPath: nil, cacheName: nil)
         return fetchResultController
     }()
     
@@ -65,7 +65,7 @@ class InformationSet {
     /// - Returns: return a tab of infos for the group
     func getInfosByGroup(group: Groupe) -> [Information] {
         var infos: [Information] = []
-        let context = CoreDataManager.getContext()
+        let context = CoreDataManager.context
         let request : NSFetchRequest<Information> = Information.fetchRequest()
         request.predicate = NSPredicate(format: "concerne == %@", group)
         do {

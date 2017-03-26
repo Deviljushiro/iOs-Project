@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16A323" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16D32" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Evenement" representedClassName="Evenement" syncable="YES" codeGenerationType="class">
+        <attribute name="dateDebut" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="dateFin" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="titre" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="participants" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Personne" inverseName="participe" inverseEntity="Personne" syncable="YES"/>
+    </entity>
     <entity name="Groupe" representedClassName="Groupe" syncable="YES" codeGenerationType="class">
         <attribute name="dateCreation" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -38,6 +45,7 @@
         <attribute name="ville" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="appartenir" optional="YES" toMany="YES" minCount="1" deletionRule="Nullify" destinationEntity="Groupe" inverseName="concerner" inverseEntity="Groupe" syncable="YES"/>
         <relationship name="ecrire" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Message" inverseName="ecritPar" inverseEntity="Message" syncable="YES"/>
+        <relationship name="participe" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Evenement" inverseName="participants" inverseEntity="Evenement" syncable="YES"/>
         <relationship name="promo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Promo" inverseName="contient" inverseEntity="Promo" syncable="YES"/>
     </entity>
     <entity name="Promo" representedClassName="Promo" syncable="YES" codeGenerationType="class">
@@ -46,9 +54,10 @@
     </entity>
     <elements>
         <element name="Groupe" positionX="-378" positionY="9" width="128" height="135"/>
-        <element name="Information" positionX="-344" positionY="116" width="128" height="135"/>
-        <element name="Message" positionX="-488" positionY="99" width="128" height="135"/>
-        <element name="Personne" positionX="-702" positionY="54" width="128" height="253"/>
+        <element name="Information" positionX="-288" positionY="270" width="128" height="135"/>
+        <element name="Message" positionX="-533" positionY="-90" width="128" height="135"/>
+        <element name="Personne" positionX="-702" positionY="54" width="128" height="268"/>
         <element name="Promo" positionX="-488" positionY="270" width="128" height="75"/>
+        <element name="Evenement" positionX="-578" positionY="405" width="128" height="118"/>
     </elements>
 </model>

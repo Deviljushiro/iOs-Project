@@ -14,14 +14,19 @@ class MessagesSet {
     
     // MARK: - CoreData Constant
     
-    let context = CoreDataManager.getContext()
+    let context = CoreDataManager.context
     let request : NSFetchRequest<Message> = Message.fetchRequest()
+    
     
     // MARK: - Variables
     
+    var currentGroupName = "All"
+    
+    //DEFAULT : Get the messages of the global group where there's everybody
     fileprivate lazy var msgFetched : NSFetchedResultsController<Message> = {
         self.request.sortDescriptors = [NSSortDescriptor(key:#keyPath(Message.dateEnvoi),ascending:true)]
-        let fetchResultController = NSFetchedResultsController(fetchRequest: self.request, managedObjectContext: CoreDataManager.getContext(), sectionNameKeyPath: nil, cacheName: nil)
+        self.request.predicate = NSPredicate(format: "concerner.name == %@",self.currentGroupName)
+        let fetchResultController = NSFetchedResultsController(fetchRequest: self.request, managedObjectContext: self.context, sectionNameKeyPath: nil, cacheName: nil)
         return fetchResultController}()
     
     // MARK : - Initialization
@@ -36,12 +41,11 @@ class MessagesSet {
         }
     }
 
-    
     /// Initialize the messages by fetching according to a group
     ///
     /// - Parameter group: messages's group
     init(group: Groupe){
-        msgFetched = valueForMsgFetched(group: group)
+        self.currentGroupName=group.name!
         do {
             try msgFetched.performFetch()
         }
@@ -63,17 +67,8 @@ class MessagesSet {
 
     }
     
-    /// Give a fetchResultController value to msfFetched according to a group
-    ///
-    /// - Parameter group: group we want to get the messages
-    /// - Returns: NSFetchResultController of the group's message
-    func valueForMsgFetched(group: Groupe) -> NSFetchedResultsController<Message> {
-            request.sortDescriptors = [NSSortDescriptor(key:#keyPath(Message.dateEnvoi),ascending:true)]
-            request.predicate = NSPredicate(format: "concerner == %@", group)
-            let fetchResultController = NSFetchedResultsController(fetchRequest: self.request, managedObjectContext: CoreDataManager.getContext(), sectionNameKeyPath: nil, cacheName: nil)
-            return fetchResultController
-    }
-    
+
+
     // MARK: - Getters
     
     /// Get all the messages
@@ -82,7 +77,15 @@ class MessagesSet {
     func getMessages() -> NSFetchedResultsController<Message>  {
         return msgFetched
     }
-    
+    /*
+    func getMessagesWithoutGroup() -> NSFetchedResultsController<Message>{
+        request.sortDescriptors = [NSSortDescriptor(key:#keyPath(Message.dateEnvoi),ascending:true)]
+        request.predicate = NSPredicate(format: "concerner == %@", nil)
+        let fetchResultController = NSFetchedResultsController(fetchRequest: self.request, managedObjectContext: CoreDataManager.getContext(), sectionNameKeyPath: nil, cacheName: nil)
+        return fetchResultController
+
+    }
+    */
     /// Get the number of msg in the DB
     ///
     /// - Returns: number of msg (int)

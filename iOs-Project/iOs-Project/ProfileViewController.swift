@@ -66,6 +66,14 @@ class ProfileViewController: UIViewController {
     
     // MARK: - Action
     
+    
+    
+    /// Go to the previous page
+    ///
+    /// - Parameter sender: who send the action
+    @IBAction func backAction(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
 
     /// go to the edition page
     ///

@@ -22,7 +22,7 @@ extension Promo {
     ///   - year: year of the promo
     static func createNewPromo(year: String){
         //create a promo
-        let promo = Promo(context: CoreDataManager.getContext())
+        let promo = Promo(context: CoreDataManager.context)
         //save datas into the promo
         promo.annee = year
         CoreDataManager.save()
