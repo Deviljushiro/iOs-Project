@@ -77,9 +77,19 @@ class PersonnesSet {
     
     // MARK: - Getters
     
+    /// Get the fetched result
+    ///
+    /// - Returns: the fetch
     func getPersons() -> NSFetchedResultsController<Personne>  {
         
         return personsFetched
+    }
+    
+    /// Check if an username exists in the datas
+    ///
+    /// - Parameter username: TRUE if it exists, else FALSE
+    class func exists(username: String) -> Bool {
+        return self.getPersonsByUsername(withUsername: username) != nil
     }
     
     /// Get persons with a specific lastname
@@ -120,23 +130,4 @@ class PersonnesSet {
         }
     }
     
-    /// Get all the persons is the DB
-    ///
-    /// - Returns: array of persons
-    func getAllPersons() -> [Personne] {
-        var persons: [Personne] = []
-        let context = CoreDataManager.context
-        let request : NSFetchRequest<Personne> = Personne.fetchRequest()
-        do {
-            try persons = context.fetch(request)
-        } catch let error as NSError {
-            print(error)
-        }
-        return persons
-    }
-    
-
-
-
-
 }

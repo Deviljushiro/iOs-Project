@@ -29,6 +29,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var ProfileCity: UILabel!
     @IBOutlet weak var ProfilePromoLabel: UILabel!
     @IBOutlet weak var ProfilePromo: UILabel!
+    @IBOutlet weak var ProfileFonction: UILabel!
     @IBOutlet weak var editButton: UIButton!
 
     // MARK: - View loading
@@ -45,7 +46,9 @@ class ProfileViewController: UIViewController {
             self.ProfileCity.text = aperson.ville
             self.ProfileImage.image = UIImage(data: aperson.photo as! Data)
             self.ProfilePromo.text = aperson.promo?.annee
+            self.ProfileFonction.text = aperson.getFonction()
         }
+        
         //Hide the edit button of the person isn't allowed to edit the profile of the page
         if (self.person?.pseudo)! == Session.getSession().pseudo || Session.getSession().isAdmin(){
             self.editButton.isEnabled = true
@@ -54,6 +57,14 @@ class ProfileViewController: UIViewController {
         else{
             self.editButton.isEnabled = false
             self.editButton.isHidden = true
+        }
+        
+        //Hide the promo if he's not a student
+        self.ProfilePromo.isHidden = true
+        self.ProfilePromoLabel.isHidden = true
+        if self.person!.isStudent() {
+            self.ProfilePromo.isHidden = false
+            self.ProfilePromoLabel.isHidden = false
         }
         
         //Circle the image

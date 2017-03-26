@@ -15,7 +15,6 @@ class InfoViewController: UIViewController, UITableViewDelegate, UITableViewData
     //MARK: - Outlets
     
     @IBOutlet weak var Infos: UITableView!
-    @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var profilePic: UIImageView!
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -32,16 +31,6 @@ class InfoViewController: UIViewController, UITableViewDelegate, UITableViewData
         // Do any additional setup after loading the view.
         self.infos.getInfos().delegate = self
         self.infos.refresh()
-        
-        //Enable the admin to click on add button
-        if Session.getSession().isAdmin(){
-            self.addButton.isEnabled = true
-            self.addButton.isHidden = false
-        }
-        else{
-            self.addButton.isEnabled = false
-            self.addButton.isHidden = true
-        }
         
         //Get the profile pic and make it circle
         self.profilePic.image = UIImage(data: Session.getSession().photo as! Data)

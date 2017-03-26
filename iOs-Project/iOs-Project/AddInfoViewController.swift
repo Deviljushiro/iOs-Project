@@ -187,6 +187,9 @@ class AddInfoViewController: KeyboardViewController, UIImagePickerControllerDele
     }
     
     
+    /// open the library by clicking on the file button
+    ///
+    /// - Parameter sender: who send the action
     @IBAction func loadImageButtonTapped(_ sender: Any) {
         picker.allowsEditing = false
         picker.sourceType = .photoLibrary

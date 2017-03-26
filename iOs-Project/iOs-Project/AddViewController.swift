@@ -198,9 +198,22 @@ class AddViewController: KeyboardViewController, UIImagePickerControllerDelegate
             DialogBoxHelper.alert(view: self, WithTitle: "Inscription impossible", andMsg: "Informations manquantes")
             return
         }
+        //if he already exists
+        if PersonnesSet.exists(username: firstname+"."+lastname) {
+            DialogBoxHelper.alert(view: self, WithTitle: "Inscription impossible", andMsg: "Etudiant déjà existant")
+            return
+        }
         //check password
         guard pwd == pwd2 else {
             DialogBoxHelper.alert(view: self, WithTitle: "Inscription impossible", andMsg: "Mots de passe non conformes")
+            return
+        }
+        if self.studentSwitch.isOn && PromoSet.getPromoByYear(year: promo) == nil { //if the student promo doesn't exist
+            DialogBoxHelper.alert(view: self, WithTitle: "Inscription impossible", andMsg: "Promotion inexistante")
+            return
+        }
+        if !self.studentSwitch.isOn && !self.teachSwitch.isOn && !self.secretartSwitch.isOn {
+            DialogBoxHelper.alert(view: self, WithTitle: "Inscription impossible", andMsg: "Fonction inexistante")
             return
         }
         //save it

@@ -26,6 +26,8 @@ extension Promo {
         //save datas into the promo
         promo.annee = year
         CoreDataManager.save()
+        //Create the associated group
+        Groupe.createNewGroup(name: year)
     }
 
     

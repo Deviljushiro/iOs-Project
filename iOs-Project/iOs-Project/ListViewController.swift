@@ -172,6 +172,13 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         performSegue(withIdentifier: self.addEventSegueId, sender: self)
     }
     
+    /// Go to the add info page
+    ///
+    /// - Parameter sender: who send the action
+    @IBAction func addInfoAction(_ sender: Any) {
+        self.performSegue(withIdentifier: self.addInfoSegueId, sender: self)
+    }
+    
     /// Go back to the previous page
     ///
     /// - Parameter sender: who send the action
@@ -193,6 +200,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     let promoSegueId = "promoSegue"
     let addEventSegueId = "addEventSegue"
     let myProfileSegueId = "myProfileSegue"
+    let addInfoSegueId = "addInfoSegue"
     
     /// prepare to send datas to the profile view ctrler
     ///

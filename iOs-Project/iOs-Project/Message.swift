@@ -12,7 +12,6 @@ import UIKit
 
 extension Message {
     
-
     // MARK: - CRUD
     
     @discardableResult
@@ -39,20 +38,7 @@ extension Message {
     
     // MARK: - Help Methods
     
-    /// Get the number of message in a set
-    ///
-    /// - Returns: how many messages are in the set
-    static func getNumbersOfMessages()-> Int{
-        var msgs: [Message] = []
-        let context = CoreDataManager.context
-        let request : NSFetchRequest<Message> = Message.fetchRequest()
-        do {
-            try msgs = context.fetch(request)
-        } catch let error as NSError {
-            fatalError("failed to get number of messages\(error)")
-        }
-        return msgs.count
-    }
+
     
     // MARK: - Increment tools
     
@@ -60,7 +46,7 @@ extension Message {
     ///
     /// - Returns: The number of messages incremented
     class func autoIncrementMessages() -> Int64{
-        return Message.getNumbersOfMessages()+1
+        return MessagesSet.getNumbersOfMessages()+1
     }
 
 

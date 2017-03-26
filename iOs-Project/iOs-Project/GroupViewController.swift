@@ -48,7 +48,13 @@ class GroupViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     //MARK: - Table view delegate protocol
-    
+
+    /// Define the cell of the tableview
+    ///
+    /// - Parameters:
+    ///   - tableView: Tableview related
+    ///   - indexPath: the index of each cell
+    /// - Returns: the cell with the defined values
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let group = self.groupSet.getGroups().object(at: indexPath)
         let cell = self.Groups.dequeueReusableCell(withIdentifier: "groupCell", for: indexPath) as! ListGroupTableViewCell
@@ -62,7 +68,12 @@ class GroupViewController: UIViewController, UITableViewDataSource, UITableViewD
         return cell
     }
     
-    
+    /// Tell the number of sections (for a search or not)
+    ///
+    /// - Parameters:
+    ///   - tableView: Table view related
+    ///   - section: number of lines for each section
+    /// - Returns: number of sections
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         guard let section = self.groupSet.getGroups().sections?[section] else {
             fatalError("unexpected section number")

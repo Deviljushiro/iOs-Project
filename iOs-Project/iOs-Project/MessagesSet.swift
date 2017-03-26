@@ -86,8 +86,11 @@ class MessagesSet {
     /// - Parameter string: keyword
     /// - Returns: the new fetch result controller
     func valueForMessageFetched(string: String) -> NSFetchedResultsController<Message> {
+        //Search even with lower cased or upper cased
+        let stringLow = string.lowercased()
+        let stringUp = string.uppercased()
         request.sortDescriptors = [NSSortDescriptor(key:#keyPath(Message.dateEnvoi),ascending:true)]
-        request.predicate = NSPredicate(format: "contenu CONTAINS %@ and concerner.name == %@", string ,self.currentGroupName)
+        request.predicate = NSPredicate(format: "(contenu CONTAINS %@ or contenu CONTAINS %@ or contenu CONTAINS %@) and concerner.name == %@", string, stringLow, stringUp ,self.currentGroupName)
         let fetchResultController = NSFetchedResultsController(fetchRequest: self.request, managedObjectContext: self.context, sectionNameKeyPath: nil, cacheName: nil)
         return fetchResultController
     }
@@ -108,6 +111,21 @@ class MessagesSet {
     /// - Returns: number of msg (int)
     func getNumberMessages() -> Int {
         return (msgFetched.fetchedObjects!.count)
+    }
+    
+    /// Get the number of message in a set (for the autoincrement in Message)
+    ///
+    /// - Returns: how many messages are in the set
+    static func getNumbersOfMessages()-> Int{
+        var msgs: [Message] = []
+        let context = CoreDataManager.context
+        let request : NSFetchRequest<Message> = Message.fetchRequest()
+        do {
+            try msgs = context.fetch(request)
+        } catch let error as NSError {
+            fatalError("failed to get number of messages\(error)")
+        }
+        return msgs.count
     }
     
 }

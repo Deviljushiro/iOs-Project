@@ -90,27 +90,6 @@ class LoginViewController: KeyboardViewController {
         }
     }
     
-    
-    /// Go to the forgot password page
-    ///
-    /// - Parameter sender: who send the action
-    @IBAction func forgotPwdAction(_ sender: Any) {
-        self.performSegue(withIdentifier: "forgotpwdSegue", sender: self)
-    }
 
-    
-    // MARK: - Navigation
-
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    //override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-        //if segue.identifier == "loginSegue" {
-        //    let navController = segue.destination as! UINavigationController
-        //    let destController = navController.topViewController as! WallViewController
-        //    destController.person = self.person
-        //}
-   // }
     
 }

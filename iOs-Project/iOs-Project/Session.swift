@@ -48,7 +48,7 @@ class Session{
     /// - Parameter person: the person wo want to create his Session
     static func createSession(person: Personne) {
         guard self.user != nil else {
-            Session(person: person)
+            _ = Session(person: person)
             return
         }
     }

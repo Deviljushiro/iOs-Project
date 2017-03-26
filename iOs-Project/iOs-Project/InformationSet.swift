@@ -94,8 +94,11 @@ class InformationSet {
     /// - Parameter title: input for the search
     /// - Returns: NSFetchResultController of the info
     func valueForInfoFetchedByTitle(title: String) -> NSFetchedResultsController<Information> {
+        //Search even with lower cased or upper cased
+        let titleLow = title.lowercased()
+        let titleUp = title.uppercased()
         self.request.sortDescriptors = [NSSortDescriptor(key:#keyPath(Information.titre),ascending:true)]
-        self.request.predicate = NSPredicate(format: "titre CONTAINS %@", title)
+        self.request.predicate = NSPredicate(format: "titre CONTAINS %@ or titre CONTAINS %@ or titre CONTAINS %@", title, titleLow, titleUp)
         let fetchResultController = NSFetchedResultsController(fetchRequest: self.request, managedObjectContext: self.context, sectionNameKeyPath: nil, cacheName: nil)
         return fetchResultController
     }
@@ -117,8 +120,11 @@ class InformationSet {
     /// - Parameter title: input for the search
     /// - Returns: NSFetchResultController of the info
     func valueForInfoFetchedByKWAndTitle(keyword: String, title: String) -> NSFetchedResultsController<Information> {
+        //Search even with lower cased or upper cased
+        let titleLow = title.lowercased()
+        let titleUp = title.uppercased()
         self.request.sortDescriptors = [NSSortDescriptor(key:#keyPath(Information.titre),ascending:true)]
-        self.request.predicate = NSPredicate(format: "titre CONTAINS %@ and possede.mot == %@",title,keyword)
+        self.request.predicate = NSPredicate(format: "(titre CONTAINS %@ or titre CONTAINS %@ or titre CONTAINS %@) and possede.mot == %@",title,titleLow, titleUp, keyword)
         let fetchResultController = NSFetchedResultsController(fetchRequest: self.request, managedObjectContext: self.context, sectionNameKeyPath: nil, cacheName: nil)
         return fetchResultController
     }

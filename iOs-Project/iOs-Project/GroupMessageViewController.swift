@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class GroupMessageViewController: KeyboardViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, NSFetchedResultsControllerDelegate, UISearchBarDelegate {
+class GroupMessageViewController: KeyboardViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, NSFetchedResultsControllerDelegate, UISearchBarDelegate, UITextViewDelegate {
 
     // MARK: - Outlets
     
@@ -25,6 +25,7 @@ class GroupMessageViewController: KeyboardViewController, UITableViewDelegate, U
     var msgFetched : MessagesSet = MessagesSet()
     var sentImage : UIImage? = nil  //To send image via message
     var selectedPerson: Personne? = nil //To see sender's profile
+    var isFieldActivated: Bool = false //Know if the message field is activated for the keyboard management
     
     //MARK: - Constants
     
@@ -40,9 +41,11 @@ class GroupMessageViewController: KeyboardViewController, UITableViewDelegate, U
             self.msgFetched = MessagesSet(group: agroup)
         }
         
-        //delegate the picker and messages fetched
+        //delegations
         self.msgFetched.getMessages().delegate = self
-        picker.delegate = self
+        self.picker.delegate = self
+        self.MessageField.delegate = self
+        
         self.msgFetched.refreshMsg()
         
         //start with the last messages
@@ -142,42 +145,36 @@ class GroupMessageViewController: KeyboardViewController, UITableViewDelegate, U
         }
         return section.numberOfObjects
     }
-
-
+    
+    
     // MARK: - Text view protocol
     
-    /// if the keyboard has to disappear after Return
-    ///
-    /// - Parameter textView: related textView
-    /// - Returns: TRUE it has to go out, FALSE else
-    func textViewShouldReturn(_ textView: UITextView) -> Bool{
-        textView.resignFirstResponder()
-        return true
-    }
     
-    /// Before editing the textView
+    /// The editing the textView begins
     ///
     /// - Parameter textView: the text view
     func textViewDidBeginEditing(_ textView: UITextView){
-        MessageField = textView
+        self.isFieldActivated = true
     }
     
     /// After edition of the text view
     ///
     /// - Parameter textView: related text view
     func textViewDidEndEditing(_ textView: UITextView){
-        MessageField = nil
+        self.isFieldActivated = false
     }
     
     // MARK: - Keyboard overriding
     
-    /// Size the keyboard and scroll the page according to this message page
+    /// Size the keyboard if the user is writing message only
     ///
     /// - Parameter notification: notif which called the method
     override func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             if self.view.frame.origin.y == 0 {
-                self.view.frame.origin.y -= keyboardSize.height
+                if self.isFieldActivated {
+                    self.view.frame.origin.y -= keyboardSize.height
+                }
             }
         }
     }
@@ -279,14 +276,14 @@ class GroupMessageViewController: KeyboardViewController, UITableViewDelegate, U
     
     /// send the message by clicking "Envoyer" button
     ///
-    /// - Parameter sender: wh osend the action
-
+    /// - Parameter sender: who osend the action
     @IBAction func sendMessage(_ sender: Any) {
-        guard let body = MessageField?.text else {
+        guard let body = MessageField?.text, body != "" else {
             DialogBoxHelper.alert(view: self, WithTitle: "Echec envoi", andMsg: "Message vide")
             return
         }
         Message.createNewMessage(body: body, image: nil, person: Session.getSession(),group: self.group)
+        self.MessageField.text = "" //Clear the field
         //refresh the page
         self.viewDidLoad()
     }

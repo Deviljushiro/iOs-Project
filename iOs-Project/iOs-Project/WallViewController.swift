@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class WallViewController: KeyboardViewController, UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, NSFetchedResultsControllerDelegate, UISearchBarDelegate {
+class WallViewController: KeyboardViewController, UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, NSFetchedResultsControllerDelegate, UISearchBarDelegate, UITextViewDelegate {
     
     // MARK: - Outlets
     
@@ -25,8 +25,8 @@ class WallViewController: KeyboardViewController, UITableViewDataSource, UITable
     var msgFetched : MessagesSet = MessagesSet()
     var sentImage : UIImage? = nil  //To send image via message
     var selectedPerson: Personne? = nil //To see sender's profile
-    var filteredMsg = [Message]()
-    var searchActive: Bool = false //To check if we are searching
+    var isFieldActivated: Bool = false  //if the user is typing a msg for the keyboard protocol
+
     
     // MARK: - Constants
     
@@ -37,9 +37,12 @@ class WallViewController: KeyboardViewController, UITableViewDataSource, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //delegate the picker and messages fetched
+        //delegations
         self.msgFetched.getMessages().delegate = self
-        picker.delegate = self
+        self.picker.delegate = self
+        self.searchBar.delegate = self
+        self.MessageField.delegate = self
+        
         self.msgFetched.refreshMsg()
         
         //start with the last messages
@@ -60,9 +63,6 @@ class WallViewController: KeyboardViewController, UITableViewDataSource, UITable
         //Get the profile pic and make it circle
         self.profilePic.image = UIImage(data: Session.getSession().photo as! Data)
         self.profilePic.maskCircle(anyImage: self.profilePic.image!)
-        
-        // Delegate the search bar
-        self.searchBar.delegate = self
     }
     
     
@@ -133,10 +133,6 @@ class WallViewController: KeyboardViewController, UITableViewDataSource, UITable
     ///   - section: number of lines for each section
     /// - Returns: number of sections
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        //if self.searchController.isActive && self.searchController.searchBar.text != "" {
-          //  return self.filteredMsg.count
-        //}
-        //else {
             guard let section = self.msgFetched.getMessages().sections?[section] else {
                 fatalError("unexpected section number")
             }
@@ -155,30 +151,33 @@ class WallViewController: KeyboardViewController, UITableViewDataSource, UITable
         return true
     }
     
-    /// Before editing the textView
+    /// Tells the controller that editing has begun
     ///
-    /// - Parameter textView: the text view
-    func textViewDidBeginEditing(_ textView: UITextView){
-        self.MessageField = textView
+    /// - Parameter textView: the related textView
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        self.isFieldActivated = true
     }
     
-    /// After edition of the text view
+    /// Tells the controller that editing is finished
     ///
-    /// - Parameter textView: related text view
-    func textViewDidEndEditing(_ textView: UITextView){
-        self.MessageField = nil
+    /// - Parameter textView: the related textView
+    func textViewDidEndEditing(_ textView: UITextView) {
+        self.isFieldActivated = false
     }
     
 
     // MARK: - Keyboard overriding
     
-    /// Size the keyboard and scroll the page according to this message page
+    /// Size the keyboard if the user is writing message only
     ///
     /// - Parameter notification: notif which called the method
     override func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+        
             if self.view.frame.origin.y == 0 {
-                self.view.frame.origin.y = 0
+                if self.isFieldActivated {
+                    self.view.frame.origin.y -= keyboardSize.height
+                }
             }
         }
     }
@@ -276,11 +275,12 @@ class WallViewController: KeyboardViewController, UITableViewDataSource, UITable
     ///
     /// - Parameter sender: wh osend the action
     @IBAction func sendMessage(_ sender: Any) {
-        guard let body = MessageField?.text else {
+        guard let body = MessageField?.text, body != "" else {
             DialogBoxHelper.alert(view: self, WithTitle: "Echec envoi", andMsg: "Message vide")
             return
         }
         Message.createNewMessage(body: body, image: nil, person: Session.getSession(), group: GroupesSet.getGroupByName(groupName: "All"))
+        self.MessageField.text = "" //Clear the field
         //refresh the page
         self.viewDidLoad()
     }
