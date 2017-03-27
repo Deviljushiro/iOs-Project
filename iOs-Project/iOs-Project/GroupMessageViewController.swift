@@ -95,7 +95,6 @@ class GroupMessageViewController: KeyboardViewController, UITableViewDelegate, U
             self.msgFetched = MessagesSet(string: searchText, group: self.group!)
         }
         self.ListMessages.reloadData()
-        self.viewDidLoad()
     }
     
     
