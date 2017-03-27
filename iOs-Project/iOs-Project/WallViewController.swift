@@ -25,7 +25,7 @@ class WallViewController: KeyboardViewController, UITableViewDataSource, UITable
     var msgFetched : MessagesSet = MessagesSet()
     var sentImage : UIImage? = nil  //To send image via message
     var selectedPerson: Personne? = nil //To see sender's profile
-    var isFieldActivated: Bool = false  //if the user is typing a msg for the keyboard protocol
+    var isSearchActivated: Bool = false  //if the user is typing a msg for the keyboard protocol
 
     
     // MARK: - Constants
@@ -92,6 +92,20 @@ class WallViewController: KeyboardViewController, UITableViewDataSource, UITable
         self.viewDidLoad()
     }
     
+    /// When we start editing the search bar
+    ///
+    /// - Parameter searchBar: the related bar
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        self.isSearchActivated = true
+    }
+    
+    /// When we finish editing the search bar
+    ///
+    /// - Parameter searchBar: the related bar
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        self.isSearchActivated = false
+    }
+    
     
     // MARK: - Table view datasource protocol
     
@@ -139,22 +153,6 @@ class WallViewController: KeyboardViewController, UITableViewDataSource, UITable
         return section.numberOfObjects
     }
     
-    // MARK: - Text view protocol
-
-    
-    /// Tells the controller that editing has begun
-    ///
-    /// - Parameter textView: the related textView
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        self.isFieldActivated = true
-    }
-    
-    /// Tells the controller that editing is finished
-    ///
-    /// - Parameter textView: the related textView
-    func textViewDidEndEditing(_ textView: UITextView) {
-        self.isFieldActivated = false
-    }
     
 
     // MARK: - Keyboard overriding
@@ -166,7 +164,7 @@ class WallViewController: KeyboardViewController, UITableViewDataSource, UITable
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
         
             if self.view.frame.origin.y == 0 {
-                if self.isFieldActivated {
+                if !self.isSearchActivated {
                     self.view.frame.origin.y -= keyboardSize.height
                 }
             }

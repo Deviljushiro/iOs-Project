@@ -25,7 +25,7 @@ class GroupMessageViewController: KeyboardViewController, UITableViewDelegate, U
     var msgFetched : MessagesSet = MessagesSet()
     var sentImage : UIImage? = nil  //To send image via message
     var selectedPerson: Personne? = nil //To see sender's profile
-    var isFieldActivated: Bool = false //Know if the message field is activated for the keyboard management
+    var isSearchActivated: Bool = false //Know if the message search is activated for the keyboard management
     
     //MARK: - Constants
     
@@ -87,14 +87,29 @@ class GroupMessageViewController: KeyboardViewController, UITableViewDelegate, U
     ///   - searchBar: where text is input
     ///   - searchText: the text input
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
         if searchText == "" {   //If the input text is empty
-            self.msgFetched = MessagesSet()
+            self.msgFetched = MessagesSet(group: self.group!)
         }
         else {  //If not
             self.msgFetched = MessagesSet(string: searchText, group: self.group!)
         }
         self.ListMessages.reloadData()
+        self.isSearchActivated = false
+    }
+    
+    
+    /// When we start editing the search bar
+    ///
+    /// - Parameter searchBar: the related bar
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        self.isSearchActivated = true
+    }
+    
+    /// When we finish editing the search bar
+    ///
+    /// - Parameter searchBar: the related bar
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        self.isSearchActivated = false
     }
     
     
@@ -151,16 +166,16 @@ class GroupMessageViewController: KeyboardViewController, UITableViewDelegate, U
     /// The editing the textView begins
     ///
     /// - Parameter textView: the text view
-    func textViewDidBeginEditing(_ textView: UITextView){
+    /*func textViewDidBeginEditing(_ textView: UITextView){
         self.isFieldActivated = true
-    }
+    }*/
     
     /// After edition of the text view
     ///
     /// - Parameter textView: related text view
-    func textViewDidEndEditing(_ textView: UITextView){
+    /*func textViewDidEndEditing(_ textView: UITextView){
         self.isFieldActivated = false
-    }
+    }*/
     
     // MARK: - Keyboard overriding
     
@@ -170,7 +185,7 @@ class GroupMessageViewController: KeyboardViewController, UITableViewDelegate, U
     override func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             if self.view.frame.origin.y == 0 {
-                if self.isFieldActivated {
+                if !self.isSearchActivated {
                     self.view.frame.origin.y -= keyboardSize.height
                 }
             }

@@ -90,7 +90,9 @@ class MessagesSet {
         let stringLow = string.lowercased()
         let stringUp = string.uppercased()
         request.sortDescriptors = [NSSortDescriptor(key:#keyPath(Message.dateEnvoi),ascending:true)]
-        request.predicate = NSPredicate(format: "contenu CONTAINS %@ or contenu CONTAINS %@ or contenu CONTAINS %@ and concerner.name == %@", string, stringLow, stringUp ,self.currentGroupName)
+        let predicate1 = NSPredicate(format: "contenu CONTAINS %@ or contenu CONTAINS %@ or contenu CONTAINS %@", string, stringLow, stringUp)
+        let predicate2 = NSPredicate(format: "concerner.name == %@", self.currentGroupName)
+        self.request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate1,predicate2])
         let fetchResultController = NSFetchedResultsController(fetchRequest: self.request, managedObjectContext: self.context, sectionNameKeyPath: nil, cacheName: nil)
         return fetchResultController
     }
