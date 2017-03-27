@@ -137,19 +137,10 @@ class WallViewController: KeyboardViewController, UITableViewDataSource, UITable
                 fatalError("unexpected section number")
             }
         return section.numberOfObjects
-       // }
     }
     
     // MARK: - Text view protocol
-    
-    /// if the keyboard has to disappear after Return
-    ///
-    /// - Parameter textView: related textView
-    /// - Returns: TRUE it has to go out, FALSE else
-    func textViewShouldReturn(_ textView: UITextView) -> Bool{
-        textView.resignFirstResponder()
-        return true
-    }
+
     
     /// Tells the controller that editing has begun
     ///

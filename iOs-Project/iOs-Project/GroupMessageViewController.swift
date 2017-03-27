@@ -108,9 +108,9 @@ class GroupMessageViewController: KeyboardViewController, UITableViewDelegate, U
     ///   - indexPath: the index of each cell
     /// - Returns: the cell with the defined values
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
+                let cell = self.ListMessages.dequeueReusableCell(withIdentifier: "messageCell", for: indexPath) as! MessageTableViewCell
         //get the msg datas from the fetched msg
         let msg = self.msgFetched.getMessages().object(at: indexPath)
-        let cell = self.ListMessages.dequeueReusableCell(withIdentifier: "messageCell2", for: indexPath) as! MessageTableViewCell
         //get the msg datas from the fetched msg
         cell.sendDate.text = msg.dateEnvoi
         cell.body?.text = msg.contenu
@@ -138,7 +138,6 @@ class GroupMessageViewController: KeyboardViewController, UITableViewDelegate, U
     ///   - tableView: Table view related
     ///   - section: number of lines for each section
     /// - Returns: number of sections
-
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         guard let section = self.msgFetched.getMessages().sections?[section] else {
             fatalError("unexpected section number")
@@ -309,11 +308,10 @@ class GroupMessageViewController: KeyboardViewController, UITableViewDelegate, U
     
     /// Go the to profile of the sender
     ///
-    /// - Parameter sender: who send the action
-    @IBAction func personProfileAction(sender: UIButton) {
-        self.performSegue(withIdentifier: self.personProfileSegueId, sender: self)
+    /// - Parameter sender: who
+    @IBAction func personProfilAction(_ sender: UIButton) {
+        self.performSegue(withIdentifier: self.personProfileSegueId, sender: sender)
     }
-
     /// Go to the admin page
     ///
     /// - Parameter sender: who send the action

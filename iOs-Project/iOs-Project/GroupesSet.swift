@@ -19,8 +19,6 @@ class GroupesSet{
 
     // MARK: - Variables
     
-    
-    
     fileprivate lazy var groupFetched : NSFetchedResultsController<Groupe> = {
         self.request.sortDescriptors = [NSSortDescriptor(key:#keyPath(Groupe.name),ascending:true)]
         let fetchResultController = NSFetchedResultsController(fetchRequest: self.request, managedObjectContext: self.context, sectionNameKeyPath: nil, cacheName: nil)
