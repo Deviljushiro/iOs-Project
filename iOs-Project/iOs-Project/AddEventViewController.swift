@@ -23,7 +23,7 @@ class AddEventViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
+        self.startDate.date = DateManager.currentDate()
         //Change the text color of the pickers
         self.startDate.setValue(UIColor.white, forKeyPath: "textColor")
         self.endDate.setValue(UIColor.white, forKeyPath: "textColor")

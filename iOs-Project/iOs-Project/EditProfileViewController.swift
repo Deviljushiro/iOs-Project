@@ -76,7 +76,7 @@ class EditProfileViewController: KeyboardViewController, UIImagePickerController
     /// - Parameters:
     ///   - picker: picker which has to pick image
     ///   - info: about finish picking media
-    @nonobjc func imagePickerController(_ picker: UIImagePickerController,
+    func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [String : AnyObject])
     {
         if let chosenImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
