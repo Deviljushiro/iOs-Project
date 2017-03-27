@@ -777,7 +777,7 @@
                                         <rect key="frame" x="0.0" y="28" width="784" height="400"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bke-Zx-N0g" id="kfi-yA-15E">
-                                            <rect key="frame" x="0.0" y="0.0" width="784" height="399"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="784" height="400"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TITRE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0F8-P3-LmG">
