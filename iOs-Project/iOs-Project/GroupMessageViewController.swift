@@ -72,6 +72,13 @@ class GroupMessageViewController: KeyboardViewController, UITableViewDelegate, U
 
 
     }
+    
+    /// When the view appear again
+    ///
+    /// - Parameter animated: if animation is needed
+    override func viewDidAppear(_ animated: Bool) {
+        self.ListMessages.reloadData()
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

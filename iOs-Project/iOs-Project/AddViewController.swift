@@ -200,7 +200,7 @@ class AddViewController: KeyboardViewController, UIImagePickerControllerDelegate
         }
         //if he already exists
         if PersonnesSet.exists(username: firstname+"."+lastname) {
-            DialogBoxHelper.alert(view: self, WithTitle: "Inscription impossible", andMsg: "Etudiant déjà existant")
+            DialogBoxHelper.alert(view: self, WithTitle: "Inscription impossible", andMsg: "Utilisateur déjà existant")
             return
         }
         //check password

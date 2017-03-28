@@ -41,6 +41,8 @@ class GroupViewController: UIViewController, UITableViewDataSource, UITableViewD
         self.profilePic.image = UIImage(data: Session.getSession().photo as! Data)
         self.profilePic.maskCircle(anyImage: self.profilePic.image!)
     }
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -65,6 +65,10 @@ class WallViewController: KeyboardViewController, UITableViewDataSource, UITable
         self.profilePic.maskCircle(anyImage: self.profilePic.image!)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        self.Messages.reloadData()
+    }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -152,9 +156,8 @@ class WallViewController: KeyboardViewController, UITableViewDataSource, UITable
             }
         return section.numberOfObjects
     }
-    
-    
 
+    
     // MARK: - Keyboard overriding
     
     /// Size the keyboard if the user is writing message only
